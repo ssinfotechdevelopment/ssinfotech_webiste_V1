@@ -130,6 +130,7 @@ const Hero = () => {
           )}
         </AnimatePresence>
       </div>
+      
 
       {/* Slideshow Controls */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full ">

@@ -115,7 +115,6 @@ const startServer = async () => {
       app.use(
         express.static(frontendPath, {
           setHeaders: (res, filePath) => {
-            // ✅ Fix wrong MIME type for .js files
             if (filePath.endsWith(".js")) {
               res.setHeader("Content-Type", "application/javascript");
             }
@@ -123,7 +122,7 @@ const startServer = async () => {
         })
       );
 
-      // Handle React Router
+      // React Router fallback
       app.get("*", (req, res) => {
         res.sendFile(join(frontendPath, "index.html"));
       });
@@ -131,7 +130,7 @@ const startServer = async () => {
       console.log(`🌐 Serving frontend from: ${frontendPath}`);
     }
 
-    // --- Global Error Handler ---
+    // --- Error Handler ---
     app.use((err, req, res, next) => {
       console.error("❌ Error Stack:", err.stack);
       res

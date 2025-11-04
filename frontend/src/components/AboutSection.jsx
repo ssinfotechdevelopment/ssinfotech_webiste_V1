@@ -17,7 +17,6 @@ const AboutSection = () => {
 
     let started = false;
     let animationFrameId;
-    
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -67,23 +66,23 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="about-area py-[90px] lg:py-28 relative overflow-hidden bg-white px-24">
+    <section ref={sectionRef} className="about-area py-16 md:py-20 lg:py-[100px] relative overflow-hidden bg-white px-4 sm:px-6 md:px-8 lg:px-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="about-area-inner grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="about-area-inner grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           
           {/* Left Side - Background Photo with Reveal Animation */}
           <motion.div 
-            className="about-image-side relative"
+            className="about-image-side relative order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             {/* Background Image Container with Reveal */}
-            <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl md:shadow-2xl">
               {/* Background Image with Clip Path Reveal */}
               <motion.div 
-                className="w-full h-full lg:h-[600px] bg-gray-200 relative overflow-hidden"
+                className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-200 relative overflow-hidden"
                 initial={{ clipPath: 'polygon(0 0, 0% 0, 0% 100%, 0 100%)' }}
                 animate={isRevealed ? { 
                   clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' 
@@ -106,19 +105,19 @@ const AboutSection = () => {
 
               {/* Experience Badge Overlay */}
               <motion.div 
-                className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100"
+                className="absolute bottom-4 left-4 md:bottom-8 md:left-8 bg-white/95 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-gray-100"
                 initial={{ opacity: 0, y: 30, scale: 0.8 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 1.0 }}
                 whileHover={{ y: -5, shadow: "0 20px 40px rgba(0,0,0,0.15)" }}
               >
-                {/* <div className="px-6 py-4">
-                  <div className="flex items-center space-x-4">
-                    <span className="text-4xl font-bold text-blue-600">25</span>
+                {/* <div className="px-4 py-3 md:px-6 md:py-4">
+                  <div className="flex items-center space-x-3 md:space-x-4">
+                    <span className="text-2xl md:text-4xl font-bold text-blue-600">25</span>
                     <div>
-                      <p className="text-lg font-bold text-gray-900">Years Of</p>
-                      <p className="text-blue-600 font-semibold">Experience</p>
+                      <p className="text-sm md:text-lg font-bold text-gray-900">Years Of</p>
+                      <p className="text-blue-600 font-semibold text-sm md:text-base">Experience</p>
                     </div>
                   </div>
                 </div> */}
@@ -128,7 +127,7 @@ const AboutSection = () => {
             {/* Floating Image with Parallax */}
             <motion.div
               ref={floatingRef}
-              className="absolute -bottom-8 -right-8 w-48 h-48 lg:w-56 lg:h-56 border-8 border-white rounded-2xl shadow-2xl overflow-hidden z-20 will-change-transform mb-[20px]"
+              className="absolute -bottom-4 -right-4 md:-bottom-8 md:-right-8 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 border-4 md:border-8 border-white rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden z-20 will-change-transform mb-[20px]"
               initial={{ scale: 0, rotate: 10, opacity: 0 }}
               whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -138,7 +137,6 @@ const AboutSection = () => {
                 type: "spring",
                 stiffness: 100
               }}
-              
             >
               <img
                 src="/director.jpg"
@@ -148,7 +146,7 @@ const AboutSection = () => {
               
               {/* Trust Badge */}
               <motion.div 
-                className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg"
+                className="absolute top-2 left-2 md:top-4 md:left-4 bg-green-500 text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold shadow-lg"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -160,14 +158,14 @@ const AboutSection = () => {
 
             {/* Decorative Elements */}
             <motion.div 
-              className="absolute -top-6 -left-6 w-32 h-32 bg-blue-600/10 rounded-full blur-xl"
+              className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-20 h-20 md:w-32 md:h-32 bg-blue-600/10 rounded-full blur-xl"
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
             />
             <motion.div 
-              className="absolute -bottom-6 -right-6 w-24 h-24 bg-purple-600/10 rounded-full blur-xl"
+              className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-16 h-16 md:w-24 md:h-24 bg-purple-600/10 rounded-full blur-xl"
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
@@ -177,7 +175,7 @@ const AboutSection = () => {
 
           {/* Right Side - Content */}
           <motion.div 
-            className="about-content"
+            className="about-content order-1 lg:order-2"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -185,7 +183,7 @@ const AboutSection = () => {
           >
             {/* Main Heading */}
             <motion.h2 
-              className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -197,7 +195,7 @@ const AboutSection = () => {
 
             {/* Description */}
             <motion.p 
-              className="text-lg lg:text-xl text-gray-600 mb-8 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -209,7 +207,7 @@ const AboutSection = () => {
             </motion.p>
 
             {/* Features */}
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               {/* Feature 1 */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -217,10 +215,10 @@ const AboutSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                <h3 className="text-2xl lg:text-3xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">
                   Improving Your Business Planning
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
+                <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
                   We envision a future where our clients are at the forefront of their industries, 
                   setting new standards of excellence.
                 </p>
@@ -233,10 +231,10 @@ const AboutSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
-                <h3 className="text-2xl lg:text-3xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">
                   Make Sure You Can Evaluate Success
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
+                <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
                   We envision a future where our clients are at the forefront of their industries, 
                   setting new standards of excellence.
                 </p>
@@ -245,7 +243,7 @@ const AboutSection = () => {
 
             {/* CTA Button */}
             <motion.div 
-              className="mt-10"
+              className="mt-8 md:mt-10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -253,7 +251,7 @@ const AboutSection = () => {
             >
               <motion.a
                 href="/services"
-                className="inline-flex items-center bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="inline-flex items-center bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl font-semibold text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: '#2563eb'
@@ -269,14 +267,14 @@ const AboutSection = () => {
 
       {/* Additional Background Elements */}
       <motion.div 
-        className="absolute top-1/4 -left-20 w-40 h-40 bg-blue-600/5 rounded-full blur-3xl"
+        className="absolute top-1/4 -left-10 md:-left-20 w-20 h-20 md:w-40 md:h-40 bg-blue-600/5 rounded-full blur-2xl md:blur-3xl"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.5 }}
       />
       <motion.div 
-        className="absolute bottom-1/4 -right-20 w-60 h-60 bg-purple-600/5 rounded-full blur-3xl"
+        className="absolute bottom-1/4 -right-10 md:-right-20 w-32 h-32 md:w-60 md:h-60 bg-purple-600/5 rounded-full blur-2xl md:blur-3xl"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

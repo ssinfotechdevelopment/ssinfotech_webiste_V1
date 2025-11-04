@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Stars, Users, Target, Eye, Album, Heart } from "lucide-react";
+import { Sparkles, Stars, Users, Target, Eye, Album, Heart, Lightbulb } from "lucide-react";
 
 // Enhanced animation variants
 const fadeUp = {
@@ -153,25 +153,37 @@ const AboutUs = () => {
         title: "Our Vision",
         icon: Eye,
         content:
-          "We aim to empower the world through the transformative power of Information Technology. Our vision is to not only utilize existing innovations but to pioneer new solutions that inspire progress and connect people globally. We see technology as a bridge to a better future—one that fosters creativity, inclusivity, and sustainable growth.",
+          "We share a vision of dedicating our intelligence and expertise to help create a world strengthened through Information Technology. This entails not only harnessing existing technologies but also innovating and inventing new ones. We envision a future where Information Technology serves as a powerful force for positive change, driving innovation, connectivity, and progress across all aspects of society. Through our commitment to continuous learning, exploration, and creativity, we strive to push the boundaries of what is possible, shaping a brighter and more technologically advanced world for generations to come.",
+        color: "from-blue-500 to-cyan-500",
+        bgColor: "bg-blue-50",
+        borderColor: "border-blue-200"
       },
       {
         title: "Our Mission",
         icon: Target,
         content:
-          "Our mission is to earn and uphold the trust, confidence, and loyalty of our valued clients. Every milestone we have achieved stems from the strong, long-term relationships we nurture with our customers—relationships we consider our greatest assets.",
+          "To achieve and maintain the confidence, trust and loyalty of our clients. Everything has been achieved and will achieve is due to the excellent and exceptional relationship it shares with its customers. We at SS Infotech believe that these relationships are the company's most priceless and precious assets. With you, we create and deliver business and technology solution that fit your needs and not drive the results you want. People matters, results count.",
+        color: "from-purple-500 to-indigo-500",
+        bgColor: "bg-purple-50",
+        borderColor: "border-purple-200"
       },
       {
-        title: "Our Objectives",
-        icon: Album,
-        content:
-          "At S.S. Infotech, our objective is to build lasting relationships with our clients founded on trust, commitment, and exceptional service. We aim to harness our knowledge and expertise to drive technological innovation and contribute meaningfully to the advancement of Information Technology.",
-      },
-      {
-        title: "Our Values",
+        title: "Our Objective",
         icon: Heart,
         content:
-          "At S.S. Infotech, we place people at the heart of everything we do. Our care is reflected in the trust, loyalty, and satisfaction we share with our clients. We are guided by a unified vision to use technology as a force for progress and empowerment.",
+          "Our objective at S.S. Infotech is clear: to cultivate enduring relationships with our clients built on trust, loyalty, and exceptional service. We are dedicated to leveraging our intelligence and expertise to pioneer new technologies and advance Information Technology for the betterment of society. Also, the S.S InfoTech provides an opportunity to the students to gets exposed to a very large area of technology and its processes. .",
+        color: "from-green-500 to-emerald-500",
+        bgColor: "bg-green-50",
+        borderColor: "border-green-200"
+      },
+      {
+        title: "Our Care",
+        icon: Lightbulb,
+        content:
+          "At S.S. Infotech, our utmost priority lies in fostering enduring relationships with our clients, rooted in trust, loyalty, and exceptional service. We are driven by a shared vision to dedicate our intelligence and expertise towards shaping a world strengthened by Information Technology. With a deep understanding of the importance of people in our endeavors, we are committed to prioritizing your needs and delivering tailored business and technology solutions that drive meaningful results. Your success is our care, and we are passionate about partnering with you on your journey towards technological excellence and a brighter future.",
+        color: "from-orange-500 to-amber-500",
+        bgColor: "bg-orange-50",
+        borderColor: "border-orange-200"
       },
     ],
     []
@@ -366,7 +378,7 @@ const AboutUs = () => {
                 <motion.img
                   src={section.image}
                   alt={section.alt}
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[800px] object-cover"
                   loading="lazy"
                   onError={(e) => (e.target.src = "/imgs/placeholder.jpg")}
                   initial={{ scale: 1.1 }}
@@ -439,83 +451,76 @@ const AboutUs = () => {
         </section>
       ))}
 
-      {/* Mission & Vision Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-purple-500/5 blur-3xl rounded-full will-change-transform"
-          animate={{
-            opacity: [0.08, 0.12, 0.08],
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-        />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      {/* Mission & Vision Section - Simplified & Professional */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          {/* Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-            variants={container}
-            className="space-y-6 mb-16"
+            viewport={{ once: true, amount: 0.5 }}
+            className="text-center mb-16"
           >
             <motion.h2
-              variants={item}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
             >
-              Our Purpose & Focus
+              Our Core Principles
             </motion.h2>
             <motion.p
-              variants={item}
-              className="text-xl sm:text-2xl text-slate-600 max-w-3xl mx-auto font-light"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
             >
-              Driving innovation and excellence in everything we do
+              Driving innovation and excellence through clear vision, focused mission, and strong values
             </motion.p>
           </motion.div>
 
+          {/* 2x2 Grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={container}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.2
+                }
+              }
+            }}
+            className="grid md:grid-cols-2 gap-8"
           >
-            {missionVision.map((card, index) => (
+            {missionVision.map((item, index) => (
               <motion.div
-                key={card.title}
-                variants={fadeUp}
-                custom={index * 0.1}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-200/60 group relative overflow-hidden"
+                key={item.title}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.6 }}
+                className={`group relative ${item.bgColor} border ${item.borderColor} rounded-2xl p-8 transition-all duration-300 hover:shadow-xl`}
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                />
-                
-                <div className="relative z-10">
-                  <motion.div
-                    className="bg-gradient-to-br from-purple-600 to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-purple-700 group-hover:to-blue-700 transition-colors will-change-transform shadow-lg"
-                    whileHover={{ rotate: 12, scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <card.icon className="w-7 h-7 text-white" />
-                  </motion.div>
-                  
-                  <motion.h3 
-                    className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-slate-800 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {card.title}
-                  </motion.h3>
-                  
-                  <motion.p 
-                    className="text-slate-600 leading-relaxed font-light text-base group-hover:text-slate-700 transition-colors"
-                    initial={{ opacity: 0.8 }}
-                    whileHover={{ opacity: 1 }}
-                  >
-                    {card.content}
-                  </motion.p>
+                {/* Icon */}
+                <div className="flex items-center mb-6">
+                  <div className={`p-3 rounded-xl bg-gradient-to-r ${item.color} shadow-lg`}>
+                    <item.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-semibold text-gray-900 ml-4">
+                    {item.title}
+                  </h3>
                 </div>
+
+                {/* Content */}
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  {item.content}
+                </p>
+
+                {/* Hover effect line */}
+                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${item.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
               </motion.div>
             ))}
           </motion.div>

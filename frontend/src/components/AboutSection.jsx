@@ -67,7 +67,7 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="about-area py-20 lg:py-28 relative overflow-hidden bg-white px-24">
+    <section ref={sectionRef} className="about-area py-[90px] lg:py-28 relative overflow-hidden bg-white px-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="about-area-inner grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           

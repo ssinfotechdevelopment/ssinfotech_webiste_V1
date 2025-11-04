@@ -29,10 +29,10 @@ const Footer = () => {
       <div className="border-y border-[#201F3D] relative z-10">
         <div className="container mx-auto max-w-[1410px] grid lg:grid-cols-[1fr_400px] gap-x-8 gap-y-4 py-12 px-4">
           <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-[#6A0DAD] to-[#9B59B6] rounded-full flex items-center justify-center sm:w-14 sm:h-14 animate-pulse">
+            {/* <div className="w-16 h-16 bg-gradient-to-r from-[#6A0DAD] to-[#9B59B6] rounded-full flex items-center justify-center sm:w-14 sm:h-14 animate-pulse">
               <FaRocket className="hover:bg-[#8A2BE2] text-xl text-white" />
-            </div>
-            <div className="mt-1">
+            </div> */}
+            {/* <div className="mt-1">
               <h3 className="text-2xl sm:text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Stay Ahead With Our Updates
               </h3>
@@ -40,7 +40,7 @@ const Footer = () => {
                 Subscribe to our newsletter and be the first to know about cutting-edge 
                 tech solutions and industry insights
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* <form className="bg-white/10 backdrop-blur-lg rounded-2xl p-1 sm:p-2 flex gap-2 sm:gap-3 items-center border border-white/10 shadow-2xl">

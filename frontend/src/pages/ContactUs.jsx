@@ -285,7 +285,7 @@ export default function ContactUs() {
       {/* Hero Heading */}
       <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight">
         Let's Start Your{" "}
-        <span className="block bg-gradient-to-r from-purple-900/95 via-purple-700/90  bg-clip-text text-transparent animate-gradient">
+        <span className="block bg-gradient-to-r from-purple-900/95 via-purple-700/90  bg-clip-text text-white animate-gradient">
           Success Journey
         </span>
       </h1>

@@ -269,9 +269,9 @@ export default function ServicePage() {
     name: "Ayurade - E-commerce Platform",
     description: "A full-featured e-commerce website specializing in Ayurvedic products. Includes user authentication, product catalog, shopping cart, order tracking, and admin dashboard.",
     tech: ["MongoDB", "React", "Node.js", "Express", "Tailwind CSS"],
-    image: "/s2.png",
+    image: "/s4.png",
     gradient: "from-amber-500 to-orange-600",
-    link: "https://ayurade.example.com",
+    link: "https://ayurveda-ssinfotech.netlify.app/signup",
     features: ["Product Catalog", "Shopping Cart", "User Authentication", "Order Management"]
   },
   {
@@ -289,7 +289,7 @@ export default function ServicePage() {
     name: "Daanapaani Foundation - Charity Platform",
     description: "A noble initiative dedicated to social welfare and community development. The platform facilitates donations, volunteer management, and showcases the foundation's humanitarian projects and impact.",
     tech: ["MongoDB", "Express", "React", "Node.js", "Tailwind CSS"],
-    image: "/s4.png",
+    image: "/s2.png",
     gradient: "from-purple-500 to-indigo-600",
     link: "https://daanapaanifoundation.com",
     features: ["Donation System", "Volunteer Management", "Project Showcase", "Impact Tracking"]

@@ -60,7 +60,7 @@ const startServer = async () => {
     const allowedOrigins = [
       "https://ssinfotech-omega.vercel.app",
       "https://ssinfotech-xsq6.vercel.app",
-      "https://ssinfotech-backend-k03q.onrender.com", // backend self URL
+      "https://ssinfotech-backend-k03q.onrender.com",
       process.env.FRONTEND_URL,
       "http://localhost:5173",
       "http://localhost:5174",
@@ -70,17 +70,13 @@ const startServer = async () => {
     app.use(
       cors({
         origin: (origin, callback) => {
-          // Allow requests without origin (like server-to-server or Postman)
           if (!origin) return callback(null, true);
-
-          // Allow same-origin requests from the backend itself
           if (
             origin === "https://ssinfotech-backend-k03q.onrender.com" ||
             allowedOrigins.includes(origin)
           ) {
             return callback(null, true);
           }
-
           console.warn(`🚫 Blocked by CORS: ${origin}`);
           return callback(new Error("Not allowed by CORS"));
         },
@@ -110,11 +106,24 @@ const startServer = async () => {
       res.status(200).json({ status: "OK", time: new Date().toISOString() });
     });
 
-    // --- Serve Frontend (for production) ---
+    // ------------------------
+    // Serve Frontend (Production)
+    // ------------------------
     if (process.env.NODE_ENV === "production") {
       const frontendPath = join(__dirname, "../frontend/dist");
-      app.use(express.static(frontendPath));
 
+      app.use(
+        express.static(frontendPath, {
+          setHeaders: (res, filePath) => {
+            // ✅ Fix wrong MIME type for .js files
+            if (filePath.endsWith(".js")) {
+              res.setHeader("Content-Type", "application/javascript");
+            }
+          },
+        })
+      );
+
+      // Handle React Router
       app.get("*", (req, res) => {
         res.sendFile(join(frontendPath, "index.html"));
       });

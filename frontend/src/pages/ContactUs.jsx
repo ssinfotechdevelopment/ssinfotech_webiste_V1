@@ -664,7 +664,7 @@ export default function ContactUs() {
                     </div>
                     <div className="pt-4 border-t">
                       <a
-                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hello%20SS%20Infotech!%20I%20would%20like%20to%20schedule%20a%20company%20visit.`}
+                        href={`https://wa.me/${+917719927774}?text=Hello%20SS%20Infotech!%20I%20would%20like%20to%20schedule%20a%20company%20visit.`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

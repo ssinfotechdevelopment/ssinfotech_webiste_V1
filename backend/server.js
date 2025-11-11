@@ -52,7 +52,7 @@ const startServer = async () => {
   try {
     // --- Connect to MongoDB ---
     await connectDB();
-    console.log("✅ MongoDB connected successfully");
+    console.log("MongoDB connected successfully");
 
     // ------------------------
     // Allowed Origins for CORS
@@ -60,37 +60,38 @@ const startServer = async () => {
     const allowedOrigins = [
       "https://ssinfotech-omega.vercel.app",
       "https://ssinfotech-xsq6.vercel.app",
-      "https://ssinfotech-backend-k03q.onrender.com",
+      "https://ssinfotech.co",
       process.env.FRONTEND_URL,
       "http://localhost:5173",
       "http://localhost:5174",
     ].filter(Boolean);
 
-    // --- Middleware ---
+    // --- CORS Middleware ---
     app.use(
       cors({
         origin: (origin, callback) => {
+          // Allow requests with no origin (mobile apps, Postman)
           if (!origin) return callback(null, true);
-          if (
-            origin === "https://ssinfotech-backend-k03q.onrender.com" ||
-            allowedOrigins.includes(origin)
-          ) {
+
+          if (allowedOrigins.includes(origin)) {
             return callback(null, true);
           }
-          console.warn(`🚫 Blocked by CORS: ${origin}`);
+
+          console.warn(`Blocked by CORS: ${origin}`);
           return callback(new Error("Not allowed by CORS"));
         },
         credentials: true,
       })
     );
 
+    // --- Body Parsers ---
     app.use(express.json({ limit: "10mb" }));
     app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-    // --- Static folders ---
+    // --- Static Files ---
     app.use("/Uploads", express.static(join(__dirname, "Uploads")));
     app.use("/public", express.static(join(__dirname, "public")));
-    app.use("/resumes", express.static(join(__dirname, "public")));
+    // app.use("/resumes", express.static(join(__dirname, "public/resumes"))); // if separate
 
     // --- API Routes ---
     app.use("/api/admin", adminRoutes);
@@ -101,57 +102,69 @@ const startServer = async () => {
     app.use("/api/candidate", candidateRoutes);
     app.use("/api/albums", albumRoutes);
 
-    // --- Health check ---
+    // --- Health Check (Public) ---
+    app.get("/health", (req, res) => {
+      res.status(200).json({
+        status: "OK",
+        time: new Date().toISOString(),
+        uptime: `${Math.floor(process.uptime())}s`,
+      });
+    });
+
+    // --- Legacy Health ---
     app.get("/api/health", (req, res) => {
       res.status(200).json({ status: "OK", time: new Date().toISOString() });
     });
 
     // ------------------------
-    // Serve Frontend (Production)
+    // Serve Frontend (Production - Only if bundled)
     // ------------------------
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === "production" && !process.env.VERCEL && !process.env.RENDER) {
       const frontendPath = join(__dirname, "../frontend/dist");
 
-      app.use(
-        express.static(frontendPath, {
-          setHeaders: (res, filePath) => {
-            if (filePath.endsWith(".js")) {
-              res.setHeader("Content-Type", "application/javascript");
-            }
-          },
-        })
-      );
+      try {
+        const fs = await import("fs");
+        if (fs.existsSync(frontendPath)) {
+          app.use(express.static(frontendPath));
 
-      // React Router fallback
-      app.get("*", (req, res) => {
-        res.sendFile(join(frontendPath, "index.html"));
-      });
+          app.get("*", (req, res) => {
+            res.sendFile(join(frontendPath, "index.html"));
+          });
 
-      console.log(`🌐 Serving frontend from: ${frontendPath}`);
+          console.log(`Serving frontend from: ${frontendPath}`);
+        }
+      } catch (err) {
+        console.warn("Frontend dist not found. Skipping static serve.");
+      }
     }
 
-    // --- Error Handler ---
+    // --- Global Error Handler ---
     app.use((err, req, res, next) => {
-      console.error("❌ Error Stack:", err.stack);
-      res
-        .status(err.status || 500)
-        .json({ message: err.message || "Something went wrong!" });
+      console.error("Error Stack:", err.stack);
+      res.status(err.status || 500).json({
+        message: err.message || "Something went wrong!",
+        ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
+      });
+    });
+
+    // --- 404 Handler ---
+    app.use("*", (req, res) => {
+      res.status(404).json({ message: "Route not found" });
     });
 
     // --- Start Server ---
     const PORT = process.env.PORT || 10000;
     app.listen(PORT, () => {
       console.log(
-        `🚀 Backend API running on port ${PORT} - ${new Date().toLocaleString(
-          "en-IN",
-          { timeZone: "Asia/Kolkata" }
-        )}`
+        `Backend API running on port ${PORT} - ${new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        })}`
       );
-      console.log("🌐 Allowed CORS Origins:");
+      console.log("Allowed CORS Origins:");
       allowedOrigins.forEach((url) => console.log(`   → ${url}`));
     });
   } catch (err) {
-    console.error("❌ Server startup error:", err);
+    console.error("Server startup error:", err);
     process.exit(1);
   }
 };

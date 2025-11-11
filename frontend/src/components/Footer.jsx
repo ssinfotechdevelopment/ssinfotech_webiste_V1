@@ -27,8 +27,8 @@ const Footer = () => {
 
       {/* Newsletter Section */}
       <div className="border-y border-[#201F3D] relative z-10">
-        <div className="container mx-auto max-w-[1410px] grid lg:grid-cols-[1fr_400px] gap-x-8 gap-y-4 py-12 px-4">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
+        {/* <div className="container mx-auto max-w-[1410px] grid lg:grid-cols-[1fr_400px] gap-x-8 gap-y-4 py-12 px-4"> */}
+          {/* <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6"> */}
             {/* <div className="w-16 h-16 bg-gradient-to-r from-[#6A0DAD] to-[#9B59B6] rounded-full flex items-center justify-center sm:w-14 sm:h-14 animate-pulse">
               <FaRocket className="hover:bg-[#8A2BE2] text-xl text-white" />
             </div> */}
@@ -41,7 +41,7 @@ const Footer = () => {
                 tech solutions and industry insights
               </p>
             </div> */}
-          </div>
+          {/* </div> */}
 
           {/* <form className="bg-white/10 backdrop-blur-lg rounded-2xl p-1 sm:p-2 flex gap-2 sm:gap-3 items-center border border-white/10 shadow-2xl">
             <input
@@ -56,7 +56,7 @@ const Footer = () => {
               Subscribe
             </button>
           </form> */}
-        </div>
+        {/* </div> */}
       </div>
 
       {/* Widgets Section */}

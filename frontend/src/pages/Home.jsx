@@ -12,9 +12,10 @@ import AboutSection from "../components/AboutSection";
 import HeroWithLogo from "../components/HeroWithLogo";
 import WhyChooseUs from "../components/WhyChooseUs";
 import BrandSectionWithIcons from "../components/BrandSectionWithIcons";
+
 const Home = () => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen p-0 overflow-x-hidden">
       
       {/* Soft Gradient Overlay */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-50/50 via-purple-50/50 to-pink-50/50"></div>
@@ -23,28 +24,27 @@ const Home = () => {
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 animate-gradient-x"></div>
       
       {/* Content */}
-      <div className="relative z-10 ">
+      <div className="relative z-10">
         {/* Hero Section */}
         <Hero />
 
         {/* About Section */}
-        <section className=" px-4 mx-[-16px]   md:px-12  bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 ">
+        <section className="px-4 mx-[-16px] md:mx-0 md:px-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
           <ServicesSection />
         </section>
 
         {/* Company Goal Section */}
-        <section className="py-0 px-20 flex flex-col items-center justify-center text-center space-y-8  ">
+        <section className="py-0 px-4 md:px-20 flex flex-col items-center justify-center text-center space-y-8">
           <AboutSection />
         </section>
 
         {/* Branches Section */}
-        <section className="py-0 mx-[-16px] px-4 md:px-12 flex flex-col items-center justify-center space-y-12 ">
-         
+        <section className="py-0 mx-[-16px] px-4 md:mx-0 md:px-12 flex flex-col items-center justify-center space-y-12">
           <HeroWithLogo/>
         </section>
 
         {/* Services Section */}
-        <section className="py-0 px-4 md:px-4 mx-[-16px]">
+        <section className="py-0 px-4 md:px-4 mx-[-16px] md:mx-0">
           <WhyChooseUs />
         </section>
 
@@ -54,7 +54,7 @@ const Home = () => {
         </section>
 
         {/* Contact Form */}
-        <section className="px-4 md:px-12 flex flex-col items-center justify-center">
+        <section className="px-4 md:px-12 flex flex-col items-center justify-center w-full">
           <BrandSectionWithIcons />
         </section>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFacebook, FaTwitter, FaLinkedinIn, FaBars, FaPhone,FaInstagram ,FaWhatsapp} from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedinIn, FaBars, FaPhone,FaInstagram ,FaWhatsapp,FaLinkedin} from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 
 // Data-driven approach for menu structure
@@ -33,24 +33,25 @@ const menuItems = [
 
 const socialLinks = [
   {
-    name: 'Whatsapp',
-    icon: FaWhatsapp,
-    href: 'https://wa.link/rck1ie',
-    color: 'hover:text-blue-400'
-  },
-  {
-    name: 'Instagram',
+    name: "Instagram",
     icon: FaInstagram,
-    href: 'https://www.instagram.com/ss.infotech_?igsh=MTJvNHVqdGZ0aXM2bA==',
-    color: 'hover:text-blue-400'
+    url: "https://www.instagram.com/ss.infotech_?igsh=MTJvNHVqdGZ0aXM2bA==",
+    color: "#E1306C",
   },
   {
-    name: 'LinkedIn',
-    icon: FaLinkedinIn,
-    href: 'https://www.linkedin.com/company/ss-infotech-co/',
-    color: 'hover:text-blue-400'
-  }
+    name: "WhatsApp",
+    icon: FaWhatsapp,
+    url: "https://wa.me/919876543210", // ← Add your WhatsApp link here
+    color: "#25D366",
+  },
+  {
+    name: "LinkedIn",
+    icon: FaLinkedin,
+    url: "https://www.linkedin.com/company/ss-infotech-co/",
+    color: "#0077B5",
+  },
 ];
+
 
 // Reusable Social Link Component
 const SocialLink = ({ social }) => {
@@ -126,24 +127,26 @@ const TopBar = () => (
       </div> */}
 
       {/* Social Icons */}
-      <div className="header-social flex space-x-5">
-        {socialLinks.map((social, index) => (
-          <motion.a
-            key={social.name}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group p-2.5 rounded-full bg-white/15 backdrop-blur border border-white/30 shadow-lg transition-all duration-300 hover:bg-white/25 hover:shadow-xl hover:scale-110"
-            whileHover={{ y: -3 }}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <social.icon className="w-5 h-5 text-white group-hover:text-purple-200 transition-colors" />
-            <span className="sr-only">{social.name}</span>
-          </motion.a>
-        ))}
-      </div>
+    <div className="header-social flex space-x-5">
+      {socialLinks.map((social, index) => (
+        <motion.button
+          key={social.name}
+          onClick={() => window.open(social.url, "_blank")}
+          className="group p-2.5 rounded-full bg-white/15 backdrop-blur border border-white/30 shadow-lg transition-all duration-300 hover:bg-white/25 hover:shadow-xl hover:scale-110"
+          whileHover={{ y: -3 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+        >
+          <social.icon
+            className="w-6 h-6 transition-colors"
+            color={social.color}
+          />
+          <span className="sr-only">{social.name}</span>
+        </motion.button>
+      ))}
+    </div>
+
     </div>
   </div>
 </motion.div>

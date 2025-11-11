@@ -378,7 +378,7 @@ const AboutUs = () => {
                 <motion.img
                   src={section.image}
                   alt={section.alt}
-                  className="w-full h-[800px] object-cover"
+                  className="w-[400px] h-[400px] object-cover   lg:w-[800px] lg:h-[800px]"
                   loading="lazy"
                   onError={(e) => (e.target.src = "/imgs/placeholder.jpg")}
                   initial={{ scale: 1.1 }}

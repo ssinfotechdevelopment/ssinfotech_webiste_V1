@@ -47,7 +47,7 @@ const socialLinks = [
   {
     name: "WhatsApp",
     icon: FaWhatsapp,
-    url: "https://wa.me/919876543210", // ← Add your WhatsApp link here
+    url: "https://wa.link/mg83y0", // ← Add your WhatsApp link here
     color: "#25D366",
   },
   {

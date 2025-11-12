@@ -13,7 +13,7 @@ export default function SocialPopup() {
     {
       name: "WhatsApp",
       icon: <FaWhatsapp size={28} color="#25D366" />,
-      url: "",
+      url: "https://wa.link/mg83y0",
       label: "SS Infotech WhatsApp",
       color: "#25D366", // WhatsApp green
     },

@@ -55,7 +55,6 @@ const InternshipPage = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
-        // Clear error on input
         if (errors[name]) {
             setErrors((prev) => ({ ...prev, [name]: "" }));
         }
@@ -73,7 +72,6 @@ const InternshipPage = () => {
         if (!/^\S+@\S+\.\S+$/.test(form.email))
             newErrors.email = "Enter a valid email";
 
-        // Resume validation: Allow "NA" (case-insensitive), otherwise require Google Drive link
         const resume = form.resume.trim();
         if (!resume) {
             newErrors.resume = "Resume link is required (or type 'NA' if not available)";
@@ -114,14 +112,22 @@ Thank you for your time and consideration.
 Best regards,
 ${form.name}`;
 
-        const mailto = `mailto:ssinfotechtnp@gmail.com?subject=${encodeURIComponent(
+        // Gmail Compose URL (opens in new tab)
+        const gmailUrl = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=ssinfotechtnp@gmail.com&su=${encodeURIComponent(
             subject
         )}&body=${encodeURIComponent(body)}`;
 
-        alert("Opening your email client... Please click 'Send' to submit.");
-        window.location.href = mailto;
+        // Open Gmail in new tab
+        const newWindow = window.open(gmailUrl, "_blank", "noopener,noreferrer");
 
-        setTimeout(() => setIsSubmitting(false), 1000);
+        setTimeout(() => {
+            if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+                alert("Popup blocked or Gmail not opened. Please allow popups and ensure you're logged into Gmail.");
+            } else {
+                alert("Gmail opened! Please review and click 'Send' to submit your application.");
+            }
+            setIsSubmitting(false);
+        }, 1000);
     };
 
     return (
@@ -143,8 +149,8 @@ ${form.name}`;
                         <button
                             onClick={() => setActiveTab("about")}
                             className={`px-6 py-3 rounded-full font-semibold transition-all ${activeTab === "about"
-                                ? "bg-purple-600 text-white shadow-md"
-                                : "text-gray-600 hover:text-purple-600"
+                                    ? "bg-purple-600 text-white shadow-md"
+                                    : "text-gray-600 hover:text-purple-600"
                                 }`}
                         >
                             About Us
@@ -152,8 +158,8 @@ ${form.name}`;
                         <button
                             onClick={() => setActiveTab("process")}
                             className={`px-6 py-3 rounded-full font-semibold transition-all ${activeTab === "process"
-                                ? "bg-purple-600 text-white shadow-md"
-                                : "text-gray-600 hover:text-purple-600"
+                                    ? "bg-purple-600 text-white shadow-md"
+                                    : "text-gray-600 hover:text-purple-600"
                                 }`}
                         >
                             Process
@@ -161,8 +167,8 @@ ${form.name}`;
                         <button
                             onClick={() => setActiveTab("application")}
                             className={`px-6 py-3 rounded-full font-semibold transition-all ${activeTab === "application"
-                                ? "bg-purple-600 text-white shadow-md"
-                                : "text-gray-600 hover:text-purple-600"
+                                    ? "bg-purple-600 text-white shadow-md"
+                                    : "text-gray-600 hover:text-purple-600"
                                 }`}
                         >
                             Apply Now
@@ -171,86 +177,47 @@ ${form.name}`;
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-8">
-                    {/* Left Side - Company Info & Process */}
+                    {/* Left Side - Conditional Content */}
                     <div className="lg:col-span-1 space-y-8">
-                        {/* About Company */}
-                        <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                            <div className="flex items-center mb-4">
-                                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                                    <span className="text-white font-bold text-lg">SS</span>
-                                </div>
-                                <h3 className="text-2xl font-bold text-gray-900 ml-4">SS Infotech</h3>
+                        {activeTab === "about" && (
+                            <div className="bg-white rounded-2xl shadow-xl p-6">
+                                <h3 className="text-2xl font-bold text-purple-700 mb-4">About SS Infotech</h3>
+                                <p className="text-gray-600 leading-relaxed">
+                                    We are a leading tech training and placement company dedicated to bridging the gap between academia and industry. With a focus on practical learning, we help students gain real-world experience through structured internships.
+                                </p>
                             </div>
-                            <p className="text-gray-600 mb-4">
-                                We are a leading technology company dedicated to innovation and excellence.
-                                Our mission is to transform businesses through cutting-edge solutions and
-                                nurture the next generation of tech talent.
-                            </p>
-                            <div className="space-y-3">
-                                <div className="flex items-center">
-                                    <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                    <span className="text-gray-700">Real-world project experience</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                    <span className="text-gray-700">Mentorship from industry experts</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                    <span className="text-gray-700">Flexible remote working options</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                    <span className="text-gray-700">Certificate & Letter of Recommendation</span>
-                                </div>
-                            </div>
-                        </div>
+                        )}
 
-                        {/* Internship Process */}
-                        <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-6">Internship Process</h3>
-                            <div className="space-y-6">
-                                {internshipProcess.map((step, index) => (
-                                    <div key={step.step} className="flex">
-                                        <div className="flex flex-col items-center mr-4">
-                                            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
-                                                {step.step}
+                        {activeTab === "process" && (
+                            <div className="bg-white rounded-2xl shadow-xl p-6">
+                                <h3 className="text-2xl font-bold text-purple-700 mb-6">Internship Process</h3>
+                                <div className="space-y-4">
+                                    {internshipProcess.map((item) => (
+                                        <div key={item.step} className="flex items-start space-x-4">
+                                            <div className="flex-shrink-0 w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">
+                                                {item.step}
                                             </div>
-                                            {index < internshipProcess.length - 1 && (
-                                                <div className="w-1 h-12 bg-purple-200 mt-2"></div>
-                                            )}
+                                            <div>
+                                                <h4 className="font-semibold text-gray-800">{item.title}</h4>
+                                                <p className="text-sm text-gray-600">{item.description}</p>
+                                            </div>
                                         </div>
-                                        <div className="flex-1 pb-6">
-                                            <h4 className="font-semibold text-gray-900 mb-1">{step.title}</h4>
-                                            <p className="text-gray-600 text-sm">{step.description}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
 
-                        {/* Stats */}
-                        <div className="bg-gradient-to-r from-purple-600 to-indigo-700 rounded-2xl shadow-lg p-6 text-white">
-                            <h3 className="text-xl font-bold mb-4">Why Choose Us?</h3>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold">500+</div>
-                                    <div className="text-sm opacity-90">Interns Trained</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold">85%</div>
-                                    <div className="text-sm opacity-90">Conversion Rate</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold">50+</div>
-                                    <div className="text-sm opacity-90">Projects</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold">4.8★</div>
-                                    <div className="text-sm opacity-90">Rating</div>
-                                </div>
+                        {activeTab === "application" && (
+                            <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl shadow-xl p-6 text-white">
+                                <h3 className="text-xl font-bold mb-4">Quick Tips</h3>
+                                <ul className="space-y-2 text-sm">
+                                    <li>Ensure your resume is publicly accessible</li>
+                                    <li>Double-check your contact details</li>
+                                    <li>Be ready for a technical assessment</li>
+                                    <li>Stay responsive during the process</li>
+                                </ul>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     {/* Right Side - Application Form */}
@@ -294,9 +261,7 @@ ${form.name}`;
                                             className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${errors.college ? "border-red-500" : "border-gray-200 hover:border-purple-300"
                                                 }`}
                                         />
-                                        {errors.college && (
-                                            <p className="text-red-500 text-xs mt-2">{errors.college}</p>
-                                        )}
+                                        {errors.college && <p className="text-red-500 text-xs mt-2">{errors.college}</p>}
                                     </div>
                                 </div>
 
@@ -314,9 +279,7 @@ ${form.name}`;
                                         className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${errors.education ? "border-red-500" : "border-gray-200 hover:border-purple-300"
                                             }`}
                                     />
-                                    {errors.education && (
-                                        <p className="text-red-500 text-xs mt-2">{errors.education}</p>
-                                    )}
+                                    {errors.education && <p className="text-red-500 text-xs mt-2">{errors.education}</p>}
                                 </div>
 
                                 {/* Domain */}
@@ -338,9 +301,7 @@ ${form.name}`;
                                             </option>
                                         ))}
                                     </select>
-                                    {errors.domain && (
-                                        <p className="text-red-500 text-xs mt-2">{errors.domain}</p>
-                                    )}
+                                    {errors.domain && <p className="text-red-500 text-xs mt-2">{errors.domain}</p>}
                                 </div>
 
                                 <div className="grid md:grid-cols-2 gap-6">
@@ -358,9 +319,7 @@ ${form.name}`;
                                             className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${errors.contact ? "border-red-500" : "border-gray-200 hover:border-purple-300"
                                                 }`}
                                         />
-                                        {errors.contact && (
-                                            <p className="text-red-500 text-xs mt-2">{errors.contact}</p>
-                                        )}
+                                        {errors.contact && <p className="text-red-500 text-xs mt-2">{errors.contact}</p>}
                                     </div>
 
                                     {/* Email */}
@@ -377,9 +336,7 @@ ${form.name}`;
                                             className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${errors.email ? "border-red-500" : "border-gray-200 hover:border-purple-300"
                                                 }`}
                                         />
-                                        {errors.email && (
-                                            <p className="text-red-500 text-xs mt-2">{errors.email}</p>
-                                        )}
+                                        {errors.email && <p className="text-red-500 text-xs mt-2">{errors.email}</p>}
                                     </div>
                                 </div>
 
@@ -400,9 +357,13 @@ ${form.name}`;
                                     <p className="text-xs text-gray-500 mt-2">
                                         Type 'NA' if you don't have a resume ready
                                     </p>
-                                    {errors.resume && (
-                                        <p className="text-red-500 text-xs mt-2">{errors.resume}</p>
-                                    )}
+                                    {errors.resume && <p className="text-red-500 text-xs mt-2">{errors.resume}</p>}
+                                </div>
+
+                                {/* Gmail Notice */}
+                                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
+                                    <strong>Note:</strong> This form will open <strong>Gmail</strong> in a new tab.
+                                    Make sure you're logged in to send the application.
                                 </div>
 
                                 {/* Submit Button */}
@@ -410,17 +371,17 @@ ${form.name}`;
                                     type="submit"
                                     disabled={isSubmitting}
                                     className={`w-full py-4 rounded-xl font-bold text-white transition-all transform hover:scale-[1.02] ${isSubmitting
-                                        ? "bg-purple-400 cursor-not-allowed"
-                                        : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl"
+                                            ? "bg-purple-400 cursor-not-allowed"
+                                            : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl"
                                         }`}
                                 >
                                     {isSubmitting ? (
                                         <div className="flex items-center justify-center">
                                             <div className="w-5 h-5 border-t-2 border-white rounded-full animate-spin mr-3"></div>
-                                            Opening Email...
+                                            Opening Gmail...
                                         </div>
                                     ) : (
-                                        "Send Application"
+                                        "Open in Gmail & Send"
                                     )}
                                 </button>
 
@@ -428,6 +389,29 @@ ${form.name}`;
                                     By applying, you agree to our privacy policy and terms of service
                                 </p>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Stats */}
+                <div className="mt-12 bg-gradient-to-r from-purple-600 to-indigo-700 rounded-2xl shadow-lg p-6 text-white">
+                    <h3 className="text-xl font-bold mb-4">Why Choose Us?</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="text-center">
+                            <div className="text-2xl font-bold">500+</div>
+                            <div className="text-sm opacity-90">Interns Trained</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-bold">85%</div>
+                            <div className="text-sm opacity-90">Conversion Rate</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-bold">50+</div>
+                            <div className="text-sm opacity-90">Projects</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-bold">4.8 stars</div>
+                            <div className="text-sm opacity-90">Rating</div>
                         </div>
                     </div>
                 </div>

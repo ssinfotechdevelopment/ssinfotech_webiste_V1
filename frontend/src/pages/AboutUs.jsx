@@ -507,7 +507,7 @@ const AboutUs = () => {
                 {/* Icon */}
                 <div className="flex items-center mb-6">
                   <div className={`p-3 rounded-xl bg-gradient-to-r ${item.color} shadow-lg`}>
-                    <item.icon className="w-6 h-6 text-white" />
+                    <item.icon className="w-6 h-6 " />
                   </div>
                   <h3 className="text-2xl font-semibold text-gray-900 ml-4">
                     {item.title}

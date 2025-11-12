@@ -86,7 +86,7 @@ Thank you for your time and consideration.
 Best regards,
 ${form.name}`;
 
-        const mailto = `mailto:flantiksolution@gmail.com?subject=${encodeURIComponent(
+        const mailto = `mailto:ssinfotechtnp@gmail.com?subject=${encodeURIComponent(
             subject
         )}&body=${encodeURIComponent(body)}`;
 
@@ -249,8 +249,8 @@ ${form.name}`;
                         type="submit"
                         disabled={isSubmitting}
                         className={`w-full py-3 rounded-lg font-semibold text-white transition-all transform ${isSubmitting
-                                ? "bg-purple-400 cursor-not-allowed"
-                                : "bg-purple-600 hover:bg-purple-700 active:scale-95"
+                            ? "bg-purple-400 cursor-not-allowed"
+                            : "bg-purple-600 hover:bg-purple-700 active:scale-95"
                             }`}
                     >
                         {isSubmitting ? "Opening Email..." : "Send Application"}

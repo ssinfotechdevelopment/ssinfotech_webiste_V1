@@ -17,6 +17,7 @@ import ServicePage from "./pages/ServicePage";
 import ContactPage from "./pages/ContactUs"
 import CollegeGallery from "./pages/CollegeGallery";
 import SocialPopup from "./components/SocialPopup";
+import InternshipPage from "./pages/InternshipPage";
 function App() {
   const [showPopup, setShowPopup] = useState(true);
   return (
@@ -24,22 +25,24 @@ function App() {
       <Navbar />
       <main className="content">
         {showPopup && (
-        <SocialPopup
-          
-          onClose={() => setShowPopup(false)}
-        />
-      )}
+          <SocialPopup
+
+            onClose={() => setShowPopup(false)}
+          />
+        )}
 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/training" element={<TrainingAndPlacements />} />
-          <Route path="/serach-jobs" element={<Jobs/>} />
-          <Route path="/placements" element={<Placements/>}/>
-          <Route path="/gallary" element={<CollegeGallery/>} />
+          <Route path="/serach-jobs" element={<Jobs />} />
+          <Route path="/apply-internship" element={<InternshipPage />} />
+          <Route path="/placements" element={<Placements />} />
+          <Route path="/gallary" element={<CollegeGallery />} />
+
 
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/services" element={<ServicePage/>} />
-          <Route path="/contact" element={<ContactPage/>} />
+          <Route path="/services" element={<ServicePage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/*" element={"not found"} />
         </Routes>
       </main>

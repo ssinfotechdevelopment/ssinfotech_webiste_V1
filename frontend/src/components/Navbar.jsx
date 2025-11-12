@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFacebook, FaTwitter, FaLinkedinIn, FaBars, FaPhone,FaInstagram ,FaWhatsapp,FaLinkedin} from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedinIn, FaBars, FaPhone, FaInstagram, FaWhatsapp, FaLinkedin } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 
 // Data-driven approach for menu structure
@@ -25,6 +25,12 @@ const menuItems = [
     title: 'Careers',
     link: '/serach-jobs'
   },
+  {
+    title: 'Internship',
+    link: '/apply-internship'
+  },
+
+
   {
     title: 'Gallery',
     link: '/gallary'
@@ -92,64 +98,64 @@ const NavItem = ({ item }) => (
 // Top Bar Component
 const TopBar = () => (
   <motion.div
-  className="relative overflow-hidden rounded-b-3xl shadow-2xl"
-  initial={{ y: -60, opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  transition={{ duration: 0.7, ease: "easeOut" }}
->
-  {/* Background Video */}
-  <div className="absolute inset-0 overflow-hidden">
-    <video
-      src="/nav.mp4"                 // VIDEO PATH: /public/navbar.mp4
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="w-full h-full object-cover"
-      style={{ filter: 'brightness(0.5) contrast(1.2)' }}
-    />
-  </div>
+    className="relative overflow-hidden rounded-b-3xl shadow-2xl"
+    initial={{ y: -60, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.7, ease: "easeOut" }}
+  >
+    {/* Background Video */}
+    <div className="absolute inset-0 overflow-hidden">
+      <video
+        src="/nav.mp4"                 // VIDEO PATH: /public/navbar.mp4
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+        style={{ filter: 'brightness(0.5) contrast(1.2)' }}
+      />
+    </div>
 
-  {/* Dark Gradient Overlay + Glass Effect */}
-  <div className="absolute inset-0 bg-gradient-to-r from-purple-900/95 via-purple-800/90 backdrop-blur-md" />
+    {/* Dark Gradient Overlay + Glass Effect */}
+    <div className="absolute inset-0 bg-gradient-to-r from-purple-900/95 via-purple-800/90 backdrop-blur-md" />
 
-  {/* Optional Subtle Pattern (for texture) */}
-  
+    {/* Optional Subtle Pattern (for texture) */}
 
-  {/* Content */}
-  <div className="relative z-10 w-full px-4 lg:px-8 py-3">
-    <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-      
-      {/* Optional: Phone / Update Note */}
-      {/* <div className="flex items-center space-x-3 text-sm font-medium">
+
+    {/* Content */}
+    <div className="relative z-10 w-full px-4 lg:px-8 py-3">
+      <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+
+        {/* Optional: Phone / Update Note */}
+        {/* <div className="flex items-center space-x-3 text-sm font-medium">
         <Phone className="w-4 h-4" />
         <span>Call: +91 77199 27774</span>
       </div> */}
 
-      {/* Social Icons */}
-    <div className="header-social flex space-x-5">
-      {socialLinks.map((social, index) => (
-        <motion.button
-          key={social.name}
-          onClick={() => window.open(social.url, "_blank")}
-          className="group p-2.5 rounded-full bg-white/15 backdrop-blur border border-white/30 shadow-lg transition-all duration-300 hover:bg-white/25 hover:shadow-xl hover:scale-110"
-          whileHover={{ y: -3 }}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-        >
-          <social.icon
-            className="w-6 h-6 transition-colors"
-            color={social.color}
-          />
-          <span className="sr-only">{social.name}</span>
-        </motion.button>
-      ))}
-    </div>
+        {/* Social Icons */}
+        <div className="header-social flex space-x-5">
+          {socialLinks.map((social, index) => (
+            <motion.button
+              key={social.name}
+              onClick={() => window.open(social.url, "_blank")}
+              className="group p-2.5 rounded-full bg-white/15 backdrop-blur border border-white/30 shadow-lg transition-all duration-300 hover:bg-white/25 hover:shadow-xl hover:scale-110"
+              whileHover={{ y: -3 }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <social.icon
+                className="w-6 h-6 transition-colors"
+                color={social.color}
+              />
+              <span className="sr-only">{social.name}</span>
+            </motion.button>
+          ))}
+        </div>
 
+      </div>
     </div>
-  </div>
-</motion.div>
+  </motion.div>
 );
 
 // Mobile Menu Toggle Component
@@ -179,7 +185,7 @@ const Navbar = () => {
 
       {/* Sticky Navbar */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <motion.div 
+        <motion.div
           className="bg-white px-4 lg:px-6 border-b border-gray-100"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -187,22 +193,22 @@ const Navbar = () => {
         >
           <div className="w-full px-4 lg:px-6">
             <div className="flex justify-between items-center py-3">
-              
+
               {/* Logo */}
-              <motion.div 
+              <motion.div
                 className="header-logo"
                 whileHover={{ scale: 1.05 }}
               >
                 <NavLink to="/" className="block">
-                  <img 
-                    src="/logo.png" 
-                    alt="SS Infotech Logo" 
+                  <img
+                    src="/logo.png"
+                    alt="SS Infotech Logo"
                     className="h-16 w-auto sm:h-20 md:h-24 lg:h-28 xl:h-32 object-contain max-w-[200px] sm:max-w-[250px] lg:max-w-[300px]"
                     loading="eager"
                   />
                 </NavLink>
               </motion.div>
-              
+
               {/* Desktop Navigation */}
               <nav className="hidden lg:block py-2">
                 <ul className="flex space-x-8 xl:space-x-10">
@@ -214,25 +220,25 @@ const Navbar = () => {
                   ))}
                 </ul>
               </nav>
-              
+
               {/* CTA Section */}
               <div className="hidden md:flex items-center space-x-6">
-                <motion.div 
+                <motion.div
                   className="call-box flex items-center space-x-2 text-gray-700"
                   whileHover={{ scale: 1.05 }}
                 >
                   <FaPhone className="w-4 h-4 text-purple-600" />
                   <span>
                     Call us: {' '}
-                    <a 
-                      href="tel:+9177199 27774" 
+                    <a
+                      href="tel:+9177199 27774"
                       className="font-semibold hover:text-purple-600 transition-colors"
                     >
                       +91 77199 27774
                     </a>
                   </span>
                 </motion.div>
-                
+
                 {/* <motion.button
                   className="bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-md"
                   whileHover={{ scale: 1.05, boxShadow: '0 10px 25px -5px rgba(168, 85, 247, 0.4)' }}
@@ -241,7 +247,7 @@ const Navbar = () => {
                   Get Started
                 </motion.button> */}
               </div>
-              
+
               {/* Mobile Menu Toggle */}
               <MobileMenuToggle onClick={toggleMobileMenu} />
             </div>

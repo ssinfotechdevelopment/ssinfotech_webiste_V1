@@ -44,9 +44,14 @@ const InternshipPage = () => {
             newErrors.contact = "Enter a valid 10-digit number";
         if (!/^\S+@\S+\.\S+$/.test(form.email))
             newErrors.email = "Enter a valid email";
-        if (!form.resume.trim()) newErrors.resume = "Resume link is required";
-        else if (!form.resume.includes("drive.google.com"))
-            newErrors.resume = "Must be a valid Google Drive link";
+
+        // Resume validation: Allow "NA" (case-insensitive), otherwise require Google Drive link
+        const resume = form.resume.trim();
+        if (!resume) {
+            newErrors.resume = "Resume link is required (or type 'NA' if not available)";
+        } else if (resume.toLowerCase() !== "na" && !resume.includes("drive.google.com")) {
+            newErrors.resume = "Must be a valid Google Drive link (or type 'NA')";
+        }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -57,6 +62,8 @@ const InternshipPage = () => {
         if (!validate()) return;
 
         setIsSubmitting(true);
+
+        const resumeDisplay = form.resume.trim().toLowerCase() === "na" ? "Not Available" : form.resume;
 
         const subject = `Application for Internship in ${form.domain}`;
         const body = `Dear Flantik Solutions Team,
@@ -72,14 +79,14 @@ Here are my details:
 - Domain: ${form.domain}
 - Contact Number: ${form.contact}
 - Email ID: ${form.email}
-- Resume Link: ${form.resume}
+- Resume Link: ${resumeDisplay}
 
 Thank you for your time and consideration.
 
 Best regards,
 ${form.name}`;
 
-        const mailto = `mailto:flantiksolution@gmail.com?subject=${encodeURIComponent(
+        const mailto = `mailto:ssinfotechtnp@gmail.com?subject=${encodeURIComponent(
             subject
         )}&body=${encodeURIComponent(body)}`;
 
@@ -221,13 +228,14 @@ ${form.name}`;
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                             Resume (Google Drive Link) <span className="text-red-500">*</span>
+                            <span className="text-xs text-gray-500 block">Type 'NA' if not available</span>
                         </label>
                         <input
-                            type="url"
+                            type="text" // Changed from "url" to allow "NA"
                             name="resume"
                             value={form.resume}
                             onChange={handleChange}
-                            placeholder="https://drive.google.com/..."
+                            placeholder="https://drive.google.com/... or type NA"
                             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition ${errors.resume ? "border-red-500" : "border-gray-300"
                                 }`}
                         />

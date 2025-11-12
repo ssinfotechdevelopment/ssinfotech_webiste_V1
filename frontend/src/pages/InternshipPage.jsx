@@ -65,6 +65,9 @@ const InternshipPage = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    // ──────────────────────────────────────────────────────────────
+    //  handleSubmit – Opens DEFAULT MAIL APP on mobile, Web Gmail on desktop
+    // ──────────────────────────────────────────────────────────────
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!validate()) return;
@@ -73,7 +76,6 @@ const InternshipPage = () => {
 
         const resumeDisplay = form.resume.trim().toLowerCase() === "na" ? "Not Available" : form.resume;
 
-        // Using your email template format
         const subject = `Application for Internship Opportunity`;
         const body = `Dear HR Manager,
 
@@ -97,22 +99,40 @@ ${form.name}
 ${form.education}, ${form.college}
 ${form.email}
 ${form.contact}
-${resumeDisplay !== "Not Available" ? `Resume: ${resumeDisplay}` : ""}`;
+${resumeDisplay !== "Not Available" ? `\nResume: ${resumeDisplay}` : ""}`;
 
-        const gmailUrl = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=ssinfotechtnp@gmail.com&su=${encodeURIComponent(
-            subject
-        )}&body=${encodeURIComponent(body)}`;
+        const encSubject = encodeURIComponent(subject);
+        const encBody = encodeURIComponent(body);
+        const to = "ssinfotechtnp@gmail.com";
 
-        const newWindow = window.open(gmailUrl, "_blank", "noopener,noreferrer");
+        // Web Gmail URL (for desktop)
+        const webGmail = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${to}&su=${encSubject}&body=${encBody}`;
 
-        setTimeout(() => {
-            if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
-                alert("Popup blocked. Please allow pop-ups and be logged into Gmail.");
-            } else {
-                alert("Gmail opened! Review and click **Send** to submit.");
-            }
-            setIsSubmitting(false);
-        }, 1000);
+        // Detect if mobile
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+            (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+
+        if (isMobile) {
+            // Open default mail app on mobile
+            const mailtoLink = `mailto:${to}?subject=${encSubject}&body=${encBody}`;
+            window.location.href = mailtoLink;
+
+            setTimeout(() => {
+                alert("Opening your mail app. Please review and send the email.");
+                setIsSubmitting(false);
+            }, 1000);
+        } else {
+            // Desktop: Open web Gmail
+            const win = window.open(webGmail, "_blank", "noopener,noreferrer");
+            setTimeout(() => {
+                if (!win || win.closed) {
+                    alert("Popup blocked. Please allow pop-ups and be logged into Gmail.");
+                } else {
+                    alert("Gmail opened in browser. Review and click Send.");
+                }
+                setIsSubmitting(false);
+            }, 1000);
+        }
     };
 
     return (
@@ -182,8 +202,6 @@ ${resumeDisplay !== "Not Available" ? `Resume: ${resumeDisplay}` : ""}`;
                                 </div>
                             </div>
                         )}
-
-
                     </aside>
 
                     {/* Centered Form */}
@@ -349,15 +367,15 @@ ${resumeDisplay !== "Not Available" ? `Resume: ${resumeDisplay}` : ""}`;
                                     {isSubmitting ? (
                                         <div className="flex items-center justify-center">
                                             <div className="w-5 h-5 border-t-2 border-white rounded-full animate-spin mr-3"></div>
-                                            Opening Gmail...
+                                            Opening Mail App...
                                         </div>
                                     ) : (
-                                        "Open in Gmail & Send Application"
+                                        "Open in Mail App & Send"
                                     )}
                                 </button>
 
                                 <p className="text-center text-xs text-gray-500 mt-4">
-                                    Your application will be sent via email. Please review before sending.
+                                    Your default mail app will open with a pre-filled email.
                                 </p>
                             </form>
                         </div>

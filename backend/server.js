@@ -61,6 +61,7 @@ const startServer = async () => {
       "https://ssinfotech-omega.vercel.app",
       "https://ssinfotech-xsq6.vercel.app",
       "https://ssinfotech.co",
+      "https://www.ssinfotech.co",
       process.env.FRONTEND_URL,
       "http://localhost:5173",
       "http://localhost:5174",

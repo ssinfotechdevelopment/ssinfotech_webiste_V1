@@ -10,6 +10,7 @@ const InternshipPage = () => {
         contact: "",
         email: "",
         resume: "",
+        skills: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -49,6 +50,7 @@ const InternshipPage = () => {
         if (!form.college.trim()) newErrors.college = "College Name is required";
         if (!form.education.trim()) newErrors.education = "Education is required";
         if (!form.domain) newErrors.domain = "Please select a domain";
+        if (!form.skills.trim()) newErrors.skills = "Please mention your skills";
         if (!/^\d{10}$/.test(form.contact)) newErrors.contact = "Enter a valid 10-digit number";
         if (!/^\S+@\S+\.\S+$/.test(form.email)) newErrors.email = "Enter a valid email";
 
@@ -71,26 +73,31 @@ const InternshipPage = () => {
 
         const resumeDisplay = form.resume.trim().toLowerCase() === "na" ? "Not Available" : form.resume;
 
-        const subject = `Application for Internship in ${form.domain}`;
-        const body = `Dear SS Infotech Team,
+        // Using your email template format
+        const subject = `Application for Internship Opportunity`;
+        const body = `Dear HR Manager,
 
-I hope you are doing well.
-I am ${form.name} from ${form.college}, currently pursuing ${form.education}.
-I would like to apply for an internship in the ${form.domain} domain.
+I am ${form.name}, a student of ${form.education} at ${form.college}. I am writing to express my interest in applying for an internship position at SS Infotech.
 
-Here are my details:
-- Full Name: ${form.name}
-- College Name: ${form.college}
-- Education: ${form.education}
-- Domain: ${form.domain}
-- Contact Number: ${form.contact}
-- Email ID: ${form.email}
-- Resume Link: ${resumeDisplay}
+I am eager to gain practical exposure and enhance my skills in ${form.domain}, and I believe that an internship with your esteemed organization will provide me with valuable learning and professional experience.
 
-Thank you for your time and consideration.
+I have a keen interest in ${form.skills}, and I am confident that I can contribute positively to your team while learning from the experts at SS Infotech.
 
-Best regards,
-${form.name}`;
+Please find my details below for your kind consideration:
+- Contact: ${form.contact}
+- Email: ${form.email}
+- Resume: ${resumeDisplay}
+
+I would be grateful if given an opportunity to discuss my application further.
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Yours sincerely,
+${form.name}
+${form.education}, ${form.college}
+${form.email}
+${form.contact}
+${resumeDisplay !== "Not Available" ? `Resume: ${resumeDisplay}` : ""}`;
 
         const gmailUrl = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=ssinfotechtnp@gmail.com&su=${encodeURIComponent(
             subject
@@ -118,7 +125,7 @@ ${form.name}`;
                         Join Our <span className="text-purple-600">Internship</span> Program
                     </h1>
                     <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                        Kickstart your career with hands-on experience and mentorship
+                        Kickstart your career with hands-on experience and professional mentorship
                     </p>
                 </div>
 
@@ -140,16 +147,19 @@ ${form.name}`;
                     </div>
                 </div>
 
-                {/* Main Content – Flex row only on lg+ */}
+                {/* Main Content */}
                 <div className="flex flex-col lg:flex-row gap-8 items-start w-full">
 
-                    {/* Left Sidebar – hidden on mobile */}
+                    {/* Left Sidebar */}
                     <aside className="hidden lg:block lg:w-80 space-y-8">
                         {activeTab === "about" && (
                             <div className="bg-white rounded-2xl shadow-xl p-6">
                                 <h3 className="text-2xl font-bold text-purple-700 mb-4">About SS Infotech</h3>
-                                <p className="text-gray-600 leading-relaxed">
+                                <p className="text-gray-600 leading-relaxed mb-4">
                                     We bridge the gap between academia and industry with hands-on training, real projects, and expert mentorship.
+                                </p>
+                                <p className="text-gray-600 leading-relaxed">
+                                    Our internship program is designed to provide students with practical experience and professional development opportunities.
                                 </p>
                             </div>
                         )}
@@ -172,18 +182,20 @@ ${form.name}`;
                                 </div>
                             </div>
                         )}
+
+
                     </aside>
 
-                    {/* Centered Form – always centered */}
+                    {/* Centered Form */}
                     <div className="flex-1 flex justify-center w-full">
                         <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-6 md:p-8 hover:shadow-purple-100 transition-all">
                             <div className="text-center mb-8">
-                                <h2 className="text-3xl font-bold text-gray-900">Application Form</h2>
-                                <p className="text-gray-600 mt-2">Fill your details to apply</p>
+                                <h2 className="text-3xl font-bold text-gray-900">Internship Application</h2>
+                                <p className="text-gray-600 mt-2">Fill your details to apply for internship</p>
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
-                                {/* ==== Name & College ==== */}
+                                {/* Name & College */}
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -218,7 +230,7 @@ ${form.name}`;
                                     </div>
                                 </div>
 
-                                {/* ==== Education ==== */}
+                                {/* Education */}
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                                         Education <span className="text-red-500">*</span>
@@ -235,10 +247,10 @@ ${form.name}`;
                                     {errors.education && <p className="text-red-500 text-xs mt-1">{errors.education}</p>}
                                 </div>
 
-                                {/* ==== Domain ==== */}
+                                {/* Domain */}
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                        Domain <span className="text-red-500">*</span>
+                                        Preferred Domain <span className="text-red-500">*</span>
                                     </label>
                                     <select
                                         name="domain"
@@ -255,7 +267,24 @@ ${form.name}`;
                                     {errors.domain && <p className="text-red-500 text-xs mt-1">{errors.domain}</p>}
                                 </div>
 
-                                {/* ==== Contact & Email ==== */}
+                                {/* Skills */}
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Skills & Interests <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="skills"
+                                        value={form.skills}
+                                        onChange={handleChange}
+                                        placeholder="Web development, Python programming, Digital marketing, etc."
+                                        className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${errors.skills ? "border-red-500" : "border-gray-200 hover:border-purple-300"
+                                            }`}
+                                    />
+                                    {errors.skills && <p className="text-red-500 text-xs mt-1">{errors.skills}</p>}
+                                </div>
+
+                                {/* Contact & Email */}
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -290,7 +319,7 @@ ${form.name}`;
                                     </div>
                                 </div>
 
-                                {/* ==== Resume ==== */}
+                                {/* Resume */}
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                                         Resume (Google Drive Link) <span className="text-red-500">*</span>
@@ -308,8 +337,7 @@ ${form.name}`;
                                     {errors.resume && <p className="text-red-500 text-xs mt-1">{errors.resume}</p>}
                                 </div>
 
-
-                                {/* ==== Submit ==== */}
+                                {/* Submit Button */}
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
@@ -324,26 +352,26 @@ ${form.name}`;
                                             Opening Gmail...
                                         </div>
                                     ) : (
-                                        "Open in Gmail & Send"
+                                        "Open in Gmail & Send Application"
                                     )}
                                 </button>
 
                                 <p className="text-center text-xs text-gray-500 mt-4">
-                                    By applying, you agree to our privacy policy and terms of service
+                                    Your application will be sent via email. Please review before sending.
                                 </p>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                {/* Stats */}
+                {/* Stats Section */}
                 <div className="mt-12 w-full bg-gradient-to-r from-purple-600 to-indigo-700 rounded-2xl shadow-lg p-6 text-white">
-                    <h3 className="text-xl font-bold mb-4 text-center md:text-left">Why Choose Us?</h3>
+                    <h3 className="text-xl font-bold mb-4 text-center md:text-left">Why Choose Our Internship Program?</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                         <div><div className="text-2xl font-bold">500+</div><div className="text-sm opacity-90">Interns Trained</div></div>
                         <div><div className="text-2xl font-bold">85%</div><div className="text-sm opacity-90">Conversion Rate</div></div>
                         <div><div className="text-2xl font-bold">50+</div><div className="text-sm opacity-90">Projects</div></div>
-                        <div><div className="text-2xl font-bold">4.8 stars</div><div className="text-sm opacity-90">Rating</div></div>
+                        <div><div className="text-2xl font-bold">4.8/5</div><div className="text-sm opacity-90">Satisfaction Rating</div></div>
                     </div>
                 </div>
             </div>

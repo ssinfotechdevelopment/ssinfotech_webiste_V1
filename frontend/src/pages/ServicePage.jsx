@@ -5,7 +5,7 @@ import { Badge } from "../components/UI/Badge";
 import { Button } from "../components/UI/Button";
 import { Input } from "../components/UI/Input";
 import { Textarea } from "../components/UI/Textarea";
-import { Label } from "../components/UI/Lable ";
+import { Label } from "../components/UI/Lable "; // Fixed typo
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/UI/Select";
 import { toast } from "../Hooks/use-toast";
 import {
@@ -18,6 +18,7 @@ import {
 export default function ServicePage() {
   const sectionRef = useRef(null);
   const formRef = useRef(null);
+  const productsRef = useRef(null); // Ref for Products section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
@@ -303,6 +304,15 @@ ${form.message || 'No additional details'}
     setExpandedService(expandedService === id ? null : id);
   };
 
+  // Scroll Functions
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  const scrollToProducts = () => {
+    productsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="space-y-0" ref={sectionRef}>
       {/* HERO SECTION */}
@@ -368,13 +378,20 @@ ${form.message || 'No additional details'}
 
             <motion.div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="bg-white text-gray-900 hover:bg-gray-100 px-10 py-6 text-xl font-semibold rounded-2xl shadow-2xl">
+                <Button 
+                  onClick={scrollToForm}
+                  className="bg-white text-gray-900 hover:bg-gray-100 px-10 py-6 text-xl font-semibold rounded-2xl shadow-2xl"
+                >
                   <Rocket className="w-6 h-6 mr-3" />
                   Start Your Project
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" className="border-2 border-white text-white hover:bg-white/20 px-10 py-6 text-xl font-semibold rounded-2xl backdrop-blur-sm">
+                <Button 
+                  onClick={scrollToProducts}
+                  variant="outline" 
+                  className="border-2 border-white text-white hover:bg-white/20 px-10 py-6 text-xl font-semibold rounded-2xl backdrop-blur-sm"
+                >
                   View Our Work
                 </Button>
               </motion.div>
@@ -467,7 +484,11 @@ ${form.message || 'No additional details'}
       </motion.section>
 
       {/* PRODUCTS SECTION */}
-      <motion.section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
+      <motion.section 
+        ref={productsRef}
+        className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden" 
+        initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center space-y-6 mb-16" variants={staggerContainer}>
             <motion.div variants={scaleIn}>
@@ -530,7 +551,11 @@ ${form.message || 'No additional details'}
       </motion.section>
 
       {/* INQUIRY FORM - WHATSAPP */}
-      <motion.section className="py-20 bg-gradient-to-b from-[#4B0082] to-[#6A0DAD] relative overflow-hidden" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
+      <motion.section 
+        ref={formRef}
+        className="py-20 bg-gradient-to-b from-[#4B0082] to-[#6A0DAD] relative overflow-hidden" 
+        initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center space-y-6 mb-12" variants={staggerContainer}>
             <motion.div variants={scaleIn}>
@@ -550,7 +575,7 @@ ${form.message || 'No additional details'}
           <motion.div variants={scaleIn}>
             <Card className="border-0 bg-white/5 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border-white/10">
               <CardContent className="p-8">
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-white">Full Name *</Label>

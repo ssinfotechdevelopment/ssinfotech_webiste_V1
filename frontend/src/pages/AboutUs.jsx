@@ -104,15 +104,15 @@ const AboutUs = () => {
         ],
       },
       {
-        title: "Our Founder's Vision",
-        subtitle: "Founder",
+        title: "Our Founder & MD Vision",
+        subtitle: "Founder & Managing Director",
         icon: Sparkles,
         image: "aboutimg/mangesh sir.jpg",
         alt: "Founder - Mr. Mangesh Ingle",
         content: [
           '"Our journey began with a simple yet powerful idea — to build technology that transforms possibilities into progress. I\'ve always believed that true innovation lies in understanding real problems and solving them with precision and creativity."',
           '"What started as a vision to develop smart, reliable software has grown into a purpose — to create meaningful digital experiences that empower businesses and people alike. Every project reflects our passion for excellence and our constant drive to redefine what technology can achieve."',
-          "- Mr. Mangesh Ingle, Founder & CEO",
+          "- Mr. Mangesh Ingle, Founder & Managing Director",
         ],
         order: "md:order-2",
         contentOrder: "order-2 md:order-1",
@@ -129,20 +129,20 @@ const AboutUs = () => {
           "- Mr. Allan Abraham, Director",
         ],
       },
-      {
-        title: "Global Perspective, Local Impact",
-        subtitle: "Overseas Director",
-        icon: Eye,
-        image: "aboutimg/allvi sir.jpg",
-        alt: "Overseas Director - Dr. N. G. Alvi",
-        content: [
-          '"My goal is to guide students and professionals toward global opportunities that expand their learning and career horizons. We connect ambitious minds with top international institutions, helping them achieve their dreams through the right guidance and support."',
-          '"With a global outlook and a personal touch, our focus is on bridging education, innovation, and opportunity — creating pathways that empower individuals to grow, learn, and lead across borders."',
-          "- Dr. N. G. Alvi, Overseas Director",
-        ],
-        order: "md:order-2",
-        contentOrder: "order-2 md:order-1",
-      },
+      // {
+      //   title: "Global Perspective, Local Impact",
+      //   subtitle: "Overseas Director",
+      //   icon: Eye,
+      //   image: "aboutimg/allvi sir.jpg",
+      //   alt: "Overseas Director - Dr. N. G. Alvi",
+      //   content: [
+      //     '"My goal is to guide students and professionals toward global opportunities that expand their learning and career horizons. We connect ambitious minds with top international institutions, helping them achieve their dreams through the right guidance and support."',
+      //     '"With a global outlook and a personal touch, our focus is on bridging education, innovation, and opportunity — creating pathways that empower individuals to grow, learn, and lead across borders."',
+      //     "- Dr. N. G. Alvi, Overseas Director",
+      //   ],
+      //   order: "md:order-2",
+      //   contentOrder: "order-2 md:order-1",
+      // },
     ],
     []
   );

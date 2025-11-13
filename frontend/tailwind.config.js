@@ -15,6 +15,18 @@ export default {
         'text-success': '#10b981', // Success green for checkmarks
         'text-blue-100': '#dbeafe', // Light blue for text in dark sections
       },
+
+      // 🌈 Animated Gradient Extension
+      keyframes: {
+        'gradient-move': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
+      animation: {
+        'gradient-move': 'gradient-move 8s ease infinite',
+      },
     },
   },
   plugins: [],

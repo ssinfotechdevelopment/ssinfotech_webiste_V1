@@ -98,7 +98,6 @@ const Footer = () => {
             </ul>
           </div>
 
-
           {/* Services */}
           <div className="space-y-4">
             <h2 className="text-lg font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">

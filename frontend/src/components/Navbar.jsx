@@ -117,7 +117,8 @@ const TopBar = () => (
     </div>
 
     {/* Dark Gradient Overlay + Glass Effect */}
-    <div className="absolute inset-0 bg-gradient-to-r from-purple-900/95 via-purple-800/90 backdrop-blur-md" />
+    {/* <div className="absolute inset-0 bg-gradient-to-r from-purple-900/95 via-purple-800/90 backdrop-blur-md" /> */}
+    <div className="absolute inset-0 animate-gradient-move bg-[length:200%_200%] bg-gradient-to-r from-purple-900 via-purple-700 to-fuchsia-600 opacity-90 backdrop-blur-md" />
 
     {/* Optional Subtle Pattern (for texture) */}
 

@@ -227,11 +227,11 @@ const AboutUs = () => {
         animate="animate"
         style={{ animationDelay: "2s" }}
       >
-        <Sparkles className="h-5 w-5 text-blue-300/80" />
+        <Sparkles className="h-5 w-5 text-blue-300/80"/>
       </motion.div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-r from-slate-900 via-purple-900 to-slate-80  text-white">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-r from-slate-900 via-purple-900 to-slate-800  text-white">
         <motion.div
           className="absolute -top-1/2 -left-1/4 w-1/2 h-1/2 bg-purple-500/15 rounded-full blur-3xl will-change-transform"
           animate={{
@@ -266,7 +266,7 @@ const AboutUs = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={container}
             className="space-y-8"
           >
@@ -361,7 +361,7 @@ const AboutUs = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={container}
             className="grid md:grid-cols-2 gap-12 items-center relative"
           >
@@ -458,7 +458,7 @@ const AboutUs = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
             <motion.h2
@@ -483,7 +483,7 @@ const AboutUs = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={{
               hidden: {},
               visible: {

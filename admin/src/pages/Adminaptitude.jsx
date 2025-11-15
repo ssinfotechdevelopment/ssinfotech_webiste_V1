@@ -19,8 +19,8 @@ const Adminaptitude = () => {
     const testBackendConnection = async () => {
         try {
             const endpoints = [
-                'http://localhost:10000/api/submissions',
-                'http://localhost:10000/api/submissions/all',
+                'https://ssinfotech-backend-k03q.onrender.com/api/submissions',
+                'https://ssinfotech-backend-k03q.onrender.com/api/submissions/all',
                 'http://127.0.0.1:10000/api/submissions'
             ];
 
@@ -214,7 +214,7 @@ const Adminaptitude = () => {
                 // Try to delete from backend only if it's a valid MongoDB ID
                 try {
                     console.log(`🗑️ Attempting to delete from backend: ${submissionId}`);
-                    const response = await fetch(`http://localhost:10000/api/submissions/${submissionId}`, {
+                    const response = await fetch(`https://ssinfotech-backend-k03q.onrender.com/api/submissions/${submissionId}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -370,7 +370,7 @@ const Adminaptitude = () => {
                 <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
                     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900">Aptitude Test Admin Panel</h1>
+                            <h1 className="text-3xl font-bold text-gray-900">Aptitude Test  Panel</h1>
                             <p className="text-gray-600 mt-2">Manage and analyze test submissions</p>
                             <p className="text-sm text-gray-500">
                                 Total Submissions: {submissions.length}

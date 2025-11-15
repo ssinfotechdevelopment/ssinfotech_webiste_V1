@@ -31,10 +31,10 @@ const AptitudeTest = () => {
     };
 
     // === CORRECTED: Only ONE valid endpoint ===
-    const SUBMIT_ENDPOINT = 'http://localhost:10000/api/submissions/submit';
+    const SUBMIT_ENDPOINT = 'https://ssinfotech-backend-k03q.onrender.com/api/submissions/submit';
     const HEALTH_ENDPOINTS = [
-        'http://localhost:10000/health',
-        'http://localhost:10000/api/health'
+        'https://ssinfotech-backend-k03q.onrender.com/health',
+        'https://ssinfotech-backend-k03q.onrender.com/api/health'
     ];
 
     // Submit to backend with retry logic
@@ -648,10 +648,7 @@ const AptitudeTest = () => {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button onClick={resetTest} disabled={submissionLoading}
-                                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50">
-                                {submissionLoading ? 'Submitting...' : 'Take Another Test'}
-                            </button>
+
                             <button onClick={() => window.print()}
                                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">
                                 Print Results

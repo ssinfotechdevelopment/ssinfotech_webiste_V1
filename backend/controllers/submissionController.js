@@ -1,4 +1,4 @@
-import Submission from '../models/Submission.js';
+import Submission from '../models/submission.js';
 export const submitTest = async (req, res) => {
     try {
         console.log("📥 Received submission request");

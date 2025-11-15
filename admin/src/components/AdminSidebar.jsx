@@ -22,6 +22,8 @@ export default function AdminSidebar() {
     { path: "/gallery", label: "Gallery", icon: FaImages },
     { path: "/certificates", label: "Certificates", icon: FaCertificate },
     { path: "/candidate-excel", label: "Candidate Excel", icon: FaUsers },
+    { path: "/admin-aptitude", label: "Aptitude Test", icon: FaUsers },
+
   ];
 
   return (
@@ -37,9 +39,8 @@ export default function AdminSidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-gradient-to-b from-white to-gray-50 border-r-2 border-[#1E245C]/20 shadow-lg z-40 transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 w-56 md:w-64 flex flex-col`}
+        className={`fixed top-0 left-0 h-full bg-gradient-to-b from-white to-gray-50 border-r-2 border-[#1E245C]/20 shadow-lg z-40 transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0 w-56 md:w-64 flex flex-col`}
         role="navigation"
         aria-label="Admin Sidebar"
       >
@@ -52,7 +53,7 @@ export default function AdminSidebar() {
               className="h-[60px] w-auto object-contain"
               onError={(e) => (e.target.style.display = "none")}
             />
-           
+
           </div>
         </div>
 
@@ -66,11 +67,10 @@ export default function AdminSidebar() {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-2 text-[#552586] font-medium px-3 py-2 rounded-lg transition duration-200 text-sm ${
-                  isActive
+                className={`flex items-center gap-2 text-[#552586] font-medium px-3 py-2 rounded-lg transition duration-200 text-sm ${isActive
                     ? "bg-[#552586] text-white shadow-sm"
                     : "hover:bg-[#552586]/90 hover:text-white"
-                }`}
+                  }`}
                 aria-current={isActive ? "page" : undefined}
               >
                 <Icon size={18} />

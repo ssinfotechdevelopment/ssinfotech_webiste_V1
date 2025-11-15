@@ -11,6 +11,7 @@ import AdminGallery from "./pages/AdminGallery";
 import AdminCertificate from "./GenerateCertificate";
 import AdminApplications from "./pages/AdminApplications";
 import CandidateManager from "./pages/CandidateManager";
+import Adminaptitude from "./pages/Adminaptitude";
 
 function AppContent() {
   const location = useLocation();
@@ -90,6 +91,15 @@ function AppContent() {
             element={
               <ProtectedRoute>
                 <CandidateManager />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin-aptitude"
+            element={
+              <ProtectedRoute>
+                <Adminaptitude />
               </ProtectedRoute>
             }
           />

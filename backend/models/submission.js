@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
@@ -26,4 +25,6 @@ const SubmissionSchema = new Schema({
     submittedAt: { type: Date, default: Date.now }
 });
 
-export default model('Submission', SubmissionSchema);
+const Submission = model('Submission', SubmissionSchema);
+
+export default Submission;

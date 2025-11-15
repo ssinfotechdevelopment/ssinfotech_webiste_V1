@@ -1,4 +1,4 @@
-// models/Submission.js
+
 import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;

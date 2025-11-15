@@ -1,5 +1,4 @@
 import Submission from '../models/Submission.js';
-s
 export const submitTest = async (req, res) => {
     try {
         console.log("📥 Received submission request");
@@ -19,14 +18,14 @@ export const submitTest = async (req, res) => {
 
         // Validate required fields
         if (!userName || !email || !phone || score === undefined || !totalQuestions) {
-            console.log("❌ Missing required fields");
+            console.log(" Missing required fields");
             return res.status(400).json({
                 success: false,
                 error: 'Missing required fields: userName, email, phone, score, totalQuestions are required'
             });
         }
 
-        console.log("✅ All required fields present");
+        console.log(" All required fields present");
 
         // Create new submission
         const submissionData = {
@@ -42,14 +41,14 @@ export const submitTest = async (req, res) => {
             submittedAt: new Date()
         };
 
-        console.log("📝 Creating submission:", submissionData);
+        console.log(" Creating submission:", submissionData);
 
         const submission = new Submission(submissionData);
 
         // Save to database
         const savedSubmission = await submission.save();
 
-        console.log("💾 Submission saved successfully with ID:", savedSubmission._id);
+        console.log(" Submission saved successfully with ID:", savedSubmission._id);
 
         res.status(201).json({
             success: true,
@@ -129,7 +128,7 @@ export const getSubmissionById = async (req, res) => {
 
 export const deleteSubmission = async (req, res) => {
     try {
-        console.log("🗑️ Delete request for submission ID:", req.params.id);
+        console.log(" Delete request for submission ID:", req.params.id);
 
         const submissionId = req.params.id;
 
@@ -148,14 +147,14 @@ export const deleteSubmission = async (req, res) => {
         const submission = await Submission.findById(submissionId);
 
         if (!submission) {
-            console.log("❌ Submission not found for ID:", submissionId);
+            console.log(" Submission not found for ID:", submissionId);
             return res.status(404).json({
                 success: false,
                 error: 'Submission not found in database'
             });
         }
 
-        console.log("✅ Submission found, deleting:", submission._id);
+        console.log("Submission found, deleting:", submission._id);
 
         // Delete the submission
         const result = await Submission.findByIdAndDelete(submissionId);
@@ -168,7 +167,7 @@ export const deleteSubmission = async (req, res) => {
             });
         }
 
-        console.log("✅ Submission deleted successfully");
+        console.log(" Submission deleted successfully");
 
         res.json({
             success: true,

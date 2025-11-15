@@ -328,7 +328,7 @@ const AptitudeTest = () => {
     };
 
     const getBackendStatusText = () => {
-        return backendStatus === 'connected' ? 'Backend Connected' :
+        return backendStatus === 'connected' ? '' :
             backendStatus === 'disconnected' ? 'Backend Offline' :
                 backendStatus === 'error' ? 'Connection Error' :
                     'Checking Status...';
@@ -342,11 +342,9 @@ const AptitudeTest = () => {
                     <div className="bg-white rounded-2xl shadow-xl p-8">
                         <div className="text-center mb-6">
                             <h1 className="text-4xl font-bold text-gray-800 mb-2">
-                                Aptitude Test Platform
+                                Aptitude Test
                             </h1>
-                            <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getBackendStatusColor()}`}>
-                                {getBackendStatusText()}
-                            </div>
+
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

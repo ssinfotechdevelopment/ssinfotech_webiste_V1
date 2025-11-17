@@ -11,7 +11,7 @@ const AptitudeTest = () => {
     const [testStarted, setTestStarted] = useState(false);
     const [testCompleted, setTestCompleted] = useState(false);
     const [userAnswers, setUserAnswers] = useState([]);
-    const [timeLeft, setTimeLeft] = useState(600); // 10 minutes for testing
+    const [timeLeft, setTimeLeft] = useState(3600); // 60 minutes = 3600 seconds
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [fullscreen, setFullscreen] = useState(false);
     const [violationCount, setViolationCount] = useState(0);
@@ -261,7 +261,7 @@ const AptitudeTest = () => {
     };
 
     const handleTestCompletion = async () => {
-        const timeTaken = startTime ? Math.floor((Date.now() - startTime) / 1000) : 600 - timeLeft;
+        const timeTaken = startTime ? Math.floor((Date.now() - startTime) / 1000) : 3600 - timeLeft;
 
         const submissionData = {
             userName: userName.trim(),
@@ -292,16 +292,17 @@ const AptitudeTest = () => {
     };
 
     const formatTime = (seconds) => {
-        const m = Math.floor(seconds / 60);
+        const h = Math.floor(seconds / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
         const s = seconds % 60;
-        return `${m}:${s < 10 ? '0' : ''}${s}`;
+        return `${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
     };
 
     const resetTest = () => {
         setUserName(''); setEmail(''); setPhone('');
         setTestStarted(false); setTestCompleted(false);
         setCurrentQuestion(0); setSelectedAnswer(''); setScore(0);
-        setUserAnswers([]); setTimeLeft(600); setCategoryFilter('all');
+        setUserAnswers([]); setTimeLeft(3600); setCategoryFilter('all');
         setViolationCount(0); setSubmissionError(''); setSubmissionSuccess('');
         setBackendStatus('checking');
         testBackendConnection();
@@ -334,7 +335,7 @@ const AptitudeTest = () => {
                     'Checking Status...';
     };
 
-    // === UI: START SCREEN (UNCHANGED) ===
+    // === UI: START SCREEN ===
     if (!testStarted && !testCompleted) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
@@ -344,7 +345,6 @@ const AptitudeTest = () => {
                             <h1 className="text-4xl font-bold text-gray-800 mb-2">
                                 Aptitude Test
                             </h1>
-
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -413,7 +413,7 @@ const AptitudeTest = () => {
                             <h3 className="text-lg font-semibold text-blue-800 mb-2">Test Information:</h3>
                             <ul className="list-disc list-inside text-blue-700 space-y-1">
                                 <li>Total Questions: {filteredQuestions.length}</li>
-                                <li>Time Limit: 10 minutes (for testing)</li>
+                                <li>Time Limit: 60 minutes (1 hour)</li>
                                 <li>All questions are multiple choice</li>
                                 <li>No negative marking</li>
                                 <li>Your results will be saved automatically</li>
@@ -450,7 +450,7 @@ const AptitudeTest = () => {
         );
     }
 
-    // === UI: TEST IN PROGRESS (UNCHANGED) ===
+    // === UI: TEST IN PROGRESS ===
     if (testStarted && !testCompleted) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
@@ -466,7 +466,9 @@ const AptitudeTest = () => {
                             </div>
                             <div className="text-right">
                                 <div className="text-lg font-semibold text-gray-700">
-                                    Time Left: <span className="text-red-600">{formatTime(timeLeft)}</span>
+                                    Time Left: <span className={timeLeft < 300 ? "text-red-600 font-bold" : "text-gray-800"}>
+                                        {formatTime(timeLeft)}
+                                    </span>
                                 </div>
                                 <div className="text-gray-600">
                                     Question {currentQuestion + 1} of {filteredQuestions.length}
@@ -552,7 +554,7 @@ const AptitudeTest = () => {
         );
     }
 
-    // === UI: RESULTS SCREEN (UNCHANGED) ===
+    // === UI: RESULTS SCREEN ===
     if (testCompleted) {
         const categoryStats = { Logical: { total: 0, correct: 0 }, Technical: { total: 0, correct: 0 }, Reasoning: { total: 0, correct: 0 } };
         userAnswers.forEach(a => {
@@ -603,7 +605,7 @@ const AptitudeTest = () => {
                                 {((score / filteredQuestions.length) * 100).toFixed(1)}%
                             </div>
                             <div className="text-sm mt-2">
-                                Time Taken: {formatTime(600 - timeLeft)}
+                                Time Taken: {formatTime(3600 - timeLeft)}
                             </div>
                         </div>
 
@@ -646,7 +648,10 @@ const AptitudeTest = () => {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-
+                            <button onClick={resetTest}
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">
+                                Take Test Again
+                            </button>
                             <button onClick={() => window.print()}
                                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">
                                 Print Results

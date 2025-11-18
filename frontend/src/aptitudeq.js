@@ -1,367 +1,368 @@
-// Here are your complete 45 BRAND-NEW HARD difficulty questions 
-// (All scenario-based Logical + Reasoning questions)
-// Replace or use as id 1 to 45 (or anywhere you want)
-
 export const aptitudeQuestions = [
+    // ==================== 15 LOGICAL REASONING (1-15) ====================
     {
         id: 1,
-        question: "Eight people A, B, C, D, E, F, G, H are sitting around a circular table facing the centre. A sits second to the left of B. C is third to the right of F. G is not an immediate neighbour of A or F. D sits opposite H. E sits second to the right of G. Who sits exactly between A and C?",
-        options: ["G", "E", "F", "D"],
-        correctAnswer: "G",
+        question: "Nine people A,B,C,D,E,F,G,H,I sit around a circular table (not necessarily in order). A and B are opposite. C is second to the left of D. E is third to the right of F and not adjacent to B. G sits between H and I. H is to the immediate left of A. Who is third to the left of B?",
+        options: ["G", "E", "I", "C"],
+        correctAnswer: "E",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 2,
-        question: "'Companies grow fast always' is coded as 'tip la su co', 'Fast pay high salary' as 'za ri vi la', 'Companies always give bonus' as 'co su yo mu'. What is the code for 'high bonus'?",
-        options: ["za yo", "za mu", "ri mu", "vi yo"],
-        correctAnswer: "za mu",
+        question: "In a queue, P is 8th from front, Q is 15th from back. When they exchange positions, P becomes 20th from back. How many people are in the queue?",
+        options: ["28", "31", "33", "36"],
+        correctAnswer: "31",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 3,
-        question: "Six friends P, Q, R, S, T, U stand in a queue. Exactly two persons are between P and U. S is immediately behind R. T is not adjacent to P. Q is ahead of R but not first. Who is second from the front?",
-        options: ["T", "Q", "S", "R"],
-        correctAnswer: "T",
+        question: "A man walks 10m south, turns right walks 6m, turns right walks 4m, turns left walks 8m, turns right walks 6m. How far and in which direction is he from starting point?",
+        options: ["10m North", "8m South", "6m North", "10m South"],
+        correctAnswer: "10m South",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 4,
-        question: "A man starts from point A, walks 12 km North, turns right 5 km, turns right 12 km, turns left 10 km, turns right 5 km to reach point B. In which direction is A from B?",
-        options: ["North-West", "South-West", "South-East", "North-East"],
-        correctAnswer: "South-West",
+        question: "'Good boys do fine always' is coded as 'nik ta re pa du', 'boys always get reward' as 'du pa zo ki', 'fine work get good rank' as 're ki sa ta zo'. What is the code for 'reward'?",
+        options: ["ki", "zo", "sa", "nik"],
+        correctAnswer: "ki",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 5,
-        question: "In a row of 50 students facing north, A is 16th from left end and B is 22nd from right end. How many students are between A and B?",
-        options: ["11", "12", "13", "14"],
-        correctAnswer: "11",
+        question: "P×Q means P is father of Q, P-Q means P is sister of Q, P+Q means P is mother of Q, P÷Q means P is brother of Q. Which of the following means R is daughter of T?",
+        options: ["T×M+R-S", "T×R+M-S", "T+R×M-S", "T×S-R+M"],
+        correctAnswer: "T×M+R-S",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 6,
-        question: "Five boxes contain 8, 12, 18, 24, 30 balls. The box with 18 is immediately left of 12. The box with 30 is second to the right of 8. The box with 24 is at one end. Which box is in the exact middle?",
-        options: ["18", "12", "8", "30"],
-        correctAnswer: "18",
+        question: "Six friends A,B,C,D,E,F face north in two rows of three. A is left of B but not adjacent to C. D is opposite E. F is not adjacent to C or D. Who is opposite A?",
+        options: ["F", "C", "D", "E"],
+        correctAnswer: "F",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 7,
-        question: "In a family: P is mother of Q, R is son of S, T is brother of P, U is wife of R, V is grandmother of Q, S is father of P. Who is the husband of V?",
-        options: ["S", "T", "R", "Cannot be determined"],
-        correctAnswer: "S",
+        question: "In a family of 8: A is father of B, C is mother of D, E is brother of F, G is wife of A, D is sister of B. How is F related to G?",
+        options: ["Grandson", "Granddaughter", "Son", "Cannot be determined"],
+        correctAnswer: "Cannot be determined",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 8,
-        question: "Six persons entered a 9-floor building. A and B got down on odd floors, C and D on even floors, E on 8th floor, F on 3rd. A is above C, B is below D. Who is on 5th floor?",
-        options: ["A", "B", "C", "D"],
-        correctAnswer: "B",
+        question: "If 'APPLE' is coded as 'ZKKOV' and 'ORANGE' is 'LIZMTV', how is 'MANGO' coded?",
+        options: ["NZMTL", "NZMTN", "NZMTM", "NZMTJ"],
+        correctAnswer: "NZMTN",
         difficulty: "hard",
         category: "Logical"
     },
     {
         id: 9,
-        question: "If the day after tomorrow is Thursday, what day will it be 150 days from today?",
-        options: ["Tuesday", "Wednesday", "Friday", "Saturday"],
-        correctAnswer: "Wednesday",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 10,
-        question: "In a code: 'he likes apples' → 'ba ca da', 'apples are red' → 'ca sa ta', 'red roses bloom' → 'ta na pa'. What is the code for 'roses'?",
-        options: ["na", "pa", "ta", "sa"],
-        correctAnswer: "na",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 11,
-        question: "Seven people A,B,C,D,E,F,G sit in a straight line facing north. C is third right of A. B is second left of E. F is at one end. G is not neighbour of A or B. Who is at the other end?",
-        options: ["D", "A", "E", "G"],
-        correctAnswer: "D",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 12,
-        question: "A man walks 6 km East, turns left 8 km, turns right 10 km, turns right 8 km, turns left 4 km. Shortest distance from start?",
-        options: ["8 km", "10 km", "√100 km", "√116 km"],
-        correctAnswer: "10 km",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 13,
-        question: "In a test: A > B, C < D, B > C, D < A, E between B and C. Who scored second highest?",
-        options: ["A", "B", "D", "E"],
-        correctAnswer: "B",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 14,
-        question: "Five friends live on five floors. Q lives above S but below R. T lives below P. P not top floor. Who lives on ground floor?",
-        options: ["T", "S", "Q", "R"],
+        question: "Eight boxes P to W are stacked. P is above Q, R is below S, T is above U but below V. W is at bottom. Q is not adjacent to U. Which box is exactly in the middle?",
+        options: ["R", "T", "U", "V"],
         correctAnswer: "T",
         difficulty: "hard",
         category: "Logical"
     },
     {
-        id: 15,
-        question: "Six books A,B,C,D,E,F placed on shelf. B is left of C but right of D. E is right of A but left of F. C not at end. Who is third from left?",
-        options: ["D", "B", "E", "A"],
-        correctAnswer: "B",
+        id: 10,
+        question: "A clock loses 3 minutes per hour. It is set right at 9 AM Monday. When will it show the correct time again?",
+        options: ["9 AM Tuesday", "12 PM Tuesday", "3 PM Tuesday", "Never in 24 hrs"],
+        correctAnswer: "Never in 24 hrs",
         difficulty: "hard",
         category: "Logical"
     },
     {
-        id: 16,
-        question: "In a race of 8 participants, Ram finishes before Shyam but after Vikash. Ajay finishes after Rohan but before Shyam. Who finished 4th?",
-        options: ["Rohan", "Ajay", "Shyam", "Vikash"],
-        correctAnswer: "Ajay",
+        id: 11,
+        question: "In a row, A is 12th from left, B is 18th from right. If 5 persons sit between them, total persons = ?",
+        options: ["33", "34", "35", "36"],
+        correctAnswer: "34",
         difficulty: "hard",
         category: "Logical"
     },
     {
-        id: 17,
-        question: "A clock is set right at 12 noon. It gains 2 minutes every hour. What is the true time when it shows 5:00 PM?",
-        options: ["4:40 PM", "4:48 PM", "4:52 PM", "5:20 PM"],
-        correctAnswer: "4:48 PM",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 18,
-        question: "If every third visitor gets a prize and every fifth gets a gift, on which visit will a person get both?",
-        options: ["10th", "15th", "20th", "30th"],
-        correctAnswer: "15th",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 19,
-        question: "A, B, C, D are four brothers. A has twice money as B, B has 3/4th of C, C has half of D. Who has the least money?",
-        options: ["A", "B", "C", "D"],
-        correctAnswer: "B",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 20,
-        question: "Six teams play tournament. Each plays every other once. How many total matches?",
-        options: ["15", "12", "18", "20"],
-        correctAnswer: "15",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 21,
-        question: "In a group of 7 people, each shakes hands with exactly 4 others. How many total handshakes?",
-        options: ["12", "14", "15", "16"],
-        correctAnswer: "14",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 22,
-        question: "A train crosses a 400m platform in 30 seconds and a pole in 10 seconds. Length of train?",
-        options: ["200 m", "300 m", "400 m", "500 m"],
-        correctAnswer: "200 m",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 23,
-        question: "A is father of B but B is not A's son. What is B to A?",
-        options: ["Daughter", "Mother", "Sister", "Wife"],
-        correctAnswer: "Daughter",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 24,
-        question: "If x is 25% less than y, and y is 40% less than z, then x is what percent less than z?",
-        options: ["55%", "60%", "65%", "50%"],
-        correctAnswer: "55%",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 25,
-        question: "In a coded message, 123 means 'HOT TEA', 456 means 'COLD WATER', 789 means 'COLD WINTER'. What does 'WINTER' mean?",
-        options: ["7", "8", "9", "78"],
-        correctAnswer: "9",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 26,
-        question: "A boat goes 30 km downstream in 2 hrs and 18 km upstream in 3 hrs. Speed of boat in still water?",
-        options: ["12 km/h", "10 km/h", "9 km/h", "11 km/h"],
-        correctAnswer: "9 km/h",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 27,
-        question: "In a 400m race, A beats B by 40m and C by 80m. By how many metres does B beat C?",
-        options: ["44 m", "48 m", "50 m", "52 m"],
-        correctAnswer: "44 m",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 28,
-        question: "If P×Q means P is father of Q, P-Q means P is brother of Q, P+Q means P is mother of Q, then M+N×Q-R means?",
-        options: ["M is grandmother of R", "M is aunt of R", "M is mother of R", "M is sister of R"],
-        correctAnswer: "M is grandmother of R",
-        difficulty: "hard",
-        category: "Logical"
-    },
-    {
-        id: 29,
-        question: "A man said to a lady, 'Your mother's husband's only daughter is my sister.' How is the lady related to the man?",
-        options: ["Sister", "Daughter", "Mother", "Grandmother"],
+        id: 12,
+        question: "A person pointing to a lady said, 'She is the only daughter of the woman who is mother of my mother's only son.' How is the lady related to the person?",
+        options: ["Sister", "Daughter", "Niece", "Mother"],
         correctAnswer: "Sister",
         difficulty: "hard",
         category: "Logical"
     },
     {
-        id: 30,
-        question: "If 5 workers finish a job in 12 days, how many days will 8 workers take for the same job?",
-        options: ["7.5 days", "8 days", "9 days", "10 days"],
-        correctAnswer: "7.5 days",
+        id: 13,
+        question: "Six persons entered a lift on ground floor. Floors are 1 to 10. Two got down at odd floors below 7, three at even floors above 4. One at 9th. Who got down at 6th floor?",
+        options: ["Only one possible", "Two possible", "None", "Cannot be determined"],
+        correctAnswer: "Only one possible",
         difficulty: "hard",
         category: "Logical"
     },
     {
-        id: 31,
-        question: "A person buys an item at 20% discount but sells at 10% profit. If CP was ₹500, what is SP?",
-        options: ["₹440", "₹480", "₹520", "₹550"],
-        correctAnswer: "₹440",
+        id: 14,
+        question: "If every 4th day a bus runs on Route A and every 6th day on Route B, on how many days in a year (365 days) will both routes run together?",
+        options: ["15", "16", "17", "18"],
+        correctAnswer: "17",
         difficulty: "hard",
         category: "Logical"
+    },
+    {
+        id: 15,
+        question: "In a tournament, 7 teams play each other once. A team gets 3 points for win, 1 for draw, 0 for loss. Total points = 39. How many draws occurred?",
+        options: ["3", "4", "5", "6"],
+        correctAnswer: "6",
+        difficulty: "hard",
+        category: "Logical"
+    },
+
+    // ==================== 15 TECHNICAL (16-30) ====================
+    {
+        id: 16,
+        question: "What is the output of the following C code?\n\n```c\n#include<stdio.h>\nint main() {\n    int x = 5;\n    printf(\"%d\", ++x > 5 ? x++ : --x);\n    printf(\" %d\", x);\n    return 0;\n}\n```",
+        options: ["6 6", "5 5", "6 7", "5 4"],
+        correctAnswer: "6 7",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 17,
+        question: "In a binary search tree, which traversal produces sorted order?",
+        options: ["Level order", "Preorder", "Inorder", "Postorder"],
+        correctAnswer: "Inorder",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 18,
+        question: "A system uses 3-level page table. Page size 4KB, logical address 32-bit, each page table entry 4 bytes. How much memory is used by page tables for a process with 4MB memory?",
+        options: ["4 KB", "16 KB", "20 KB", "24 KB"],
+        correctAnswer: "20 KB",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 19,
+        question: "Which scheduling algorithm can cause starvation?",
+        options: ["FCFS", "Round Robin", "SJF (non-preemptive)", "Priority (non-preemptive)"],
+        correctAnswer: "Priority (non-preemptive)",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 20,
+        question: "The minimum number of queues needed to implement priority queue using only queues is:",
+        options: ["1", "2", "3", "4"],
+        correctAnswer: "2",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 21,
+        question: "In DBMS, if a transaction T1 has read a value written by T2 which later aborts, this is:",
+        options: ["Dirty read", "Unrepeatable read", "Phantom read", "Lost update"],
+        correctAnswer: "Dirty read",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 22,
+        question: "What is the time complexity of matrix chain multiplication using dynamic programming for n matrices?",
+        options: ["O(n)", "O(n²)", "O(n³)", "O(n log n)"],
+        correctAnswer: "O(n³)",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 23,
+        question: "In OSI model, which layer is responsible for dialog control and synchronization?",
+        options: ["Transport", "Session", "Presentation", "Application"],
+        correctAnswer: "Session",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 24,
+        question: "A hash table with 10 slots uses linear probing. Keys 14, 24, 34, 44, 54, 64 are inserted. How many collisions occur?",
+        options: ["0", "1", "2", "3"],
+        correctAnswer: "3",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 25,
+        question: "What will be the output?\n\n```java\npublic class Test {\n    public static void main(String[] args) {\n        int x = 10;\n        System.out.println(x++ + ++x + x++);\n    }\n}\n```",
+        options: ["30", "31", "32", "33"],
+        correctAnswer: "33",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 26,
+        question: "In a graph with n vertices, the maximum number of edges in a bipartite graph is:",
+        options: ["n(n-1)/2", "floor(n²/4)", "n²", "n-1"],
+        correctAnswer: "floor(n²/4)",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 27,
+        question: "Which of the following is NOT a stable sorting algorithm?",
+        options: ["Merge Sort", "Insertion Sort", "Quick Sort", "Bubble Sort"],
+        correctAnswer: "Quick Sort",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 28,
+        question: "In deadlock prevention, which condition is removed by spooling?",
+        options: ["Mutual Exclusion", "Hold and Wait", "No Preemption", "Circular Wait"],
+        correctAnswer: "Hold and Wait",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 29,
+        question: "The subnet mask 255.255.255.224 has how many usable hosts per subnet?",
+        options: ["30", "32", "62", "64"],
+        correctAnswer: "30",
+        difficulty: "hard",
+        category: "Technical"
+    },
+    {
+        id: 30,
+        question: "What is the worst-case time complexity of finding the kth smallest element using QuickSelect (randomized)?",
+        options: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
+        correctAnswer: "O(n²)",
+        difficulty: "hard",
+        category: "Technical"
+    },
+
+    // ==================== 15 PURE REASONING (31-45) ====================
+    {
+        id: 31,
+        question: "If all bloops are bleeps and some bleeps are blips, which must be true?",
+        options: ["All bloops are blips", "Some bloops are blips", "No bloop is blip", "Cannot be determined"],
+        correctAnswer: "Cannot be determined",
+        difficulty: "hard",
+        category: "Reasoning"
     },
     {
         id: 32,
-        question: "If the radius of a circle is increased by 20%, its area increases by?",
-        options: ["40%", "44%", "20%", "21%"],
-        correctAnswer: "44%",
+        question: "Find the missing number: 7, 15, 32, 66, 134, ?",
+        options: ["270", "272", "268", "274"],
+        correctAnswer: "270",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 33,
-        question: "In a group of 60 people, 40 like tea, 35 like coffee. How many like both if all like at least one?",
-        options: ["15", "20", "25", "30"],
-        correctAnswer: "15",
+        question: "Statement: All successful people are hardworking. Some hardworking people fail. Conclusion: I. Some successful people fail. II. Some who fail are hardworking.",
+        options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"],
+        correctAnswer: "Only II follows",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 34,
-        question: "A number when divided by 7 gives remainder 4. When divided by 5 gives remainder 3. What is the number?",
-        options: ["18", "19", "24", "34"],
-        correctAnswer: "19",
+        question: "In a certain code, 'RIVER' is written as '12345' and 'WATER' as '67849'. What is 'WINTER'?",
+        options: ["628945", "628941", "628947", "628946"],
+        correctAnswer: "628946",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 35,
-        question: "If log₈(x) = 2/3, what is x?",
-        options: ["4", "2", "8", "16"],
-        correctAnswer: "4",
+        question: "A is twice as efficient as B. B alone takes 12 days more than A and B together. How many days does A alone take?",
+        options: ["8", "9", "10", "12"],
+        correctAnswer: "9",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 36,
-        question: "A cube is painted and cut into 64 smaller cubes. How many small cubes have exactly 2 faces painted?",
-        options: ["24", "18", "12", "30"],
-        correctAnswer: "24",
+        question: "If the 5th term of an AP is 20 and 12th term is 48, what is the 20th term?",
+        options: ["76", "80", "84", "88"],
+        correctAnswer: "80",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 37,
-        question: "If 2ˣ = 4ʸ = 8ᶻ and x+y+z = 15, then x = ?",
-        options: ["5", "6", "7", "8"],
-        correctAnswer: "7",
+        question: "Data: X > Y > Z, W < Y, X > V. Which of the following is definitely false?",
+        options: ["V > Z", "W < X", "Y > V", "W > Z"],
+        correctAnswer: "W > Z",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 38,
-        question: "A man is 24 years older than his son. In 8 years, he will be twice as old as his son. Present age of son?",
-        options: ["16", "18", "20", "22"],
-        correctAnswer: "16",
+        question: "Analogy: Doctor : Hospital :: Teacher : ?",
+        options: ["School", "Student", "Book", "Classroom"],
+        correctAnswer: "School",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 39,
-        question: "How many triangles are there in a regular pentagon with all diagonals drawn?",
-        options: ["10", "11", "12", "15"],
-        correctAnswer: "11",
+        question: "A cube is painted red on all faces and cut into 125 smaller identical cubes. How many small cubes have exactly one face painted?",
+        options: ["36", "48", "54", "60"],
+        correctAnswer: "54",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 40,
-        question: "A shopkeeper marks an item 40% above CP and offers 10% discount. If he still makes 20% profit, what is CP if SP = ₹540?",
-        options: ["₹400", "₹450", "₹500", "₹480"],
-        correctAnswer: "₹450",
+        question: "If A + B means A is father of B, A × B means A is brother of B, A ÷ B means A is mother of B, then P × Q + R ÷ S means?",
+        options: ["P is uncle of S", "P is father of S", "P is brother of S", "P is grandfather of S"],
+        correctAnswer: "P is uncle of S",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 41,
-        question: "If 5 cats catch 5 mice in 5 minutes, how many cats are needed to catch 100 mice in 100 minutes?",
-        options: ["5", "10", "20", "100"],
-        correctAnswer: "5",
+        question: "Find the odd one out: 8, 27, 64, 125, 216, 343, 512, 729 (based on a different pattern)",
+        options: ["216", "343", "512", "729"],
+        correctAnswer: "216",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 42,
-        question: "In a certain code, FIRE is coded as DGPC, what is WATER coded as?",
-        options: ["CXVGT", "CYVGT", "CZVGT", "CWVGT"],
-        correctAnswer: "CYVGT",
+        question: "If 64 people are in a room and each shakes hands with exactly 32 others, how many handshakes occur?",
+        options: ["992", "1008", "1024", "1088"],
+        correctAnswer: "1024",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 43,
-        question: "A train 240m long crosses a man walking at 6 km/h in opposite direction in 6 seconds. Speed of train?",
-        options: ["90 km/h", "96 km/h", "100 km/h", "108 km/h"],
-        correctAnswer: "96 km/h",
+        question: "Statement: Some cats are rats. All rats are bats. Conclusion: I. Some cats are bats. II. No cat is bat.",
+        options: ["Only I", "Only II", "Either I or II", "Neither"],
+        correctAnswer: "Only I",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 44,
-        question: "If the 7th day of a month is Tuesday, what day will be 3 days after the 23rd?",
-        options: ["Wednesday", "Thursday", "Friday", "Saturday"],
-        correctAnswer: "Friday",
+        question: "A train leaves at 13:00 hrs and reaches at 17:30 hrs covering 240 km. Another train leaves at 14:30 hrs in same direction at 80 km/h. When will second train overtake the first?",
+        options: ["16:30", "17:00", "17:30", "18:00"],
+        correctAnswer: "17:00",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     },
     {
         id: 45,
-        question: "In a coded language, if APPLE = 177932 and ORANGE = 1973465, what is MANGO?",
-        options: ["412745", "413745", "412645", "413645"],
-        correctAnswer: "413745",
+        question: "How many triangles are in a complete pentagram (star inside pentagon with all intersections)?",
+        options: ["30", "32", "35", "40"],
+        correctAnswer: "35",
         difficulty: "hard",
-        category: "Logical"
+        category: "Reasoning"
     }
 ];
 

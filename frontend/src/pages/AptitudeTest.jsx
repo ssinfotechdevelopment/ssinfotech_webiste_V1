@@ -11,7 +11,7 @@ const AptitudeTest = () => {
     const [testStarted, setTestStarted] = useState(false);
     const [testCompleted, setTestCompleted] = useState(false);
     const [userAnswers, setUserAnswers] = useState([]);
-    const [timeLeft, setTimeLeft] = useState(3600); // 60 minutes = 3600 seconds
+    const [timeLeft, setTimeLeft] = useState(3600);
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [fullscreen, setFullscreen] = useState(false);
     const [violationCount, setViolationCount] = useState(0);
@@ -20,24 +20,25 @@ const AptitudeTest = () => {
     const [submissionError, setSubmissionError] = useState('');
     const [submissionSuccess, setSubmissionSuccess] = useState('');
     const [backendStatus, setBackendStatus] = useState('checking');
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const filteredQuestions = categoryFilter === 'all'
         ? aptitudeQuestions
         : aptitudeQuestions.filter(q => q.category === categoryFilter);
 
-    // Generate unique submission ID
     const generateSubmissionId = () => {
         return 'sub-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
     };
 
-    // === CORRECTED: Only ONE valid endpoint ===
     const SUBMIT_ENDPOINT = 'https://ssinfotech-backend-k03q.onrender.com/api/submissions/submit';
     const HEALTH_ENDPOINTS = [
         'https://ssinfotech-backend-k03q.onrender.com/health',
         'https://ssinfotech-backend-k03q.onrender.com/api/health'
     ];
 
-    // Submit to backend with retry logic
+    // Google Form URL for online test submission
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfYourFormID/viewform";
+
     const submitTestToBackend = async (submissionData) => {
         try {
             setSubmissionLoading(true);
@@ -58,7 +59,7 @@ const AptitudeTest = () => {
             console.log('Backend response:', result);
 
             if (response.ok && result.success) {
-                setSubmissionSuccess('Test results saved successfully in database!');
+                setSubmissionSuccess('Your test results have been successfully recorded!');
                 setBackendStatus('connected');
                 return { ...result, synced: true };
             } else {
@@ -74,7 +75,6 @@ const AptitudeTest = () => {
         }
     };
 
-    // Test backend connection
     const testBackendConnection = async () => {
         for (const endpoint of HEALTH_ENDPOINTS) {
             try {
@@ -91,25 +91,38 @@ const AptitudeTest = () => {
         return false;
     };
 
-    // Save to localStorage (append, not replace)
     const saveToLocalStorage = (submission, synced = false) => {
         try {
             const existing = JSON.parse(localStorage.getItem('aptitudeTestSubmissions') || '[]');
-            const newEntry = {
-                ...submission,
-                submissionId: submission.submissionId || generateSubmissionId(),
-                localSaveTime: new Date().toISOString(),
-                syncedToBackend: synced
-            };
-            existing.unshift(newEntry);
-            localStorage.setItem('aptitudeTestSubmissions', JSON.stringify(existing));
-            console.log('Saved to localStorage:', newEntry);
+
+            const existingSubmission = existing.find(sub =>
+                sub.submissionId === submission.submissionId
+            );
+
+            if (existingSubmission) {
+                console.log('Submission already exists in localStorage, updating...');
+                const updated = existing.map(sub =>
+                    sub.submissionId === submission.submissionId
+                        ? { ...submission, localSaveTime: new Date().toISOString(), syncedToBackend: synced }
+                        : sub
+                );
+                localStorage.setItem('aptitudeTestSubmissions', JSON.stringify(updated));
+            } else {
+                const newEntry = {
+                    ...submission,
+                    submissionId: submission.submissionId || generateSubmissionId(),
+                    localSaveTime: new Date().toISOString(),
+                    syncedToBackend: synced
+                };
+                existing.unshift(newEntry);
+                localStorage.setItem('aptitudeTestSubmissions', JSON.stringify(existing));
+                console.log('New submission saved to localStorage:', newEntry);
+            }
         } catch (e) {
             console.error('localStorage error:', e);
         }
     };
 
-    // Sync pending submissions when online
     const syncPendingSubmissions = async () => {
         const pending = JSON.parse(localStorage.getItem('aptitudeTestSubmissions') || '[]')
             .filter(s => !s.syncedToBackend);
@@ -124,7 +137,6 @@ const AptitudeTest = () => {
         }
     };
 
-    // Fullscreen controls
     const enterFullscreen = () => {
         const elem = document.documentElement;
         (elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen)?.call(elem);
@@ -232,6 +244,7 @@ const AptitudeTest = () => {
         setCurrentQuestion(0);
         setSelectedAnswer('');
         setViolationCount(0);
+        setHasSubmitted(false);
     };
 
     const handleAnswerSelect = (answer) => setSelectedAnswer(answer);
@@ -261,6 +274,13 @@ const AptitudeTest = () => {
     };
 
     const handleTestCompletion = async () => {
+        if (hasSubmitted) {
+            console.log('Test already submitted, skipping duplicate submission');
+            return;
+        }
+
+        setHasSubmitted(true);
+
         const timeTaken = startTime ? Math.floor((Date.now() - startTime) / 1000) : 3600 - timeLeft;
 
         const submissionData = {
@@ -277,14 +297,13 @@ const AptitudeTest = () => {
             submissionId: generateSubmissionId()
         };
 
-        // Save locally first
+        console.log('Submitting test with ID:', submissionData.submissionId);
+
         saveToLocalStorage(submissionData, false);
 
-        // Try backend
         const result = await submitTestToBackend(submissionData);
-        if (result.synced) {
-            saveToLocalStorage(submissionData, true);
-        }
+
+        saveToLocalStorage(submissionData, result.synced);
 
         setTestCompleted(true);
         setTestStarted(false);
@@ -305,6 +324,7 @@ const AptitudeTest = () => {
         setUserAnswers([]); setTimeLeft(3600); setCategoryFilter('all');
         setViolationCount(0); setSubmissionError(''); setSubmissionSuccess('');
         setBackendStatus('checking');
+        setHasSubmitted(false);
         testBackendConnection();
     };
 
@@ -333,6 +353,10 @@ const AptitudeTest = () => {
             backendStatus === 'disconnected' ? 'Backend Offline' :
                 backendStatus === 'error' ? 'Connection Error' :
                     'Checking Status...';
+    };
+
+    const handleGoogleFormClick = () => {
+        window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
     };
 
     // === UI: START SCREEN ===
@@ -454,98 +478,177 @@ const AptitudeTest = () => {
     if (testStarted && !testCompleted) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-white rounded-2xl shadow-xl p-8">
-                        <div className="flex justify-between items-center mb-8">
-                            <div>
-                                <h2 className="text-2xl font-bold text-gray-800">Aptitude Test</h2>
-                                <p className="text-gray-600">Candidate: {userName}</p>
-                                <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getBackendStatusColor()}`}>
-                                    {getBackendStatusText()}
+                <div className="max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        {/* Main Test Content - 3/4 width */}
+                        <div className="lg:col-span-3">
+                            <div className="bg-white rounded-2xl shadow-xl p-8">
+                                <div className="flex justify-between items-center mb-8">
+                                    <div>
+                                        <h2 className="text-2xl font-bold text-gray-800">Aptitude Test</h2>
+                                        <p className="text-gray-600">Candidate: {userName}</p>
+                                        <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getBackendStatusColor()}`}>
+                                            {getBackendStatusText()}
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-lg font-semibold text-gray-700">
+                                            Time Left: <span className={timeLeft < 300 ? "text-red-600 font-bold" : "text-gray-800"}>
+                                                {formatTime(timeLeft)}
+                                            </span>
+                                        </div>
+                                        <div className="text-gray-600">
+                                            Question {currentQuestion + 1} of {filteredQuestions.length}
+                                        </div>
+                                        <div className="text-sm text-red-600">
+                                            Violations: {violationCount}/3
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="text-right">
-                                <div className="text-lg font-semibold text-gray-700">
-                                    Time Left: <span className={timeLeft < 300 ? "text-red-600 font-bold" : "text-gray-800"}>
-                                        {formatTime(timeLeft)}
-                                    </span>
-                                </div>
-                                <div className="text-gray-600">
-                                    Question {currentQuestion + 1} of {filteredQuestions.length}
-                                </div>
-                                <div className="text-sm text-red-600">
-                                    Violations: {violationCount}/3
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="w-full bg-gray-200 rounded-full h-2 mb-8">
-                            <div className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                                style={{ width: `${((currentQuestion + 1) / filteredQuestions.length) * 100}%` }}></div>
-                        </div>
-
-                        <div className="mb-8">
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="flex gap-2">
-                                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(filteredQuestions[currentQuestion].category)}`}>
-                                        {filteredQuestions[currentQuestion].category}
-                                    </span>
-                                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(filteredQuestions[currentQuestion].difficulty)}`}>
-                                        {filteredQuestions[currentQuestion].difficulty.toUpperCase()}
-                                    </span>
+                                <div className="w-full bg-gray-200 rounded-full h-2 mb-8">
+                                    <div className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                                        style={{ width: `${((currentQuestion + 1) / filteredQuestions.length) * 100}%` }}></div>
                                 </div>
-                                <span className="text-sm text-gray-500">
-                                    Q{filteredQuestions[currentQuestion].id}
-                                </span>
-                            </div>
 
-                            <h3 className="text-xl font-semibold text-gray-800 mb-6 leading-relaxed">
-                                {filteredQuestions[currentQuestion].question}
-                            </h3>
+                                <div className="mb-8">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="flex gap-2">
+                                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(filteredQuestions[currentQuestion].category)}`}>
+                                                {filteredQuestions[currentQuestion].category}
+                                            </span>
+                                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(filteredQuestions[currentQuestion].difficulty)}`}>
+                                                {filteredQuestions[currentQuestion].difficulty.toUpperCase()}
+                                            </span>
+                                        </div>
+                                        <span className="text-sm text-gray-500">
+                                            Q{filteredQuestions[currentQuestion].id}
+                                        </span>
+                                    </div>
 
-                            <div className="space-y-3">
-                                {filteredQuestions[currentQuestion].options.map((option, index) => (
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-6 leading-relaxed">
+                                        {filteredQuestions[currentQuestion].question}
+                                    </h3>
+
+                                    <div className="space-y-3">
+                                        {filteredQuestions[currentQuestion].options.map((option, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => handleAnswerSelect(option)}
+                                                className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${selectedAnswer === option
+                                                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                                                    : 'border-gray-200 hover:border-blue-300 hover:bg-blue-25'
+                                                    }`}
+                                            >
+                                                <span className="font-medium mr-2">{String.fromCharCode(65 + index)}.</span>
+                                                {option}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-between">
                                     <button
-                                        key={index}
-                                        onClick={() => handleAnswerSelect(option)}
-                                        className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${selectedAnswer === option
-                                            ? 'border-blue-500 bg-blue-50 text-blue-700'
-                                            : 'border-gray-200 hover:border-blue-300 hover:bg-blue-25'
-                                            }`}
+                                        onClick={() => setCurrentQuestion(prev => Math.max(0, prev - 1))}
+                                        disabled={currentQuestion === 0}
+                                        className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <span className="font-medium mr-2">{String.fromCharCode(65 + index)}.</span>
-                                        {option}
+                                        Previous
                                     </button>
-                                ))}
+
+                                    <button
+                                        onClick={handleNextQuestion}
+                                        disabled={!selectedAnswer}
+                                        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {currentQuestion === filteredQuestions.length - 1 ? 'Finish Test' : 'Next Question'}
+                                    </button>
+                                </div>
+
+                                <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+                                    <div className="flex items-center">
+                                        <svg className="w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                        </svg>
+                                        <span className="text-red-700 font-medium">
+                                            SECURITY ACTIVE: {violationCount > 0 && `Violations: ${violationCount}/3`}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="flex justify-between">
-                            <button
-                                onClick={() => setCurrentQuestion(prev => Math.max(0, prev - 1))}
-                                disabled={currentQuestion === 0}
-                                className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                Previous
-                            </button>
+                        {/* Advertisement Sidebar - 1/4 width */}
+                        <div className="lg:col-span-1 space-y-4">
+                            {/* SS SKILL 2 SUCCESS Ad */}
+                            <div className="bg-gradient-to-b from-blue-600 to-purple-700 rounded-2xl shadow-lg p-4 text-white">
+                                <div className="text-center mb-3">
+                                    <h3 className="font-bold text-sm mb-1">SS Traning Center</h3>
+                                    <p className="text-xs mb-2">AI-DATA ANALYTICS</p>
+                                    <div className="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
+                                        FORAGE CERTIFICATION
+                                    </div>
+                                </div>
 
-                            <button
-                                onClick={handleNextQuestion}
-                                disabled={!selectedAnswer}
-                                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {currentQuestion === filteredQuestions.length - 1 ? 'Finish Test' : 'Next Question'}
-                            </button>
-                        </div>
+                                <div className="text-xs space-y-1 mb-3">
+                                    <p className="font-semibold text-yellow-300">TOPICS:</p>
+                                    <p>• Excel, BI Tools, SQL</p>
+                                    <p>• Python, Data Science</p>
+                                    <p>• WebScraping, API</p>
+                                </div>
 
-                        <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
-                            <div className="flex items-center">
-                                <svg className="w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                                </svg>
-                                <span className="text-red-700 font-medium">
-                                    SECURITY ACTIVE: {violationCount > 0 && `Violations: ${violationCount}/3`}
-                                </span>
+                                <div className="text-xs space-y-1 mb-3">
+                                    <p className="font-semibold text-yellow-300">PERKS:</p>
+                                    <p>• Industry Experts</p>
+                                    <p>• Placement Assistance</p>
+                                    <p>• Internship Certificate</p>
+                                </div>
+
+                                <div className="bg-white text-blue-600 text-center py-1 rounded-lg text-xs font-bold mb-2">
+                                    GRAB YOUR SEAT NOW!
+                                </div>
+
+                                <div className="text-center text-xs">
+                                    <p className="font-semibold">Contact:</p>
+                                    <p>9422129534</p>
+                                    <p>7719927774</p>
+
+                                </div>
+                            </div>
+
+                            {/* ANSWERCRAFT Ad */}
+                            <div className="bg-gradient-to-b from-green-600 to-blue-700 rounded-2xl shadow-lg p-4 text-white">
+                                <div className="text-center mb-3">
+                                    <div className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full mb-1">
+                                        LAUNCHING
+                                    </div>
+                                    <h3 className="font-bold text-sm mb-1">ANSWERCRAFT</h3>
+                                    <p className="text-xs mb-2">Get "HIRED" Skills</p>
+                                </div>
+
+                                <div className="text-xs space-y-1 mb-3">
+                                    <p className="font-semibold text-yellow-300">YOU GET:</p>
+                                    <p>• STAR+ Strategy</p>
+                                    <p>• HR Question Handling</p>
+                                    <p>• Interview Practice</p>
+                                    <p>• Negotiation Skills</p>
+                                </div>
+
+                                <div className="bg-yellow-400 text-black text-center py-1 rounded-lg text-xs font-bold mb-2">
+                                    JOIN NOW!
+                                </div>
+
+                                <div className="text-center text-xs">
+                                    <p className="font-semibold">Contact:</p>
+                                    <p>7719927774</p>
+                                    <p>7720846048</p>
+                                    <p className="text-xs mt-1">skill2success.in</p>
+                                </div>
+
+                                <div className="text-center mt-2 pt-2 border-t border-white/30">
+                                    <p className="font-bold text-xs">ALLAN ABHRAHAM</p>
+                                    <p className="text-xs">14+ Years Experience</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -644,6 +747,29 @@ const AptitudeTest = () => {
                                     <div><div className="text-2xl font-bold text-blue-600">{userAnswers.length}</div><div className="text-gray-600">Questions Attempted</div></div>
                                     <div><div className="text-2xl font-bold text-purple-600">{filteredQuestions.length - userAnswers.length}</div><div className="text-gray-600">Skipped Questions</div></div>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* Google Form Button Section */}
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+                            <div className="text-center">
+                                <h3 className="text-xl font-bold text-yellow-800 mb-3">Next Step: Complete Online Test Form</h3>
+                                <p className="text-yellow-700 mb-4">
+                                    Please click the button below to complete the official Google Form for your online test submission.
+                                    This is required to finalize your application process.
+                                </p>
+                                <button
+                                    onClick={handleGoogleFormClick}
+                                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 flex items-center justify-center mx-auto"
+                                >
+                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M14.4 12.8H12v2.4h2.4V12.8zM21.6 12c0-1.2-.4-2.4-1.2-3.2l-2.4 2.4c.4.8.4 1.6.4 2.4 0 .8-.4 1.6-.4 2.4l2.4 2.4c.8-.8 1.2-2 1.2-3.2zM12 7.2c-2.4 0-4.4 2-4.4 4.4s2 4.4 4.4 4.4 4.4-2 4.4-4.4-2-4.4-4.4-4.4zM2.4 12c0-1.2.4-2.4 1.2-3.2l2.4 2.4c-.4.8-.4 1.6-.4 2.4 0 .8.4 1.6.4 2.4l-2.4 2.4c-.8-.8-1.2-2-1.2-3.2z" />
+                                    </svg>
+                                    Complete Google Form
+                                </button>
+                                <p className="text-yellow-600 text-sm mt-3">
+                                    Note: If you are giving this test online, please fill the Google Form only. You don't need to take the test again.
+                                </p>
                             </div>
                         </div>
 

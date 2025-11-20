@@ -6,6 +6,7 @@ const DataAnalystOfferLetter = ({ data }) => {
     candidateName,
     collegeName,
     internshipFrom,
+    stipend,   // ✅ added stipend
   } = data;
 
   return (
@@ -36,12 +37,13 @@ const DataAnalystOfferLetter = ({ data }) => {
           <b>Internship / Training Details:</b><br />
           Role: Data Analyst Intern<br />
           Location: Nagpur<br />
-          Joining Date: {internshipFrom || "DD/MM/YYYY"}
+          Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
+          Stipend: {stipend || "Unpaid / As per company norms"}  {/* ✅ stipend added */}
         </p>
 
         <p className="mt-4 text-justify">
-          During your internship, you will gain hands-on experience with data collection, cleaning, visualization, and 
-          basic machine learning model interpretation. This training will help you build a strong foundation in 
+          During your internship, you will gain hands-on experience with data collection, cleaning, visualization, and
+          basic machine learning model interpretation. This training will help you build a strong foundation in
           statistical analysis and data-driven decision-making, enhancing your career prospects in the field of Data Science.
         </p>
 

@@ -6,6 +6,7 @@ const WebDeveloperOfferLetter = ({ data }) => {
     candidateName,
     collegeName,
     internshipFrom,
+    stipend, // ✅ added stipend
   } = data;
 
   return (
@@ -34,7 +35,8 @@ const WebDeveloperOfferLetter = ({ data }) => {
           <b>Internship / Training Details:</b><br />
           Role: Web Development Intern<br />
           Location: Nagpur<br />
-          Joining Date: {internshipFrom || "DD/MM/YYYY"}
+          Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
+          Stipend: {stipend || "Unpaid / As per company norms"}   {/* ✅ Added stipend line */}
         </p>
 
         <p className="mt-4 text-justify">
@@ -52,8 +54,6 @@ const WebDeveloperOfferLetter = ({ data }) => {
         <p className="mt-4 text-justify">
           We look forward to having you on board and seeing your contributions in action.
         </p>
-
-        
       </div>
     </div>
   );

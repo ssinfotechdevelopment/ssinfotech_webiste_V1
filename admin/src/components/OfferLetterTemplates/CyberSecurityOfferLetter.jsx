@@ -6,6 +6,7 @@ const CyberSecurityOfferLetter = ({ data }) => {
     candidateName,
     collegeName,
     internshipFrom,
+    stipend,   // ✅ added stipend
   } = data;
 
   return (
@@ -35,12 +36,13 @@ const CyberSecurityOfferLetter = ({ data }) => {
           <b>Internship / Training Details:</b><br />
           Role: Cyber Security Intern<br />
           Location: Nagpur<br />
-          Joining Date: {internshipFrom || "DD/MM/YYYY"}
+          Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
+          Stipend: {stipend || "Unpaid / As per company norms"}   {/* ✅ Stipend added */}
         </p>
 
         <p className="mt-4 text-justify">
-          During your internship, you will work on vulnerability assessments, penetration testing, and security auditing 
-          under the guidance of experienced professionals. This program aims to strengthen your knowledge in safeguarding 
+          During your internship, you will work on vulnerability assessments, penetration testing, and security auditing
+          under the guidance of experienced professionals. This program aims to strengthen your knowledge in safeguarding
           IT infrastructure and enhance your expertise in the field of Cyber Security.
         </p>
 

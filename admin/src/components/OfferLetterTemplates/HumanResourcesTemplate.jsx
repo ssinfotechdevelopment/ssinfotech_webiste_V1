@@ -11,6 +11,7 @@ const HumanResourcesTemplate = ({ data }) => {
     internshipTo,
     duration,
     directorName,
+    stipend,   // ✅ Added stipend
   } = data;
 
   return (
@@ -24,12 +25,14 @@ const HumanResourcesTemplate = ({ data }) => {
     >
       <div className="absolute left-8 right-8 pt-40">
         <p>To,</p>
-        <p className="font-semibold">{candidateName || "candidate Name"}</p>
+        <p className="font-semibold">{candidateName || "Candidate Name"}</p>
         <p>{collegeName || "College Name"}</p>
 
-        <p className="mt-6 font-semibold">Subject: Offer for Internship in Human Resources</p>
+        <p className="mt-6 font-semibold">
+          Subject: Offer for Internship in Human Resources
+        </p>
 
-        <p className="mt-6">Dear {candidateName?.split(" ")[0] || "Shreya"},</p>
+        <p className="mt-6">Dear {candidateName?.split(" ")[0] || "Candidate"},</p>
 
         <p className="mt-4 text-justify">
           We are pleased to offer you an opportunity to join{" "}
@@ -46,7 +49,9 @@ const HumanResourcesTemplate = ({ data }) => {
           <br />
           Duration: {duration || "2 months"}
           <br />
-          Start Date: {internshipFrom || "2nd June, 2025"}
+          Start Date: {internshipFrom || "DD/MM/YYYY"}
+          <br />
+          Stipend: {stipend || "Unpaid / As per company norms"} {/* ✅ Stipend added */}
         </p>
 
         <p className="mt-4 text-justify">
@@ -69,7 +74,6 @@ const HumanResourcesTemplate = ({ data }) => {
         <p className="mt-4 text-justify">
           We look forward to having you on board and witnessing your contributions.
         </p>
-
       </div>
     </div>
   );

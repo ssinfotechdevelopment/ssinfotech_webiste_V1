@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { templates } from "../../admin/src/components/CertificateTemplates"
-import { offerLetterTemplates } from "../../admin/src/components/OfferLetterTemplates"
+import { templates } from "../../admin/src/components/CertificateTemplates";
+import { offerLetterTemplates } from "../../admin/src/components/OfferLetterTemplates";
 
 const GenerateCertificate = () => {
   const ref = useRef(null);
@@ -17,6 +17,7 @@ const GenerateCertificate = () => {
     position: "",
     issuedDate: "",
     collegeName: "",
+    stipend: "",        // ✅ Added stipend here
   });
 
   const handleChange = (e) => {
@@ -33,14 +34,14 @@ const GenerateCertificate = () => {
     pdf.save(`${data.candidateName || "document"}.pdf`);
   };
 
-  // Decide which template set to use
-  const templateSet = docType === "Internship Offer Letter" ? offerLetterTemplates : templates;
+  const templateSet =
+    docType === "Internship Offer Letter" ? offerLetterTemplates : templates;
 
-  // Fetch the correct component
   const TemplateComponent = templateSet[templateName];
 
   return (
     <div className="p-6 space-y-6">
+
       {/* Select Document Type */}
       <div className="flex gap-4 max-w-4xl mx-auto">
         <select

@@ -6,6 +6,7 @@ const MarketingOfferLetter = ({ data }) => {
         candidateName,
         collegeName,
         internshipFrom,
+        stipend, // ✅ Added stipend
     } = data;
 
     return (
@@ -36,7 +37,8 @@ const MarketingOfferLetter = ({ data }) => {
                     <b>Internship / Training Details:</b><br />
                     Internship Role: Marketing Intern<br />
                     Location: Nagpur<br />
-                    Start Date: {internshipFrom || "DD/MM/YYYY"}
+                    Start Date: {internshipFrom || "DD/MM/YYYY"}<br />
+                    Stipend: {stipend || "Unpaid"}  {/* ✅ Added stipend line */}
                 </p>
 
                 <p className="mt-4 text-justify">
@@ -58,8 +60,6 @@ const MarketingOfferLetter = ({ data }) => {
                 <p className="mt-4 text-justify">
                     We look forward to having you on board and witnessing your contributions.
                 </p>
-
-
             </div>
         </div>
     );

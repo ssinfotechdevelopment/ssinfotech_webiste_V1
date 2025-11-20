@@ -7,7 +7,7 @@ import HumanResourcesTemplate from "./HumanResourcesTemplate";
 import CloudComputingOfferLetter from "./CloudComputingOfferLetter";
 import BackendDeveloperOfferLetter from "./BackendDeveloperOfferLetter";
 import MachineLearningOfferLetter from "./MachineLearningOfferLetter";
-import AndroidDeveloperOfferLetter from "./AndroidOfferLetter ";
+import AndroidDeveloperOfferLetter from "./AndroidOfferLetter";
 import SystemEngineerOfferLetter from "./SystemEngineerOfferLetter";
 import NetworkingEngineerOfferLetter from "./NetworkingOfferLetter ";
 import TestingQAOfferLetter from "./TestingQAAOfferLetter";

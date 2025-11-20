@@ -1,7 +1,8 @@
+// 1. HumanResourcesOfferLetter.jsx
 import React from "react";
 import certificateBg from "../../assets/certificate-bg.png";
 
-const HumanResourcesTemplate = ({ data }) => {
+const HumanResourcesOfferLetter = ({ data }) => {
   const { candidateName, collegeName, internshipFrom, stipend } = data;
 
   return (
@@ -20,18 +21,17 @@ const HumanResourcesTemplate = ({ data }) => {
         <p>{collegeName || "College Name"}</p>
 
         <p className="mt-8 font-semibold text-[15px]">
-          Subject: Offer for Internship in Human Resources
+          Subject: Offer for Internship in Human Resources (HR)
         </p>
 
         <p className="mt-8">
-          Dear {candidateName || "Candidate"},
+          Dear {candidateName || "Candidate Name"},
         </p>
 
         <p className="mt-6 text-justify">
-          We are pleased to offer you the position of <b>Human Resources Intern</b> at
-          <b> SS Infotech Pvt. Ltd.</b>. This internship will give you exposure to core HR
-          functions including recruitment assistance, documentation, onboarding, and
-          employee communication.
+          We are pleased to offer you the position of <b>HR Intern</b> at
+          <b> SS Infotech Pvt. Ltd.</b>. This internship aims to provide you hands-on experience
+          in recruitment, employee onboarding, HR documentation, and organizational processes.
         </p>
 
         <p className="mt-6 text-justify">
@@ -43,23 +43,25 @@ const HumanResourcesTemplate = ({ data }) => {
         </p>
 
         <p className="mt-6 text-justify">
-          During the internship, you will support tasks such as candidate screening,
-          interview coordination, maintaining HR records, attendance tracking, and
-          assisting in employee engagement activities and internal communication.
+          During the internship, you will assist in resume screening, interview coordination,
+          employee record management, attendance tracking, payroll support, and organizing
+          team engagement activities. You will follow HR policies and maintain confidentiality.
         </p>
 
         <p className="mt-6 text-justify">
-          You are expected to maintain professionalism, punctuality, confidentiality, and
-          follow HR guidelines while completing assigned tasks regularly.
+          You are expected to maintain professionalism, teamwork, punctuality,
+          and confidentiality throughout the internship period. Regular reporting,
+          task updates, and participation in team meetings will also be required.
         </p>
 
         <p className="mt-6 text-justify">
-          After the successful completion of your internship, you will receive an official
-          <b> Internship Completion Certificate</b> from the company.
+          Upon successful completion of your internship and final evaluation,
+          you will receive an official <b>Internship Completion Certificate</b> from the company.
         </p>
 
         <p className="mt-6 text-justify">
-          Kindly confirm your acceptance of this offer at the earliest.
+          Kindly confirm your acceptance of this offer by replying to this email or submitting
+          a signed copy of this letter.
         </p>
 
       </div>
@@ -67,4 +69,4 @@ const HumanResourcesTemplate = ({ data }) => {
   );
 };
 
-export default HumanResourcesTemplate;
+export default HumanResourcesOfferLetter;

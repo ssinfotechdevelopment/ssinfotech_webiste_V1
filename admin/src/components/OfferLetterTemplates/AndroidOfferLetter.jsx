@@ -1,8 +1,8 @@
-// 7. SystemEngineerOfferLetter.jsx
+// 5. AndroidDevelopmentOfferLetter.jsx
 import React from "react";
 import certificateBg from "../../assets/certificate-bg.png";
 
-const SystemEngineerOfferLetter = ({ data }) => {
+const AndroidDevelopmentOfferLetter = ({ data }) => {
     const { candidateName, collegeName, internshipFrom, stipend } = data;
 
     return (
@@ -14,29 +14,29 @@ const SystemEngineerOfferLetter = ({ data }) => {
                 <p>{collegeName || "College Name"}</p>
 
                 <p className="mt-8 font-semibold text-[15px]">
-                    Subject: Offer for Internship in System Engineering
+                    Subject: Offer for Internship in Android Development
                 </p>
 
                 <p className="mt-8">Dear {candidateName || "Candidate Name"},</p>
 
                 <p className="mt-6 text-justify">
-                    We are pleased to offer you the position of <b>System Engineer Intern</b> at
+                    We are pleased to offer you the position of <b>Android Development Intern</b> at
                     <b> SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your practical
-                    understanding of server management, automation and system administration.
+                    understanding of mobile app development and Android ecosystem.
                 </p>
 
                 <p className="mt-6 text-justify">
                     <b>Internship Details:</b><br />
-                    Role: System Engineer Intern<br />
+                    Role: Android Development Intern<br />
                     Location: Nagpur<br />
                     Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
                     Stipend: {stipend || "Unpaid / As per company norms"}
                 </p>
 
                 <p className="mt-6 text-justify">
-                    During the internship, you will manage Linux/Windows servers, write shell/PowerShell scripts,
-                    handle backups, monitoring using Nagios/Zabbix, hardware troubleshooting and ensure
-                    system reliability and security. You will follow standard operating procedures.
+                    During the internship, you will build native Android apps using Kotlin or Java,
+                    integrate REST APIs, work with Firebase, implement UI/UX designs and publish apps
+                    on Google Play Store. You will follow coding standards and version control practices.
                 </p>
 
                 <p className="mt-6 text-justify">
@@ -59,4 +59,4 @@ const SystemEngineerOfferLetter = ({ data }) => {
     );
 };
 
-export default SystemEngineerOfferLetter;
+export default AndroidDevelopmentOfferLetter;

@@ -20,7 +20,7 @@ const WebDeveloperOfferLetter = ({ data }) => {
         <p>{collegeName || "College Name"}</p>
 
         <p className="mt-8 font-semibold text-[15px]">
-          Subject: Offer for Internship in Web Development
+          Subject: Offer for Internship in Full Stack Development
         </p>
 
         <p className="mt-8">
@@ -28,14 +28,14 @@ const WebDeveloperOfferLetter = ({ data }) => {
         </p>
 
         <p className="mt-6 text-justify">
-          We are pleased to offer you the position of <b>Web Development Intern</b> at
+          We are pleased to offer you the position of <b>Full Stack Developer Intern</b> at
           <b> SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your practical
           understanding of modern web technologies and real-world development workflows.
         </p>
 
         <p className="mt-6 text-justify">
           <b>Internship Details:</b><br />
-          Role: Web Development Intern<br />
+          Role: Full Stack Developer Intern<br />
           Location: Nagpur<br />
           Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
           Stipend: {stipend || "Unpaid / As per company norms"}

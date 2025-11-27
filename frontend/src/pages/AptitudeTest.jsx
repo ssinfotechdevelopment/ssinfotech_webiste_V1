@@ -675,8 +675,9 @@ const AptitudeTest = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h1 className="text-3xl font-bold text-gray-800 mb-2">Test Completed!</h1>
-                            <p className="text-gray-600">Congratulations {userName} on completing the aptitude test</p>
+                            <h1 className="text-3xl font-bold text-gray-800 mb-2">Align Infotech</h1>
+                            <h1 className="text-3xl font-bold text-gray-800 mb-2">Test Completed</h1>
+                            <p className="text-gray-600">Congratulations {userName} on completing the aptitude test </p>
 
                             {submissionSuccess && (
                                 <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">

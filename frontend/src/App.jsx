@@ -17,6 +17,7 @@ import SocialPopup from "./components/SocialPopup";
 import InternshipPage from "./pages/InternshipPage";
 import ScrollToTop from "./components/ScrollToTop"; // ✅ import added
 import AptitudeTest from "./pages/AptitudeTest";
+import PythonTest from "./pages/PythonTest";
 
 function App() {
   const [showPopup, setShowPopup] = useState(true);
@@ -43,6 +44,7 @@ function App() {
           <Route path="/services" element={<ServicePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/aptitudetest" element={< AptitudeTest />} />
+          <Route path="/python-test" element={< PythonTest />} />
           <Route path="/*" element={"not found"} />
         </Routes>
       </main>

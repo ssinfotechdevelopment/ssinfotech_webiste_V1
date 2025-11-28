@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { aptitudeQuestions } from "../aptitudeq";
+import { pythonQuestions } from '../pythonQuestions';
 
-const AptitudeTest = () => {
+const PythonTest = () => {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -23,11 +23,11 @@ const AptitudeTest = () => {
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const filteredQuestions = categoryFilter === 'all'
-        ? aptitudeQuestions
-        : aptitudeQuestions.filter(q => q.category === categoryFilter);
+        ? pythonQuestions
+        : pythonQuestions.filter(q => q.category === categoryFilter);
 
     const generateSubmissionId = () => {
-        return 'sub-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        return 'python-sub-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
     };
 
     const SUBMIT_ENDPOINT = 'https://ssinfotech-backend-k03q.onrender.com/api/submissions/submit';
@@ -36,8 +36,8 @@ const AptitudeTest = () => {
         'https://ssinfotech-backend-k03q.onrender.com/api/health'
     ];
 
-    // Google Form URL for online test submission
-    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfYourFormID/viewform";
+    // Google Form URL for Python test submission
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfYourPythonFormID/viewform";
 
     const submitTestToBackend = async (submissionData) => {
         try {
@@ -45,7 +45,7 @@ const AptitudeTest = () => {
             setSubmissionError('');
             setSubmissionSuccess('');
 
-            console.log('Submitting test data:', submissionData);
+            console.log('Submitting Python test data:', submissionData);
 
             const response = await fetch(SUBMIT_ENDPOINT, {
                 method: 'POST',
@@ -59,7 +59,7 @@ const AptitudeTest = () => {
             console.log('Backend response:', result);
 
             if (response.ok && result.success) {
-                setSubmissionSuccess('Your test results have been successfully recorded!');
+                setSubmissionSuccess('Your Python test results have been successfully recorded!');
                 setBackendStatus('connected');
                 return { ...result, synced: true };
             } else {
@@ -93,20 +93,20 @@ const AptitudeTest = () => {
 
     const saveToLocalStorage = (submission, synced = false) => {
         try {
-            const existing = JSON.parse(localStorage.getItem('aptitudeTestSubmissions') || '[]');
+            const existing = JSON.parse(localStorage.getItem('pythonTestSubmissions') || '[]');
 
             const existingSubmission = existing.find(sub =>
                 sub.submissionId === submission.submissionId
             );
 
             if (existingSubmission) {
-                console.log('Submission already exists in localStorage, updating...');
+                console.log('Python submission already exists in localStorage, updating...');
                 const updated = existing.map(sub =>
                     sub.submissionId === submission.submissionId
                         ? { ...submission, localSaveTime: new Date().toISOString(), syncedToBackend: synced }
                         : sub
                 );
-                localStorage.setItem('aptitudeTestSubmissions', JSON.stringify(updated));
+                localStorage.setItem('pythonTestSubmissions', JSON.stringify(updated));
             } else {
                 const newEntry = {
                     ...submission,
@@ -115,8 +115,8 @@ const AptitudeTest = () => {
                     syncedToBackend: synced
                 };
                 existing.unshift(newEntry);
-                localStorage.setItem('aptitudeTestSubmissions', JSON.stringify(existing));
-                console.log('New submission saved to localStorage:', newEntry);
+                localStorage.setItem('pythonTestSubmissions', JSON.stringify(existing));
+                console.log('New Python submission saved to localStorage:', newEntry);
             }
         } catch (e) {
             console.error('localStorage error:', e);
@@ -124,15 +124,15 @@ const AptitudeTest = () => {
     };
 
     const syncPendingSubmissions = async () => {
-        const pending = JSON.parse(localStorage.getItem('aptitudeTestSubmissions') || '[]')
+        const pending = JSON.parse(localStorage.getItem('pythonTestSubmissions') || '[]')
             .filter(s => !s.syncedToBackend);
 
         for (const sub of pending) {
             const result = await submitTestToBackend(sub);
             if (result.synced) {
-                const updated = JSON.parse(localStorage.getItem('aptitudeTestSubmissions') || '[]')
+                const updated = JSON.parse(localStorage.getItem('pythonTestSubmissions') || '[]')
                     .map(s => s.submissionId === sub.submissionId ? { ...s, syncedToBackend: true } : s);
-                localStorage.setItem('aptitudeTestSubmissions', JSON.stringify(updated));
+                localStorage.setItem('pythonTestSubmissions', JSON.stringify(updated));
             }
         }
     };
@@ -260,7 +260,8 @@ const AptitudeTest = () => {
             correctAnswer: q.correctAnswer,
             isCorrect,
             difficulty: q.difficulty,
-            category: q.category
+            category: q.category,
+            explanation: q.explanation
         }]);
 
         if (isCorrect) setScore(s => s + 1);
@@ -275,7 +276,7 @@ const AptitudeTest = () => {
 
     const handleTestCompletion = async () => {
         if (hasSubmitted) {
-            console.log('Test already submitted, skipping duplicate submission');
+            console.log('Python test already submitted, skipping duplicate submission');
             return;
         }
 
@@ -284,6 +285,7 @@ const AptitudeTest = () => {
         const timeTaken = startTime ? Math.floor((Date.now() - startTime) / 1000) : 3600 - timeLeft;
 
         const submissionData = {
+            testType: 'python',
             userName: userName.trim(),
             email: email.trim().toLowerCase(),
             phone: phone.trim(),
@@ -297,7 +299,7 @@ const AptitudeTest = () => {
             submissionId: generateSubmissionId()
         };
 
-        console.log('Submitting test with ID:', submissionData.submissionId);
+        console.log('Submitting Python test with ID:', submissionData.submissionId);
 
         saveToLocalStorage(submissionData, false);
 
@@ -335,10 +337,12 @@ const AptitudeTest = () => {
     };
 
     const getCategoryColor = (c) => {
-        return c === 'Logical' ? 'bg-blue-100 text-blue-800' :
-            c === 'Technical' ? 'bg-purple-100 text-purple-800' :
-                c === 'Reasoning' ? 'bg-indigo-100 text-indigo-800' :
-                    'bg-gray-100 text-gray-800';
+        return c === 'Basic Syntax' ? 'bg-blue-100 text-blue-800' :
+            c === 'Data Types' ? 'bg-purple-100 text-purple-800' :
+                c === 'Functions' ? 'bg-indigo-100 text-indigo-800' :
+                    c === 'OOP' ? 'bg-pink-100 text-pink-800' :
+                        c === 'Data Structures' ? 'bg-teal-100 text-teal-800' :
+                            'bg-gray-100 text-gray-800';
     };
 
     const getBackendStatusColor = () => {
@@ -359,6 +363,17 @@ const AptitudeTest = () => {
         window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
     };
 
+    // Get category counts
+    const getCategoryCounts = () => {
+        const counts = {};
+        pythonQuestions.forEach(q => {
+            counts[q.category] = (counts[q.category] || 0) + 1;
+        });
+        return counts;
+    };
+
+    const categoryCounts = getCategoryCounts();
+
     // === UI: START SCREEN ===
     if (!testStarted && !testCompleted) {
         return (
@@ -367,8 +382,9 @@ const AptitudeTest = () => {
                     <div className="bg-white rounded-2xl shadow-xl p-8">
                         <div className="text-center mb-6">
                             <h1 className="text-4xl font-bold text-gray-800 mb-2">
-                                Aptitude Test
+                                Python Programming Test
                             </h1>
+                            <p className="text-gray-600">Test your Python programming skills</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -394,34 +410,24 @@ const AptitudeTest = () => {
                                 <label className="block text-lg font-medium text-gray-700 mb-2">Test Category</label>
                                 <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="all">All Categories ({aptitudeQuestions.length} Questions)</option>
-                                    <option value="Logical">Logical Only</option>
-                                    <option value="Technical">Technical Only</option>
-                                    <option value="Reasoning">Reasoning Only</option>
+                                    <option value="all">All Categories ({pythonQuestions.length} Questions)</option>
+                                    {Object.entries(categoryCounts).map(([category, count]) => (
+                                        <option key={category} value={category}>
+                                            {category} ({count} Questions)
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                            <div className="bg-blue-50 p-4 rounded-lg text-center">
-                                <div className="text-2xl font-bold text-blue-600">
-                                    {aptitudeQuestions.filter(q => q.category === 'Logical').length}
+                        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            {Object.entries(categoryCounts).map(([category, count]) => (
+                                <div key={category} className="bg-blue-50 p-4 rounded-lg text-center">
+                                    <div className="text-2xl font-bold text-blue-600">{count}</div>
+                                    <div className="text-blue-700 font-medium text-sm">{category}</div>
                                 </div>
-                                <div className="text-blue-700 font-medium">Logical Questions</div>
-                            </div>
-                            <div className="bg-purple-50 p-4 rounded-lg text-center">
-                                <div className="text-2xl font-bold text-purple-600">
-                                    {aptitudeQuestions.filter(q => q.category === 'Technical').length}
-                                </div>
-                                <div className="text-purple-700 font-medium">Technical Questions</div>
-                            </div>
-                            <div className="bg-indigo-50 p-4 rounded-lg text-center">
-                                <div className="text-2xl font-bold text-indigo-600">
-                                    {aptitudeQuestions.filter(q => q.category === 'Reasoning').length}
-                                </div>
-                                <div className="text-indigo-700 font-medium">Reasoning Questions</div>
-                            </div>
-                        </div>
+                            ))}
+                        </div> */}
 
                         <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
                             <h3 className="text-lg font-semibold text-red-800 mb-2">Security Measures:</h3>
@@ -442,6 +448,7 @@ const AptitudeTest = () => {
                                 <li>No negative marking</li>
                                 <li>Your results will be saved automatically</li>
                                 <li>Backup storage in browser</li>
+                                <li>Topics: Basic Syntax, Data Types, OOP, Functions, Data Structures</li>
                             </ul>
                         </div>
 
@@ -458,7 +465,7 @@ const AptitudeTest = () => {
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={backendStatus === 'checking'}
                         >
-                            {backendStatus === 'checking' ? 'Checking Connection...' : 'Start Test'}
+                            {backendStatus === 'checking' ? 'Checking Connection...' : 'Start Python Test'}
                         </button>
 
                         {backendStatus === 'disconnected' && (
@@ -485,7 +492,7 @@ const AptitudeTest = () => {
                             <div className="bg-white rounded-2xl shadow-xl p-8">
                                 <div className="flex justify-between items-center mb-8">
                                     <div>
-                                        <h2 className="text-2xl font-bold text-gray-800">Aptitude Test</h2>
+                                        <h2 className="text-2xl font-bold text-gray-800">Python Programming Test</h2>
                                         <p className="text-gray-600">Candidate: {userName}</p>
                                         <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getBackendStatusColor()}`}>
                                             {getBackendStatusText()}
@@ -612,7 +619,6 @@ const AptitudeTest = () => {
                                     <p className="font-semibold">Contact:</p>
                                     <p>9422129534</p>
                                     <p>7719927774</p>
-
                                 </div>
                             </div>
 
@@ -659,10 +665,16 @@ const AptitudeTest = () => {
 
     // === UI: RESULTS SCREEN ===
     if (testCompleted) {
-        const categoryStats = { Logical: { total: 0, correct: 0 }, Technical: { total: 0, correct: 0 }, Reasoning: { total: 0, correct: 0 } };
+        const categoryStats = {};
+        pythonQuestions.forEach(q => {
+            categoryStats[q.category] = { total: 0, correct: 0 };
+        });
+
         userAnswers.forEach(a => {
-            categoryStats[a.category].total++;
-            if (a.isCorrect) categoryStats[a.category].correct++;
+            if (categoryStats[a.category]) {
+                categoryStats[a.category].total++;
+                if (a.isCorrect) categoryStats[a.category].correct++;
+            }
         });
 
         return (
@@ -675,8 +687,8 @@ const AptitudeTest = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h1 className="text-3xl font-bold text-gray-800 mb-2">Test Completed</h1>
-                            <p className="text-gray-600">Congratulations {userName} on completing the aptitude test </p>
+                            <h1 className="text-3xl font-bold text-gray-800 mb-2">Python Test Completed</h1>
+                            <p className="text-gray-600">Congratulations {userName} on completing the Python programming test</p>
 
                             {submissionSuccess && (
                                 <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -702,7 +714,7 @@ const AptitudeTest = () => {
                         </div>
 
                         <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-white text-center mb-8">
-                            <h2 className="text-2xl font-bold mb-4">Your Overall Score</h2>
+                            <h2 className="text-2xl font-bold mb-4">Your Python Test Score</h2>
                             <div className="text-5xl font-bold mb-2">{score}/{filteredQuestions.length}</div>
                             <div className="text-xl">
                                 {((score / filteredQuestions.length) * 100).toFixed(1)}%
@@ -712,25 +724,17 @@ const AptitudeTest = () => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                             {Object.entries(categoryStats).map(([category, stats]) => (
                                 stats.total > 0 && (
-                                    <div key={category} className={`p-6 rounded-lg text-center ${category === 'Logical' ? 'bg-blue-50' :
-                                        category === 'Technical' ? 'bg-purple-50' : 'bg-indigo-50'
-                                        }`}>
-                                        <div className={`text-2xl font-bold ${category === 'Logical' ? 'text-blue-600' :
-                                            category === 'Technical' ? 'text-purple-600' : 'text-indigo-600'
-                                            }`}>
+                                    <div key={category} className={`p-4 rounded-lg text-center ${getCategoryColor(category).replace('text', 'bg').split(' ')[0]}`}>
+                                        <div className={`text-xl font-bold ${getCategoryColor(category).split(' ')[1]}`}>
                                             {stats.correct}/{stats.total}
                                         </div>
-                                        <div className={`font-medium ${category === 'Logical' ? 'text-blue-700' :
-                                            category === 'Technical' ? 'text-purple-700' : 'text-indigo-700'
-                                            }`}>
+                                        <div className={`text-sm font-medium ${getCategoryColor(category).split(' ')[1]}`}>
                                             {category}
                                         </div>
-                                        <div className={`text-sm ${category === 'Logical' ? 'text-blue-600' :
-                                            category === 'Technical' ? 'text-purple-600' : 'text-indigo-600'
-                                            }`}>
+                                        <div className={`text-xs ${getCategoryColor(category).split(' ')[1]}`}>
                                             {((stats.correct / stats.total) * 100).toFixed(1)}%
                                         </div>
                                     </div>
@@ -750,12 +754,35 @@ const AptitudeTest = () => {
                             </div>
                         </div>
 
+                        <div className="mb-8">
+                            <h3 className="text-xl font-bold text-gray-800 mb-4">Question Review</h3>
+                            <div className="space-y-4">
+                                {userAnswers.map((answer, index) => (
+                                    <div key={index} className={`border rounded-lg p-4 ${answer.isCorrect ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
+                                        <div className="flex justify-between items-start mb-2">
+                                            <span className="font-semibold">Q{index + 1}: {answer.question}</span>
+                                            <span className={`px-2 py-1 rounded text-xs ${answer.isCorrect ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+                                                {answer.isCorrect ? 'CORRECT' : 'INCORRECT'}
+                                            </span>
+                                        </div>
+                                        <div className="text-sm">
+                                            <p><strong>Your answer:</strong> {answer.selectedAnswer}</p>
+                                            <p><strong>Correct answer:</strong> {answer.correctAnswer}</p>
+                                            {answer.explanation && (
+                                                <p className="mt-2 text-gray-600"><strong>Explanation:</strong> {answer.explanation}</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Google Form Button Section */}
                         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
                             <div className="text-center">
                                 <h3 className="text-xl font-bold text-yellow-800 mb-3">Next Step: Complete Online Test Form</h3>
                                 <p className="text-yellow-700 mb-4">
-                                    Please click the button below to complete the official Google Form for your online test submission.
+                                    Please click the button below to complete the official Google Form for your Python test submission.
                                     This is required to finalize your application process.
                                 </p>
                                 <button
@@ -787,7 +814,7 @@ const AptitudeTest = () => {
                         {backendStatus === 'disconnected' && (
                             <div className="mt-6 text-center">
                                 <p className="text-sm text-gray-600">
-                                    Your results are saved in your browser's local storage.
+                                    Your Python test results are saved in your browser's local storage.
                                     They will be available until you clear your browser data.
                                 </p>
                             </div>
@@ -799,4 +826,4 @@ const AptitudeTest = () => {
     }
 };
 
-export default AptitudeTest;
+export default PythonTest;

@@ -63,7 +63,7 @@ const startServer = async () => {
       "https://ssinfotech-xsq6.vercel.app",
       "https://ssinfotech.co",
       "https://www.ssinfotech.co",
-      process.env.FRONTEND_URL,
+      "https://ss-aptitude.netlify.app",
       "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:3000",
@@ -94,7 +94,6 @@ const startServer = async () => {
     app.use("/public", express.static(join(__dirname, "public")));
 
     // --- API Routes ---
-    // FIXED: Properly register submission routes
     app.use("/api/submissions", submissionRoutes);
     app.use("/api/admin", adminRoutes);
     app.use("/api/joblistings", jobListingRoutes);
@@ -104,7 +103,7 @@ const startServer = async () => {
     app.use("/api/candidate", candidateRoutes);
     app.use("/api/albums", albumRoutes);
 
-    // Test submission endpoint (direct route)
+    // Test submission endpoint
     app.post("/api/submit", async (req, res) => {
       try {
         console.log("Direct submission received:", req.body);
@@ -112,17 +111,17 @@ const startServer = async () => {
           success: true,
           message: "Direct test submission received successfully",
           data: req.body,
-          submissionId: "direct-" + Date.now()
+          submissionId: "direct-" + Date.now(),
         });
       } catch (error) {
         res.status(500).json({
           success: false,
-          error: error.message
+          error: error.message,
         });
       }
     });
 
-    // --- Health Check (Public) ---
+    // --- Health Check ---
     app.get("/health", (req, res) => {
       res.status(200).json({
         status: "OK",
@@ -133,21 +132,21 @@ const startServer = async () => {
           "/api/submissions/submit",
           "/api/submit",
           "/health",
-          "/api/health"
-        ]
+          "/api/health",
+        ],
       });
     });
 
-    // --- Legacy Health ---
+    // Legacy Health
     app.get("/api/health", (req, res) => {
       res.status(200).json({
         status: "OK",
         time: new Date().toISOString(),
-        message: "API is running correctly"
+        message: "API is running correctly",
       });
     });
 
-    // Route to list all available routes
+    // Route listing
     app.get("/api/routes", (req, res) => {
       const routes = [
         "POST /api/submissions/submit",
@@ -155,13 +154,13 @@ const startServer = async () => {
         "GET /api/submissions",
         "GET /api/submission/:id",
         "GET /health",
-        "GET /api/health"
+        "GET /api/health",
       ];
       res.json({ availableRoutes: routes });
     });
 
     // ------------------------
-    // Serve Frontend (Production - Only if bundled)
+    // Serve Frontend (Production)
     // ------------------------
     if (process.env.NODE_ENV === "production" && !process.env.VERCEL && !process.env.RENDER) {
       const frontendPath = join(__dirname, "../frontend/dist");
@@ -191,8 +190,8 @@ const startServer = async () => {
           "POST /api/submissions/submit",
           "POST /api/submit",
           "GET /health",
-          "GET /api/health"
-        ]
+          "GET /api/health",
+        ],
       });
     });
 

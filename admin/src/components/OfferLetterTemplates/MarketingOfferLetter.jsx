@@ -7,73 +7,85 @@ const MarketingOfferLetter = ({ data }) => {
         collegeName,
         internshipFrom,
         stipend,
+        issuedDate,
+        referenceNo,
+        place // e.g., "Nagpur, Maharashtra"
     } = data;
 
     return (
         <div
-            className="relative w-[794px] h-[1123px] text-[14px] leading-[1.7] bg-white mx-auto"
+            className="relative w-[794px] h-[1123px] text-[14px] leading-[1.7] bg-white"
             style={{
                 backgroundImage: `url(${certificateBg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
         >
-            <div className="absolute left-10 right-10 pt-44 pb-10">
+            <div className="absolute inset-x-10 top-40 bottom-10">
+                {/* Company Header */}
+                <div className="text-center mb-4">
+                    <div className="border-t border-gray-300 my-4"></div>
+
+                    {/* Ref and Date aligned properly on the same level */}
+                    <div className="flex justify-between text-sm -mt-2">
+                        <div className="text-left">
+                            <p><strong>Ref:</strong> {referenceNo || "OFF-XXXXXX-XXX"}</p>
+                        </div>
+                        <div className="text-right">
+                            <p><strong>Date:</strong> {issuedDate || "YYYY-MM-DD"}</p>
+                        </div>
+                    </div>
+                </div>
 
                 <p>To,</p>
                 <p className="font-semibold">{candidateName || "Candidate Name"}</p>
-                <p>{collegeName || "College Name"}</p>
+                <p className="mb-3">{collegeName || "College Name"}</p>
 
-                <p className="mt-8 font-semibold text-[15px]">
+                <p className="font-semibold text-[13px] mb-3">
                     Subject: Offer for Internship in Marketing
                 </p>
 
-                <p className="mt-8">Dear {candidateName || "Candidate Name"},</p>
+                <p className="mb-4">
+                    Dear {candidateName || "Candidate Name"},
+                </p>
 
-                <p className="mt-6 text-justify">
+                <p className="mb-3 text-justify">
                     We are pleased to offer you the position of <b>Marketing Intern</b> at
                     <b> SS Infotech Pvt. Ltd.</b>. This internship program is designed to
-                    help you gain hands-on experience in marketing strategies, branding,
+                    provide you hands-on experience in marketing strategies, branding,
                     client communication, and campaign execution.
                 </p>
 
-                <p className="mt-6 text-justify">
-                    <b>Internship / Training Details:</b><br />
-                    Internship Role: Marketing Intern<br />
+                <p className="mb-3 text-justify">
+                    <b>Internship Details:</b><br />
+                    Role: Marketing Intern<br />
                     Location: Nagpur<br />
-                    Start Date: {internshipFrom || "DD/MM/YYYY"}<br />
+                    Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
                     Stipend: {stipend || "Unpaid / As per company norms"}
                 </p>
 
-                <p className="mt-6 text-justify">
-                    During your internship, you will work under the guidance of the HR
-                    and Marketing team. Your responsibilities may include digital
-                    marketing activities, social media management, lead generation,
-                    research work, field marketing support, and participation in internal
-                    promotional campaigns.
+                <p className="mb-3 text-justify">
+                    During the internship, you will work under the guidance of the HR and
+                    Marketing team. Your responsibilities may include digital marketing
+                    activities, social media management, lead generation, market research,
+                    field marketing support, content creation, and participation in internal
+                    promotional campaigns. You will follow company guidelines and maintain
+                    documentation standards.
                 </p>
 
-                <p className="mt-6 text-justify">
-                    You are expected to maintain a high level of professionalism,
-                    discipline, punctuality, and confidentiality throughout the internship
-                    period. Regular reporting and timely completion of tasks will be an
-                    important part of your learning process.
+                <p className="mb-3 text-justify">
+                    You are expected to maintain professionalism, teamwork, punctuality,
+                    and confidentiality throughout the internship period. Regular reporting,
+                    task updates, and participation in team meetings will also be required.
+                    <br /><br />
+                    Upon successful completion of your internship and final evaluation,
+                    you will receive an official <b>Internship Completion Certificate</b> from the company.
                 </p>
 
-                <p className="mt-6 text-justify">
-                    Upon successful completion of the internship and final evaluation,
-                    you will be awarded an official <b>Internship Completion Certificate</b>.
-                    Please note that this internship is purely for training purposes and
-                    does not guarantee any employment.
+                <p className="text-justify">
+                    Kindly confirm your acceptance of this offer by replying to this email or submitting
+                    a signed copy of this letter.
                 </p>
-
-                <p className="mt-6 text-justify">
-                    Kindly confirm your acceptance of this offer by replying to this email
-                    or submitting a signed copy of this letter.
-                </p>
-
-
-
             </div>
         </div>
     );

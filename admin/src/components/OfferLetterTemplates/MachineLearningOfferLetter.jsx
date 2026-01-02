@@ -1,7 +1,13 @@
 import React from "react";
 import certificateBg from "../../assets/certificate-bg.png";
+import certificateBgStamp from "../../assets/certificate-bg-stamp.png";
 
-const MachineLearningOfferLetter = ({ data }) => {
+/**
+ * MachineLearningOfferLetter Component
+ * Internship Offer Letter for Machine Learning & AI
+ * Supports stamped background via withStamp prop
+ */
+const MachineLearningOfferLetter = ({ data, withStamp = false }) => {
     const {
         candidateName,
         collegeName,
@@ -9,79 +15,98 @@ const MachineLearningOfferLetter = ({ data }) => {
         stipend,
         issuedDate,
         referenceNo,
-        place // e.g., "Nagpur, Maharashtra"
-    } = data;
+        place, // Reserved for future use
+    } = data || {};
+
+    // Select background: with stamp or clean
+    const bgImage = withStamp ? certificateBgStamp : certificateBg;
 
     return (
         <div
-            className="relative w-[794px] h-[1123px] text-[14px] leading-[1.7] bg-white"
+            className="relative w-[794px] h-[1123px] text-[14px] leading-[1.7] bg-white overflow-hidden"
             style={{
-                backgroundImage: `url(${certificateBg})`,
+                backgroundImage: `url(${bgImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
             }}
         >
-            <div className="absolute inset-x-10 top-40 bottom-10">
-                {/* Company Header */}
-                <div className="text-center mb-4">
-                    <div className="border-t border-gray-300 my-4"></div>
-
-                    {/* Ref and Date aligned properly on the same level */}
-                    <div className="flex justify-between text-sm -mt-2">
-                        <div className="text-left">
-                            <p><strong>Ref:</strong> {referenceNo || "OFF-XXXXXX-XXX"}</p>
+            <div className="absolute inset-x-10 top-40 bottom-10 px-4">
+                {/* Header: Ref (left) and Date (right) aligned on the same line */}
+                <div className="mb-8">
+                    <div className="flex justify-between text-sm font-medium">
+                        <div>
+                            <strong>Ref:</strong> {referenceNo || "OFF-XXXXXX-XXX"}
                         </div>
-                        <div className="text-right">
-                            <p><strong>Date:</strong> {issuedDate || "YYYY-MM-DD"}</p>
+                        <div>
+                            <strong>Date:</strong> {issuedDate || "YYYY-MM-DD"}
                         </div>
                     </div>
+
+                    {/* Decorative line below Ref & Date */}
+                    <div className="border-t-2 border-gray-400 mt-4"></div>
                 </div>
 
-                <p>To,</p>
-                <p className="font-semibold">{candidateName || "Candidate Name"}</p>
-                <p className="mb-3">{collegeName || "College Name"}</p>
+                {/* Recipient Address */}
+                <p className="mb-1">To,</p>
+                <p className="font-semibold text-lg mb-1">
+                    {candidateName || "Candidate Name"}
+                </p>
+                <p className="mb-8">{collegeName || "College Name"}</p>
 
-                <p className="font-semibold text-[13px] mb-3">
+                {/* Subject */}
+                <p className="font-semibold text-[13px] mb-5">
                     Subject: Offer for Internship in Machine Learning & AI
                 </p>
 
-                <p className="mb-4">
+                {/* Greeting */}
+                <p className="mb-5">
                     Dear {candidateName || "Candidate Name"},
                 </p>
 
-                <p className="mb-3 text-justify">
-                    We are pleased to offer you the position of <b>Machine Learning & AI Intern</b> at
-                    <b> SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your practical
-                    understanding of data science, model building, and AI deployment.
+                {/* Opening Paragraph */}
+                <p className="mb-5 text-justify">
+                    We are pleased to offer you the position of <b>Machine Learning & AI Intern</b>{" "}
+                    at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your
+                    practical understanding of data science, machine learning workflows,
+                    model development, and real-world AI deployment.
                 </p>
 
-                <p className="mb-3 text-justify">
-                    <b>Internship Details:</b><br />
-                    Role: Machine Learning & AI Intern<br />
-                    Location: Nagpur<br />
-                    Joining Date: {internshipFrom || "DD/MM/YYYY"}<br />
+                {/* Internship Details */}
+                <p className="mb-5 text-justify">
+                    <b>Internship Details:</b>
+                    <br />
+                    Role: Machine Learning & AI Intern
+                    <br />
+                    Location: Nagpur
+                    <br />
+                    Joining Date: {internshipFrom || "DD/MM/YYYY"}
+                    <br />
                     Stipend: {stipend || "Unpaid / As per company norms"}
                 </p>
 
-                <p className="mb-3 text-justify">
+                {/* Responsibilities */}
+                <p className="mb-5 text-justify">
                     During the internship, you will work on data preprocessing, feature engineering,
-                    model training using frameworks such as TensorFlow, PyTorch, or scikit-learn,
-                    evaluate models with appropriate metrics, and assist in deploying ML/AI solutions.
-                    You will follow documentation guidelines, version control practices, and industry best practices.
+                    building and training models using frameworks such as TensorFlow, PyTorch,
+                    or scikit-learn, evaluating model performance with appropriate metrics,
+                    hyperparameter tuning, and assisting in deploying ML/AI solutions. You will
+                    follow documentation guidelines, version control practices, and industry
+                    best practices for reproducible and ethical AI development.
                 </p>
 
-                <p className="mb-3 text-justify">
+                {/* Expectations & Completion Certificate */}
+                <p className="mb-6 text-justify">
                     You are expected to maintain professionalism, teamwork, punctuality,
                     and confidentiality throughout the internship period. Regular reporting,
                     task updates, and participation in team meetings will also be required.
-                    <br /><br />
-                    Upon successful completion of your internship and final evaluation,
-                    you will receive an official <b>Internship Completion Certificate</b> from the company.
-                </p>
 
-                <p className="text-justify">
-                    Kindly confirm your acceptance of this offer by replying to this email or submitting
-                    a signed copy of this letter.
+                    Upon successful completion of your internship and final evaluation, you
+                    will receive an official <b>Internship Completion Certificate</b> from
+                    the company.
+
+                    Kindly confirm your acceptance of this offer by replying to this email
+                    or submitting a signed copy of this letter.
                 </p>
             </div>
         </div>

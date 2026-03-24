@@ -66,7 +66,7 @@ const WebDeveloperTemplate = ({ data = {}, type = "Certificate" }) => {
           <p>Backend Development: Developing and integrating APIs using Node.js, Express.js, and managing databases with MongoDB/MySQL.</p>
           <p>Debugging & Optimization: Identifying and fixing bugs, optimizing apppcation performance.</p>
           <p>Version Control: Collaborating with teams using Git & GitHub.</p>
-          <p>Deployment & Testing: Assisting in deployment of web apppcations and conducting testing for functionality and security.</p>
+          <p>Deployment & Testing: Assisted in deploying web applications and performing testing to ensure functionality and security.</p>
         </p>
 
         <p className="mb-3 font-semibold">Internship Overview & Performance Evaluation:</p>

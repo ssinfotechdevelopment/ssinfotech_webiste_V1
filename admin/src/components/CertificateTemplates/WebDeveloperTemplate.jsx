@@ -23,11 +23,11 @@ const WebDeveloperTemplate = ({ data = {}, type = "Certificate" }) => {
            }}
     >
       {/* Date top-right */}
-      <div className="absolute right-8 text-sm pt-44">
+      <div className="absolute right-8 text-sm pt-[143px]">
         Date: <strong>{issuedDate}</strong>
       </div>
 
-      <div className="text-center font-bold text-[20px] underline pt-52">INTERNSHIP COMPLETION CERTIFICATE</div>
+      <div className="text-center font-bold text-[20px] underline pt-[170px]">INTERNSHIP COMPLETION CERTIFICATE</div>
 
       <div className="absolute left-8 right-8 text-[14px] pt-4">
         {/* To block */}

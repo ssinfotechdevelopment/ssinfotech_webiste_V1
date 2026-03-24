@@ -13,6 +13,7 @@ const WebDeveloperTemplate = ({ data = {}, type = "Certificate" }) => {
     collegeName = "[College Name]",
   } = data;
 
+  
   return (
     <div
       className="relative w-[794px] h-[1123px] p-8"

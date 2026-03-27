@@ -35,7 +35,7 @@ const DataAnalystOfferLetter = ({ data, withStamp = false }) => {
         {/* Header: Ref (left) and Date (right) aligned on the same line */}
         <div className="mb-8">
           <br />
-          <div className="flex justify-between text-sm font-medium">
+          <div className="flex justify-between text-sm font-medium pt-[15px]">
             <div>
               <strong>Ref:</strong> {referenceNo || "OFF-XXXXXX-XXX"}
             </div>

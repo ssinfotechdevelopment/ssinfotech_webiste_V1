@@ -21,12 +21,11 @@ const DataAnalystTemplate = ({ data = {}, type = "Internship Offer Letter" }) =>
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute right-8 text-sm pt-44">
+      <div className="absolute right-8 text-sm pt-[140px]">
         Date: <strong>{issuedDate}</strong>
       </div>
 
-      <div className="text-center font-bold text-[20px] underline pt-52">INTERNSHIP COMPLETION CERTIFICATE</div>
-
+      <div className="text-center font-bold text-[20px] underline pt-[170px]">INTERNSHIP COMPLETION CERTIFICATE</div>
       <div className="absolute left-8 right-8 text-[14px] pt-4">
         <div className="mb-4">
           <p className="font-semibold">To,</p>

@@ -64,7 +64,8 @@ const startServer = async () => {
       "https://ssinfotech.co",
       "https://www.ssinfotech.co",
       "https://ss-aptitude.netlify.app",
-      "https://aptitude-test-v.netlify.app",   // ✅ NEW URL ADDED HERE
+      "https://aptitude-test-v.netlify.app",
+      "https://aptitude.skill2success.in",
       "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:3000",

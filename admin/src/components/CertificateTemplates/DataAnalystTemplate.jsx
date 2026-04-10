@@ -25,59 +25,38 @@ const DataAnalystTemplate = ({
         backgroundPosition: "center",
       }}
     >
+      {/* Date */}
       <div className="absolute right-8 text-sm pt-44">
         Date: <strong>{issuedDate}</strong>
       </div>
 
-      <div className="text-center font-bold text-[20px] underline pt-52">INTERNSHIP COMPLETION CERTIFICATE</div>
+      {/* Title */}
+      <div className="text-center font-bold text-[20px] underline pt-52">
+        INTERNSHIP COMPLETION CERTIFICATE
+      </div>
 
-      <div className="absolute left-8 right-8 text-[14px] pt-4">
-        <div className="mb-4">
-          <p className="font-semibold">To,</p>
-          <p className="font-semibold">{candidateName}</p>
-          <p>{collegeName}</p>
-        </div>
+      {/* Content */}
+      <div className="absolute left-8 right-8 text-[14px] pt-6 leading-relaxed">
         
-        <p className="font-semibold mb-3">
-          Subject:{" "}
-          {type === "Internship Offer Letter"
-            ? `Offer for Internship in ${position}`
-            : "Certificate of Internship"}
+        {/* Main Paragraph */}
+        <p className="mb-4">
+          This is to formally certify that <strong>{candidateName}</strong> has successfully completed an internship at{" "}
+          <strong>{companyName}</strong> from{" "}
+          <strong>{internshipFrom}</strong> to{" "}
+          <strong>{internshipTo}</strong>. During the tenure of the internship,{" "}
+          {candidateName} was assigned to the role of{" "}
+          <strong>{position}</strong> under the supervision of{" "}
+          <strong>Mr. Viraj Patle</strong>.
         </p>
 
-        <p className="mb-4">Dear {candidateName},</p>
-
-        {type === "Internship Offer Letter" ? (
-          <>
-            <p className="mb-3">
-              We are pleased to offer you the position of <strong>{position}</strong> at{" "}
-              <strong>{companyName}</strong>. Your internship will focus on data analysis,
-              business intelligence, and related tasks. Internship Details:
-            </p>
-
-            <p className="mb-3">
-              Internship Duration: <strong>{internshipFrom}</strong> to <strong>{internshipTo}</strong>.
-              Please confirm your acceptance by replying to this email or returning a signed copy of this letter.
-            </p>
-
-            <p className="mb-6">
-              We look forward to your contributions and growth during the internship.
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="mb-3">
-              This is to formally certify that <strong>{candidateName}</strong> has successfully completed an internship at{" "}
-              <strong>{companyName}</strong> from <strong>{internshipFrom}</strong> to <strong>{internshipTo}</strong>.
-            </p>
-
-            <div className="mt-4 mb-3">
-              <p className="font-semibold underline">Internship Details:</p>
-              <p>Intern Name: {candidateName}</p>
-              <p>Position: {position}</p>
-              <p>Department: Product & Development</p>
-              <p>Internship Duration: {internshipFrom} to {internshipTo}</p>
-            </div>
+        {/* Internship Details */}
+        <div className="mb-4">
+          <p className="font-semibold underline">Internship Details:</p>
+          <p>Intern Name: {candidateName}</p>
+          <p>Position: {position}</p>
+          <p>Department: Product & Development</p>
+          <p>Internship Duration: {internshipFrom} to {internshipTo}</p>
+        </div>
 
         {/* Responsibilities */}
         <div className="mb-4">

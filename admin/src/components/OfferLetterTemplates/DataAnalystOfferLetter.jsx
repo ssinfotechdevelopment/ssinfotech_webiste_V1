@@ -66,7 +66,7 @@ const DataAnalystOfferLetter = ({ data, withStamp = false }) => {
         {/* Opening Paragraph */}
         <p className="mb-5 text-justify">
           We are pleased to offer you the position of <b>Data Analyst Intern</b>{" "}
-          at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to strengthen your
+          at <b>SS Infotech</b>. This internship aims to strengthen your
           analytical capabilities and provide hands-on experience with real-world
           data interpretation, visualization, and reporting techniques.
         </p>
@@ -80,6 +80,8 @@ const DataAnalystOfferLetter = ({ data, withStamp = false }) => {
           Location: Nagpur
           <br />
           Joining Date: {internshipFrom || "DD/MM/YYYY"}
+          <br />
+          Ending Date: 07/10/2026
           <br />
           Stipend: {stipend || "Unpaid / As per company norms"}
         </p>

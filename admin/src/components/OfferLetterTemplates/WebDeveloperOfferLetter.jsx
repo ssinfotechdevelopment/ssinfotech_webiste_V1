@@ -34,22 +34,15 @@ const WebDeveloperOfferLetter = ({ data, withStamp = false }) => {
       <div className="absolute inset-x-10 top-40 bottom-10 px-4">
         {/* Header: Ref (left) and Date (right) aligned on the same line */}
         <div className="mb-8">
-          <div className="flex justify-between text-sm font-medium">
+         
+          <div className="flex justify-between text-sm font-medium pt-[15px]">
             <div>
               <strong>Ref:</strong> {referenceNo || "OFF-XXXXXX-XXX"}
             </div>
-
-          </div>
-
-          {/* Decorative line below Ref & Date */}
-          <div className="border-t-2 border-gray-400 mt-4"></div>
-
-          <div className="flex justify-between text-sm font-medium">
-
             <div>
               <strong>Date:</strong> {issuedDate || "YYYY-MM-DD"}
             </div>
-          </div>
+          </div> 
         </div>
 
         {/* Recipient Address */}

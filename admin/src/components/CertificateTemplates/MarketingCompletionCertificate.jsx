@@ -23,12 +23,12 @@ const MarketingCompletionCertificate = ({ data = {}, type = "Certificate" }) => 
       }}
     >
       {/* Date top-right */}
-      <div className="absolute right-8 text-sm pt-44">
+      <div className="absolute right-8 text-sm pt-[143px]">
         Date: <strong>{issuedDate}</strong>
       </div>
 
       {/* Title */}
-      <div className="text-center font-bold text-[20px] underline pt-52">
+      <div className="text-center font-bold text-[20px] underline pt-[170px]">
         INTERNSHIP COMPLETION CERTIFICATE
       </div>
 

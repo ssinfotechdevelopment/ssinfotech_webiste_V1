@@ -19,8 +19,8 @@ const Adminaptitude = () => {
     const testBackendConnection = async () => {
         try {
             const endpoints = [
-                'https://ssinfotech-backend-k03q.onrender.com/api/submissions',
-                'https://ssinfotech-backend-k03q.onrender.com/api/submissions/all',
+                'https://ssinfotech-0x5s.onrender.com/api/submissions',
+                'https://ssinfotech-0x5s.onrender.com/api/submissions/all',
                 'http://127.0.0.1:10000/api/submissions'
             ];
 
@@ -214,7 +214,7 @@ const Adminaptitude = () => {
                 // Try to delete from backend only if it's a valid MongoDB ID
                 try {
                     console.log(`🗑️ Attempting to delete from backend: ${submissionId}`);
-                    const response = await fetch(`https://ssinfotech-backend-k03q.onrender.com/api/submissions/${submissionId}`, {
+                    const response = await fetch(`https://ssinfotech-0x5s.onrender.com/api/submissions/${submissionId}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',

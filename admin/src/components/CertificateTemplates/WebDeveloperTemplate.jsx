@@ -1,7 +1,9 @@
 import React from "react";
 import certificateBg from "../../assets/certificate-bg.png";
+import certificateBgStamp from "../../assets/certificate-bg-stamp.png";
 
-const WebDeveloperTemplate = ({ data = {}, type = "Certificate" }) => {
+const WebDeveloperTemplate = ({  data = {},
+  withStamp = true, }) => {
   const {
     candidateName = "[Candidate Name]",
     companyName = "[Company Name]",
@@ -18,7 +20,7 @@ const WebDeveloperTemplate = ({ data = {}, type = "Certificate" }) => {
     <div
       className="relative w-[794px] h-[1123px] p-8"
            style={{
-             backgroundImage: `url(${certificateBg})`,
+             backgroundImage: `url(${withStamp?certificateBgStamp:certificateBg})`,
              backgroundSize: "cover",
              backgroundPosition: "center",
            }}

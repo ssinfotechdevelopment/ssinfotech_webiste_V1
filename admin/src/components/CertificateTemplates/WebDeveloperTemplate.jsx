@@ -13,6 +13,8 @@ const WebDeveloperTemplate = ({  data = {},
     position = "[Position]",
     issuedDate = "[Date]",
     collegeName = "[College Name]",
+    stipend = "[Stipend]",
+    
   } = data;
 
   
@@ -58,6 +60,7 @@ const WebDeveloperTemplate = ({  data = {},
           <p><strong>Intern Name:</strong> {candidateName}</p>
           <p><strong>Position:</strong> {position}</p>
           <p><strong>Internship Duration:</strong> {internshipFrom} to {internshipTo}</p>
+          <p><strong>Stipend:</strong> {stipend}</p>
         </p>
 
         <p className="mb-3 font-semibold">Responsibilities Undertaken:</p>

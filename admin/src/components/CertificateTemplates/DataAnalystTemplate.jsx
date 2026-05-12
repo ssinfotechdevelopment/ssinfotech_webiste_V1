@@ -14,6 +14,7 @@ const DataAnalystTemplate = ({
     internshipFrom = "15th Jun 2025",
     internshipTo = "15th August 2025",
     issuedDate = "[Date]",
+    stipend = "[Stipend]",
     
   } = data;
 
@@ -57,6 +58,7 @@ const DataAnalystTemplate = ({
           <p>Position: {position}</p>
           <p>Department: Product & Development</p>
           <p>Internship Duration: {internshipFrom} to {internshipTo}</p>
+          <p>Stipend: {stipend}</p>
         </div>
 
         {/* Responsibilities */}

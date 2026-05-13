@@ -55,6 +55,7 @@ const WebDeveloperTemplate = ({  data = {},
           This is to formally certify that <strong>{candidateName}</strong> has successfully completed an internship at <strong>{companyName}</strong> from <strong>{internshipFrom}</strong> to <strong>{internshipTo}</strong>. During the tenure of the internship, {candidateName} was assigned to the <strong>{position}</strong> role.
         </p>
 
+
         <p className="mb-3 font-semibold">Internship Details:</p>
         <p className="list-disc pl-4 mb-3">
           <p><strong>Intern Name:</strong> {candidateName}</p>

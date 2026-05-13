@@ -52,7 +52,7 @@ const WebDeveloperTemplate = ({  data = {},
 
         {/* Main Content */}
         <p className="mb-3">
-          This is to formally certify that <strong>{candidateName}</strong> has successfply completed an internship at <strong>{companyName}</strong> from <strong>{internshipFrom}</strong> to <strong>{internshipTo}</strong>. During the tenure of the internship, {candidateName} was assigned to the <strong>{position}</strong> role.
+          This is to formally certify that <strong>{candidateName}</strong> has successfully completed an internship at <strong>{companyName}</strong> from <strong>{internshipFrom}</strong> to <strong>{internshipTo}</strong>. During the tenure of the internship, {candidateName} was assigned to the <strong>{position}</strong> role.
         </p>
 
         <p className="mb-3 font-semibold">Internship Details:</p>
@@ -70,7 +70,7 @@ const WebDeveloperTemplate = ({  data = {},
         <p className="list-disc pl-4 mb-3">
           <p>Frontend Development: Implementing responsive UI designs using HTML, CSS, JavaScript, React.js.</p>
           <p>Backend Development: Developing and integrating APIs using Node.js, Express.js, and managing databases with MongoDB/MySQL.</p>
-          <p>Debugging & Optimization: Identifying and fixing bugs, optimizing apppcation performance.</p>
+          <p>Debugging & Optimization: Identifying and fixing bugs, optimizing application performance.</p>
           <p>Version Control: Collaborating with teams using Git & GitHub.</p>
           <p>Deployment & Testing: Assisted in deploying web applications and performing testing to ensure functionality and security.</p>
         </p>

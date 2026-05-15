@@ -12,6 +12,7 @@ import AdminCertificate from "./GenerateCertificate";
 import AdminApplications from "./pages/AdminApplications";
 import CandidateManager from "./pages/CandidateManager";
 import Adminaptitude from "./pages/Adminaptitude";
+import DocumentHistory from "./pages/Documenthistory";
 
 function AppContent() {
   const location = useLocation();
@@ -83,6 +84,15 @@ function AppContent() {
             element={
               <ProtectedRoute>
                 <AdminCertificate />
+              </ProtectedRoute>
+            }
+          />
+
+           <Route
+            path="/document-history"
+            element={
+              <ProtectedRoute>
+                <DocumentHistory />
               </ProtectedRoute>
             }
           />

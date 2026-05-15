@@ -21,6 +21,7 @@ export default function AdminSidebar() {
     { path: "/job-applications", label: "Job Applications", icon: FaFileAlt },
     { path: "/gallery", label: "Gallery", icon: FaImages },
     { path: "/certificates", label: "Certificates", icon: FaCertificate },
+    { path: "/document-history", label: "Certificates History", icon: FaCertificate },
     { path: "/candidate-excel", label: "Candidate Excel", icon: FaUsers },
     { path: "/admin-aptitude", label: "Aptitude Test", icon: FaUsers },
 

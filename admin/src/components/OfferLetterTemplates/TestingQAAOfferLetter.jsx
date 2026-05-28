@@ -31,7 +31,7 @@ const TestingQAOfferLetter = ({ data, withStamp = false }) => {
                 backgroundRepeat: "no-repeat",
             }}
         >
-            <div className="absolute inset-x-10 top-40 bottom-10 px-4">
+            <div className="absolute inset-x-10 top-[180px] bottom-10 px-4">
                 {/* Header: Ref (left) and Date (right) aligned on the same line */}
                 <div className="mb-8">
                     <div className="flex justify-between text-sm font-medium">
@@ -43,8 +43,7 @@ const TestingQAOfferLetter = ({ data, withStamp = false }) => {
                         </div>
                     </div>
 
-                    {/* Decorative line below Ref & Date */}
-                    <div className="border-t-2 border-gray-400 mt-4"></div>
+                    
                 </div>
 
                 {/* Recipient Address */}

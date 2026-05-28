@@ -81,8 +81,6 @@ const DataAnalystOfferLetter = ({ data, withStamp = false }) => {
           <br />
           Joining Date: {internshipFrom || "DD/MM/YYYY"}
           <br />
-          Ending Date: 07/10/2026
-          <br />
           Stipend: {stipend || "Unpaid / As per company norms"}
         </p>
 

@@ -3,6 +3,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { templates } from "../../admin/src/components/CertificateTemplates";
 import { offerLetterTemplates } from "../../admin/src/components/OfferLetterTemplates";
+import { saveToSheets } from "./pages/Googlesheetsservice";
 
 // Background images
 import certificateBg from "./assets/certificate-bg.png";
@@ -15,11 +16,16 @@ const GenerateCertificate = () => {
   const [withStamp, setWithStamp] = useState(true);
   const [referenceNo, setReferenceNo] = useState("");
 
+  // Save status: null | "saving" | "success" | "error"
+  const [saveStatus, setSaveStatus] = useState(null);
+
   // Generate unique reference number
   const generateReferenceNo = () => {
     const prefix = docType.includes("Offer") ? "OFF" : "CERT";
     const timestamp = Date.now().toString().slice(-6);
-    const random = Math.floor(Math.random() * 1000).toString().padStart(3, "0");
+    const random = Math.floor(Math.random() * 1000)
+      .toString()
+      .padStart(3, "0");
     return `${prefix}-${timestamp}-${random}`;
   };
 
@@ -64,6 +70,7 @@ const GenerateCertificate = () => {
   const downloadPdf = async () => {
     if (!ref.current) return;
 
+    // ── 1. Render canvas ──────────────────────────────────────────
     const canvas = await html2canvas(ref.current, {
       scale: 2,
       useCORS: true,
@@ -82,7 +89,32 @@ const GenerateCertificate = () => {
 
     const stampSuffix = withStamp ? "_with-stamp" : "";
     const fileName = `${data.candidateName || "document"}_${referenceNo}${stampSuffix}.pdf`;
+
+    // ── 2. Trigger browser download ───────────────────────────────
     pdf.save(fileName);
+
+    // ── 3. Save record + PDF to Google Sheets / Drive ─────────────
+    setSaveStatus("saving");
+    try {
+      // Get base64 string without the data-URI prefix
+      const pdfBase64 = pdf.output("datauristring").split(",")[1];
+
+      await saveToSheets({
+        data,
+        docType,
+        templateName,
+        pdfBase64, // ← remove this line if you don't want Drive upload
+        fileName,
+      });
+
+      setSaveStatus("success");
+    } catch (err) {
+      console.error("Google Sheets save failed:", err);
+      setSaveStatus("error");
+    } finally {
+      // Clear the status badge after 4 seconds
+      setTimeout(() => setSaveStatus(null), 4000);
+    }
   };
 
   // Select correct template set
@@ -92,11 +124,60 @@ const GenerateCertificate = () => {
 
   const TemplateComponent = templateSet[templateName];
 
+  // ── Save-status badge config ────────────────────────────────────
+  const statusConfig = {
+    saving: {
+      bg: "bg-blue-50 border-blue-200 text-blue-700",
+      icon: (
+        <svg
+          className="w-4 h-4 animate-spin"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v8H4z"
+          />
+        </svg>
+      ),
+      text: "Saving to Google Sheets…",
+    },
+    success: {
+      bg: "bg-green-50 border-green-200 text-green-700",
+      icon: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      ),
+      text: "Saved to Google Sheets & Drive ✓",
+    },
+    error: {
+      bg: "bg-red-50 border-red-200 text-red-700",
+      icon: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      ),
+      text: "Sheets save failed — PDF was still downloaded",
+    },
+  };
+
   return (
     <div className="p-6 space-y-8 max-w-7xl mx-auto">
-      {/* Controls: Document Type, Template, Stamp Toggle */}
+
+      {/* ── Controls: Document Type, Template, Stamp Toggle ── */}
       <div className="bg-white rounded-xl shadow-md p-6">
         <div className="flex flex-wrap items-center gap-6">
+
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Document Type
@@ -128,7 +209,7 @@ const GenerateCertificate = () => {
             </select>
           </div>
 
-          {/* Stamp Toggle - Visible for both, but mainly used for certificates */}
+          {/* Stamp Toggle */}
           <div className="flex items-center gap-4">
             <label className="text-sm font-semibold text-gray-700">
               Official Stamp:
@@ -136,12 +217,14 @@ const GenerateCertificate = () => {
             <button
               type="button"
               onClick={() => setWithStamp(!withStamp)}
-              className={`relative inline-flex h-10 w-20 rounded-full transition-colors duration-300 ${withStamp ? "bg-[#552586]" : "bg-gray-400"
-                }`}
+              className={`relative inline-flex h-10 w-20 rounded-full transition-colors duration-300 ${
+                withStamp ? "bg-[#552586]" : "bg-gray-400"
+              }`}
             >
               <span
-                className={`inline-block w-8 h-8 bg-white rounded-full shadow-lg transform transition-transform duration-300 ${withStamp ? "translate-x-11" : "translate-x-1"
-                  }`}
+                className={`inline-block w-8 h-8 bg-white rounded-full shadow-lg transform transition-transform duration-300 ${
+                  withStamp ? "translate-x-11" : "translate-x-1"
+                }`}
               />
             </button>
             <span className="font-medium text-gray-800">
@@ -151,7 +234,7 @@ const GenerateCertificate = () => {
         </div>
       </div>
 
-      {/* Input Fields */}
+      {/* ── Input Fields ── */}
       <div className="bg-white rounded-xl shadow-md p-6">
         <h3 className="text-lg font-bold text-gray-800 mb-4">Enter Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -200,24 +283,39 @@ const GenerateCertificate = () => {
         </div>
       </div>
 
-      {/* Download Button */}
-      <div className="text-center">
+      {/* ── Download Button + Save Status ── */}
+      <div className="flex flex-col items-center gap-3">
         <button
           onClick={downloadPdf}
-          className="bg-[#552586] hover:bg-[#663399] text-white font-bold py-4 px-10 rounded-xl shadow-xl transition transform hover:scale-105 text-lg"
+          disabled={saveStatus === "saving"}
+          className="bg-[#552586] hover:bg-[#663399] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-xl shadow-xl transition transform hover:scale-105 text-lg"
         >
-          Download {docType} (Ref: {referenceNo})
-          {withStamp && " — With Official Stamp"}
+          {saveStatus === "saving"
+            ? "Generating…"
+            : `Download ${docType} (Ref: ${referenceNo})${withStamp ? " — With Official Stamp" : ""}`}
         </button>
+
+        {/* Save status badge */}
+        {saveStatus && (
+          <div
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all duration-300 ${statusConfig[saveStatus].bg}`}
+          >
+            {statusConfig[saveStatus].icon}
+            <span>{statusConfig[saveStatus].text}</span>
+          </div>
+        )}
       </div>
 
-      {/* Live Preview */}
+      {/* ── Live Preview ── */}
       <div className="bg-gray-100 rounded-2xl shadow-inner p-8">
         <h3 className="text-center text-xl font-bold text-gray-800 mb-6">
           Live Preview
         </h3>
         <div className="flex justify-center">
-          <div ref={ref} className="shadow-2xl border-4 border-gray-300 rounded-lg overflow-hidden">
+          <div
+            ref={ref}
+            className="shadow-2xl border-4 border-gray-300 rounded-lg overflow-hidden"
+          >
             {TemplateComponent ? (
               <TemplateComponent data={data} withStamp={withStamp} />
             ) : (

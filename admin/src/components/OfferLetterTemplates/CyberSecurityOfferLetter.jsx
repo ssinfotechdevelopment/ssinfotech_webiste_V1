@@ -67,7 +67,7 @@ const CyberSecurityOfferLetter = ({ data, withStamp = false }) => {
         {/* Opening Paragraph */}
         <p className="mb-5 text-justify">
           We are pleased to offer you the position of <b>Cyber Security Intern</b>{" "}
-          at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to provide practical
+          at <b>SS Infotech </b>. This internship aims to provide practical
           exposure to security tools, vulnerability detection, and modern cyber
           defense techniques used in real-world environments.
         </p>

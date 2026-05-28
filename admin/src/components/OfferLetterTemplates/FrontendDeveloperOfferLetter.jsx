@@ -67,7 +67,7 @@ const FrontendDeveloperOfferLetter = ({ data, withStamp = false }) => {
                 {/* Opening Paragraph */}
                 <p className="mb-5 text-justify">
                     We are pleased to offer you the position of <b>Frontend Development Intern</b>{" "}
-                    at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your
+                    at <b>SS Infotech </b>. This internship aims to enhance your
                     practical understanding of modern frontend technologies, responsive design,
                     and user interface development.
                 </p>

@@ -9,7 +9,7 @@ const DataAnalystTemplate = ({
   const {
     candidateName = "Sanket Makade",
     collegeName = "[College Name]",
-    companyName = "SS Infotech Pvt. Ltd.",
+    companyName = "SS Infotech ",
     position = "AI/ML Intern",
     internshipFrom = "15th Jun 2025",
     internshipTo = "15th August 2025",

@@ -5,7 +5,7 @@ const CyberSecurityTemplate = ({ data = {}, type = "Internship Offer Letter" }) 
   const {
     candidateName = "[Candidate Name]",
     collegeName = "[College Name]",
-    companyName = "SS Infotech Pvt. Ltd.",
+    companyName = "SS Infotech ",
     position = "Cyber Security Intern",
     internshipFrom = "[Start Date]",
     internshipTo = "[End Date]",

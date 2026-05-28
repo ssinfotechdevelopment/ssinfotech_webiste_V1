@@ -81,7 +81,7 @@ const DataAnalystOfferLetter = ({ data, withStamp = false }) => {
           <br />
           Joining Date: {internshipFrom || "DD/MM/YYYY"}
           <br />
-          Stipend: {stipend || "Unpaid / As per company norms"}
+          {/* Stipend: {stipend || "Unpaid / As per company norms"} */}
         </p>
 
         {/* Responsibilities */}
@@ -101,7 +101,7 @@ const DataAnalystOfferLetter = ({ data, withStamp = false }) => {
           will also be required.
 
           Upon successful completion of your internship and final evaluation, you
-          will receive an official <b>Internship Completion Certificate</b> from
+          will receive an offer letter <b>Internship Completion Certificate</b> from
           the company.
           Kindly confirm your acceptance of this offer by replying to this email
           or submitting a signed copy of this letter.

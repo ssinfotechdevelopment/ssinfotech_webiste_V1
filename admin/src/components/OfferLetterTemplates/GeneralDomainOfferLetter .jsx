@@ -29,7 +29,7 @@ const AndroidDeveloperOfferLetter = ({ data }) => {
 
                 <p className="mt-6 text-justify">
                     We are pleased to offer you the position of <b>Android Development Intern</b> at
-                    <b> SS Infotech Pvt. Ltd.</b>. This internship will help you gain hands-on experience
+                    <b> SS Infotech </b>. This internship will help you gain hands-on experience
                     in building Android applications and understanding mobile development workflows.
                 </p>
 

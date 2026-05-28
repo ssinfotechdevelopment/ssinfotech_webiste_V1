@@ -67,7 +67,7 @@ const HumanResourcesOfferLetter = ({ data, withStamp = false }) => {
         {/* Opening Paragraph */}
         <p className="mb-5 text-justify">
           We are pleased to offer you the position of <b>HR Intern</b>{" "}
-          at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to provide you
+          at <b>SS Infotech </b>. This internship aims to provide you
           hands-on experience in recruitment, employee onboarding, HR documentation,
           and organizational processes.
         </p>

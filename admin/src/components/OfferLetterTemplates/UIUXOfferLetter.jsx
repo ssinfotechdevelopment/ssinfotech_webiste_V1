@@ -67,7 +67,7 @@ const UIUXOfferLetter = ({ data, withStamp = false }) => {
                 {/* Opening Paragraph */}
                 <p className="mb-5 text-justify">
                     We are pleased to offer you the position of <b>UI/UX Design Intern</b>{" "}
-                    at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your
+                    at <b>SS Infotech </b>. This internship aims to enhance your
                     practical understanding of user-centered design principles, prototyping,
                     visual communication, and modern design workflows.
                 </p>

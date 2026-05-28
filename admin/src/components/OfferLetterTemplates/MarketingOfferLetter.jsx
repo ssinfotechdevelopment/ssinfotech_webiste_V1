@@ -67,7 +67,7 @@ const MarketingOfferLetter = ({ data, withStamp = false }) => {
                 {/* Opening Paragraph */}
                 <p className="mb-5 text-justify">
                     We are pleased to offer you the position of <b>Marketing Intern</b>{" "}
-                    at <b>SS Infotech Pvt. Ltd.</b>. This internship program is designed to
+                    at <b>SS Infotech </b>. This internship program is designed to
                     provide you hands-on experience in marketing strategies, branding,
                     client communication, campaign execution, and digital promotion.
                 </p>

@@ -67,7 +67,7 @@ const MachineLearningOfferLetter = ({ data, withStamp = false }) => {
                 {/* Opening Paragraph */}
                 <p className="mb-5 text-justify">
                     We are pleased to offer you the position of <b>Machine Learning & AI Intern</b>{" "}
-                    at <b>SS Infotech Pvt. Ltd.</b>. This internship aims to enhance your
+                    at <b>SS Infotech </b>. This internship aims to enhance your
                     practical understanding of data science, machine learning workflows,
                     model development, and real-world AI deployment.
                 </p>

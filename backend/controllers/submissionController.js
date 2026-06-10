@@ -8,8 +8,8 @@ export const submitTest = async (req, res) => {
             userName,
             email,
             phone,
-            score,
             company,
+            score,
             totalQuestions,
             userAnswers,
             violationCount = 0,
@@ -18,60 +18,70 @@ export const submitTest = async (req, res) => {
         } = req.body;
 
         // Validate required fields
-        if (!userName || !email || !phone || score === undefined || !totalQuestions) {
-            console.log(" Missing required fields");
+        if (
+            !userName ||
+            !email ||
+            !phone ||
+            !company ||
+            score === undefined ||
+            !totalQuestions
+        ) {
             return res.status(400).json({
                 success: false,
-                error: 'Missing required fields: userName, email, phone, score, totalQuestions are required'
+                error:
+                    'Missing required fields: userName, email, phone, company, score, totalQuestions are required'
             });
         }
 
-        console.log(" All required fields present");
+        console.log("✅ All required fields present");
 
-        // Create new submission
         const submissionData = {
             userName: userName.trim(),
             email: email.toLowerCase().trim(),
             phone: phone.trim(),
-            score: parseInt(score),
             company: company.trim(),
-            totalQuestions: parseInt(totalQuestions),
+            score: Number(score),
+            totalQuestions: Number(totalQuestions),
             userAnswers: userAnswers || [],
-            violationCount: parseInt(violationCount) || 0,
+            violationCount: Number(violationCount) || 0,
             categoryFilter: categoryFilter || 'all',
-            timeTaken: parseInt(timeTaken) || 0,
+            timeTaken: Number(timeTaken) || 0,
             submittedAt: new Date()
         };
 
-        console.log(" Creating submission:", submissionData);
+        console.log("📦 Creating submission:", submissionData);
 
         const submission = new Submission(submissionData);
 
-        // Save to database
         const savedSubmission = await submission.save();
 
-        console.log(" Submission saved successfully with ID:", savedSubmission._id);
+        console.log(
+            "✅ Submission saved successfully with ID:",
+            savedSubmission._id
+        );
 
         res.status(201).json({
             success: true,
             submissionId: savedSubmission._id,
             message: 'Test submitted successfully',
             data: {
+                userName: savedSubmission.userName,
+                company: savedSubmission.company,
                 score: savedSubmission.score,
                 totalQuestions: savedSubmission.totalQuestions,
                 submittedAt: savedSubmission.submittedAt
             }
         });
-
     } catch (err) {
-        console.error('❌ Submission error:', err);
+        console.error("❌ Submission error:", err);
 
-        // More detailed error response
         let errorMessage = 'Failed to save submission';
         let statusCode = 500;
 
         if (err.name === 'ValidationError') {
-            errorMessage = Object.values(err.errors).map(e => e.message).join(', ');
+            errorMessage = Object.values(err.errors)
+                .map(e => e.message)
+                .join(', ');
             statusCode = 400;
         } else if (err.code === 11000) {
             errorMessage = 'Duplicate submission detected';
@@ -81,7 +91,10 @@ export const submitTest = async (req, res) => {
         res.status(statusCode).json({
             success: false,
             error: errorMessage,
-            details: process.env.NODE_ENV === 'development' ? err.message : undefined
+            details:
+                process.env.NODE_ENV === 'development'
+                    ? err.message
+                    : undefined
         });
     }
 };

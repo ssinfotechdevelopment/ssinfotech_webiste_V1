@@ -17,7 +17,7 @@ const SubmissionSchema = new Schema({
     email: { type: String, required: true, lowercase: true },
     phone: { type: String, required: true },
     score: { type: Number, required: true },
-    company:{type:String,require:true},
+    company: { type: String, required: true },
     totalQuestions: { type: Number, required: true },
     userAnswers: [AnswerSchema],
     violationCount: { type: Number, default: 0 },

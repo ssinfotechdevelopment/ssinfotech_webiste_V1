@@ -19,8 +19,8 @@ const Adminaptitude = () => {
     const testBackendConnection = async () => {
         try {
             const endpoints = [
-                'http://localhost:10000/api/submissions',
-                'http://localhost:10000/api/submissions/all',
+                'https://ssinfotech-0x5s.onrender.com/api/submissions',
+                'https://ssinfotech-0x5s.onrender.com/api/submissions/all',
                 'http://127.0.0.1:10000/api/submissions'
             ];
 

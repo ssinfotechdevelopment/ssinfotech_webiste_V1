@@ -19,8 +19,8 @@ const Adminaptitude = () => {
     const testBackendConnection = async () => {
         try {
             const endpoints = [
-                'https://ssinfotech-0x5s.onrender.com/api/submissions',
-                'https://ssinfotech-0x5s.onrender.com/api/submissions/all',
+                'http://localhost:10000/api/submissions',
+                'http://localhost:10000/api/submissions/all',
                 'http://127.0.0.1:10000/api/submissions'
             ];
 
@@ -300,12 +300,13 @@ const Adminaptitude = () => {
             return;
         }
 
-        const headers = ['Name', 'Email', 'Phone', 'Score', 'Total Questions', 'Percentage', 'Time Taken', 'Violations', 'Submitted At'];
+        const headers = ['Name', 'Email','Company', 'Phone', 'Score', 'Total Questions', 'Percentage', 'Time Taken', 'Violations', 'Submitted At'];
 
         const csvData = filteredSubmissions.map(sub => [
             `"${sub.userName || 'N/A'}"`,
             `"${sub.email || 'N/A'}"`,
             `"${sub.phone || 'N/A'}"`,
+            sub.company || "N/A",
             sub.score || 0,
             sub.totalQuestions || 0,
             sub.totalQuestions ? `${((sub.score / sub.totalQuestions) * 100).toFixed(1)}%` : '0%',
@@ -526,9 +527,11 @@ const Adminaptitude = () => {
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Candidate
                                         </th>
+                                        
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Score
                                         </th>
+                                       
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Time & Violations
                                         </th>
@@ -554,6 +557,9 @@ const Adminaptitude = () => {
                                                     </div>
                                                     <div className="text-sm text-gray-500">
                                                         {submission.phone || 'No phone'}
+                                                    </div>
+                                                    <div className="text-sm text-gray-500">
+                                                        {submission.company || ' No Company'}
                                                     </div>
                                                 </div>
                                             </td>
@@ -631,6 +637,7 @@ const Adminaptitude = () => {
                                     <p><strong>Email:</strong> {selectedSubmission.email}</p>
                                     <p><strong>Phone:</strong> {selectedSubmission.phone}</p>
                                     <p><strong>Category:</strong> {selectedSubmission.categoryFilter || 'All'}</p>
+                                    <p><strong>Company:</strong> {selectedSubmission.company || 'N/A'}</p>
                                 </div>
                                 <div>
                                     <h4 className="text-sm font-medium text-gray-500 mb-2">Test Results</h4>

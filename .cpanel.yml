@@ -1,4 +1,4 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/sgilbcav/public_html/
-    - /bin/cp -R frontend/build/* $DEPLOYPATH
+    - export DEPLOYPATH=/home/sgilbcav/public_html
+    - /bin/cp -R frontend/dist/* $DEPLOYPATH

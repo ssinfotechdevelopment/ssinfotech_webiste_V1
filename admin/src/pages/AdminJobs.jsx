@@ -7,7 +7,7 @@ import { Button, Upload, Table, message, Popconfirm, Input, Space } from "antd";
 import { Trash, Plus, Edit3, Loader2 } from "lucide-react";
 
 export default function AdminJobs() {
-  const BASE_URL = "https://ssinfotech-0x5s.onrender.com/api/jobs";
+  const BASE_URL = "https://ssinfotech-webiste-backend.onrender.com/api/jobs";
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);

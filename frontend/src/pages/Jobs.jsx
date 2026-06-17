@@ -124,7 +124,7 @@ function JobApplicationModal({ job, isOpen, onClose }) {
     formDataToSend.append("resume", formData.resume);
 
     try {
-      const response = await fetch("https://ssinfotech-0x5s.onrender.com/api/applications/fill-applications", {
+      const response = await fetch("https://ssinfotech-webiste-backend.onrender.com/api/applications/fill-applications", {
         method: "POST",
         body: formDataToSend,
       });
@@ -270,7 +270,7 @@ export default function JobSearch() {
       try {
         setLoading(true);
 
-        let url = "https://ssinfotech-0x5s.onrender.com/api/jobs/show-jobs";
+        let url = "https://ssinfotech-webiste-backend.onrender.com/api/jobs/show-jobs";
 
         const params = new URLSearchParams();
         if (query) params.append("query", query);

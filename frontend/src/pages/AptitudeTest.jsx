@@ -30,10 +30,10 @@ const AptitudeTest = () => {
         return 'sub-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
     };
 
-    const SUBMIT_ENDPOINT = 'https://ssinfotech-0x5s.onrender.com/api/submissions/submit';
+    const SUBMIT_ENDPOINT = 'https://ssinfotech-webiste-backend.onrender.com/api/submissions/submit';
     const HEALTH_ENDPOINTS = [
-        'https://ssinfotech-0x5s.onrender.com/health',
-        'https://ssinfotech-0x5s.onrender.com/api/health'
+        'https://ssinfotech-webiste-backend.onrender.com/health',
+        'https://ssinfotech-webiste-backend.onrender.com/api/health'
     ];
 
     // Google Form URL for online test submission

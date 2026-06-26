@@ -14,7 +14,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const response = await fetch("https://ssinfotech-webiste-backend.onrender.com/api/slides");
+        const response = await fetch("https://ssinfotech-webiste-v1-backend.onrender.com/api/slides");
         if (!response.ok) throw new Error("Failed to fetch slides");
         const data = await response.json();
         setSlides(data.slides || []);

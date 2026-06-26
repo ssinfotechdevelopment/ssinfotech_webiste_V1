@@ -63,7 +63,7 @@ const pulseAnimation = {
 // API service functions
 const apiService = {
   async getAlbums() {
-    const response = await fetch('https://ssinfotech-webiste-backend.onrender.com/api/albums/album-getall');
+    const response = await fetch('https://ssinfotech-webiste-v1-backend.onrender.com/api/albums/album-getall');
     if (!response.ok) throw new Error('Failed to fetch albums');
     return response.json();
   },

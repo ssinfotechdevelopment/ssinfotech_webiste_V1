@@ -12,7 +12,7 @@ const AdminSlides = () => {
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState("");
 
-  const API_BASE = "https://ssinfotech-webiste-backend.onrender.com"; // Your backend URL
+  const API_BASE = "https://ssinfotech-webiste-v1-backend.onrender.com"; // Your backend URL
 
   // Fetch slides on mount
   useEffect(() => {

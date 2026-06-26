@@ -10,7 +10,7 @@ export default function CandidateManager() {
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  const API_BASE = "https://ssinfotech-webiste-backend.onrender.com/api/candidate"; // change if needed
+  const API_BASE = "https://ssinfotech-webiste-v1-backend.onrender.com/api/candidate"; // change if needed
 
   // ✅ Fetch all candidates
   useEffect(() => {
